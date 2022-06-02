@@ -34,6 +34,7 @@
                 var htmlDetail = "";
                 var obj = JSON.parse(obj.result);
 
+               
                 if (obj.length == 0) {
                     htmlDetail += "<tr><td colspan='5' style='text-align: center;'>No data.</td></tr>";
                 }
@@ -41,8 +42,11 @@
 
                     var no = 1;
                     for (var i = 0; i < obj.length; i++) {
+                        var date2 = new Date(obj[i].start_date);
+                        var DateCreate = ("0" + date2.getDate()).slice(-2) + "/" + ("0" + (date2.getMonth() + 1)).slice(-2) + "/" + date2.getFullYear();
+
                         htmlDetail += "<tr>";
-                        htmlDetail += "<td>" + obj[i].start_date + "</td>";
+                        htmlDetail += "<td>" + DateCreate + "</td>";
                         htmlDetail += "<td>" + obj[i].no + "</td>";
                         htmlDetail += "<td style='text-align:center'><a class='btn btn-lg btn-outline-success fa fa-cloud-upload' href='/Quotation/UploadSlip?id=" + obj[i].id +"'> Upload Slip</a></td>";
                         if (obj[i].is_complete == 1) {
@@ -133,7 +137,7 @@
                                         {
                                             <tr>
 
-                                                <td>@item.create_date</td>
+                                                <td>@item.create_date.ToString("dd/MM/yyyy")</td>
                                                 <td>@item.no</td>
                                                 <td style="text-align:center">@Html.ActionLink(" Upload Slip", "UploadSlip", "Quotation", new { id = item.id}, new {@class = "btn btn-lg btn-outline-success fa fa-cloud-upload" })</td>
                                                 @if (@item.is_complete == 1)

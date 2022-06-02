@@ -44,7 +44,7 @@ namespace account.Database
         public Nullable<System.DateTime> done_date { get; set; }
         public Nullable<int> done_by { get; set; }
         public Nullable<int> status { get; set; }
-        public Nullable<System.DateTime> create_date { get; set; }
+        public System.DateTime create_date { get; set; }
         public Nullable<int> create_by { get; set; }
         public Nullable<System.DateTime> update_date { get; set; }
         public Nullable<int> update_by { get; set; }
