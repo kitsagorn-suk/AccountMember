@@ -1,0 +1,351 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="accountModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="bill_confirm_slip">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="transaction_id" Type="int" />
+          <Property Name="slip" Type="varchar" MaxLength="255" />
+          <Property Name="comfirm_by" Type="varchar" MaxLength="200" />
+          <Property Name="create_at" Type="datetime" />
+          <Property Name="create_date" Type="datetime" />
+          <Property Name="amount" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="bill_transaction">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="no" Type="varchar" MaxLength="20" />
+          <Property Name="year" Type="int" />
+          <Property Name="month" Type="int" />
+          <Property Name="company_id" Type="int" />
+          <Property Name="company_type_id" Type="varchar" MaxLength="20" />
+          <Property Name="company_type_sub_id" Type="int" />
+          <Property Name="company_prefix_id" Type="int" />
+          <Property Name="bill_type" Type="int" />
+          <Property Name="start_date" Type="date" />
+          <Property Name="end_date" Type="date" />
+          <Property Name="file_name" Type="varchar" MaxLength="150" />
+          <Property Name="system_bank_id" Type="varchar" MaxLength="50" />
+          <Property Name="total" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="discount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="sub_total" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="fee" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="vat" Type="int" />
+          <Property Name="vat_amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="grand_total" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="is_confirm" Type="bit" />
+          <Property Name="confirm_date" Type="datetime" />
+          <Property Name="confirm_by" Type="int" />
+          <Property Name="is_complete" Type="int" />
+          <Property Name="complete_date" Type="datetime" />
+          <Property Name="complete_by" Type="varchar" MaxLength="150" />
+          <Property Name="is_done" Type="bit" />
+          <Property Name="done_date" Type="datetime" />
+          <Property Name="done_by" Type="int" />
+          <Property Name="status" Type="int" />
+          <Property Name="create_date" Type="datetime" />
+          <Property Name="create_by" Type="int" />
+          <Property Name="update_date" Type="datetime" />
+          <Property Name="update_by" Type="int" />
+        </EntityType>
+        <EntityType Name="bill_transaction_detail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bill_transaction_id" Type="int" />
+          <Property Name="description" Type="varchar(max)" />
+          <Property Name="qty" Type="int" />
+          <Property Name="unit" Type="varchar" MaxLength="150" />
+          <Property Name="unit_price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="is_manual" Type="int" />
+          <Property Name="status" Type="int" />
+          <Property Name="create_date" Type="datetime" />
+          <Property Name="create_by" Type="int" />
+          <Property Name="update_date" Type="datetime" />
+          <Property Name="update_by" Type="int" />
+          <Property Name="delete_date" Type="datetime" />
+          <Property Name="delete_by" Type="int" />
+          <Property Name="balance_amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="overpay" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="complete_amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="discount_description" Type="varchar" MaxLength="150" />
+          <Property Name="discount_amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="discount_percent" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="discount_type" Type="int" />
+        </EntityType>
+        <EntityType Name="user_login">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="100" />
+          <Property Name="password" Type="varchar" MaxLength="200" />
+          <Property Name="password_expire_date" Type="datetime" />
+          <Property Name="token_id" Type="varchar(max)" />
+          <Property Name="device_type" Type="varchar" MaxLength="100" />
+          <Property Name="device_id" Type="varchar" MaxLength="250" />
+          <Property Name="device_token" Type="varchar" MaxLength="250" />
+          <Property Name="is_online" Type="bit" />
+          <Property Name="status" Type="bit" />
+          <Property Name="create_date" Type="datetime" />
+          <Property Name="create_by" Type="int" />
+          <Property Name="update_date" Type="datetime" />
+          <Property Name="update_by" Type="int" />
+          <Property Name="company_id" Type="int" />
+        </EntityType>
+        <EntityContainer Name="accountModelStoreContainer">
+          <EntitySet Name="bill_confirm_slip" EntityType="Self.bill_confirm_slip" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="bill_transaction" EntityType="Self.bill_transaction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="bill_transaction_detail" EntityType="Self.bill_transaction_detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user_login" EntityType="Self.user_login" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="accountModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="user_login">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="password_expire_date" Type="DateTime" Precision="3" />
+          <Property Name="token_id" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="device_type" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="device_id" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="device_token" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="is_online" Type="Boolean" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="create_date" Type="DateTime" Precision="3" />
+          <Property Name="create_by" Type="Int32" />
+          <Property Name="update_date" Type="DateTime" Precision="3" />
+          <Property Name="update_by" Type="Int32" />
+          <Property Name="company_id" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="accountEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="user_login" EntityType="Self.user_login" />
+          <EntitySet Name="bill_transaction" EntityType="accountModel.bill_transaction" />
+          <EntitySet Name="bill_transaction_detail" EntityType="accountModel.bill_transaction_detail" />
+          <EntitySet Name="bill_confirm_slip" EntityType="accountModel.bill_confirm_slip" />
+        </EntityContainer>
+        <EntityType Name="bill_transaction">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="no" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="year" Type="Int32" />
+          <Property Name="month" Type="Int32" />
+          <Property Name="company_id" Type="Int32" />
+          <Property Name="company_type_id" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="company_type_sub_id" Type="Int32" />
+          <Property Name="company_prefix_id" Type="Int32" />
+          <Property Name="bill_type" Type="Int32" />
+          <Property Name="start_date" Type="DateTime" Precision="0" />
+          <Property Name="end_date" Type="DateTime" Precision="0" />
+          <Property Name="file_name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="system_bank_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="total" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="discount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="sub_total" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="fee" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="vat" Type="Int32" />
+          <Property Name="vat_amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="grand_total" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="is_confirm" Type="Boolean" />
+          <Property Name="confirm_date" Type="DateTime" Precision="3" />
+          <Property Name="confirm_by" Type="Int32" />
+          <Property Name="is_complete" Type="Int32" />
+          <Property Name="complete_date" Type="DateTime" Precision="3" />
+          <Property Name="complete_by" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="is_done" Type="Boolean" />
+          <Property Name="done_date" Type="DateTime" Precision="3" />
+          <Property Name="done_by" Type="Int32" />
+          <Property Name="status" Type="Int32" />
+          <Property Name="create_date" Type="DateTime" Precision="3" />
+          <Property Name="create_by" Type="Int32" />
+          <Property Name="update_date" Type="DateTime" Precision="3" />
+          <Property Name="update_by" Type="Int32" />
+        </EntityType>
+        <EntityType Name="bill_transaction_detail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bill_transaction_id" Type="Int32" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="qty" Type="Int32" />
+          <Property Name="unit" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="unit_price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="is_manual" Type="Int32" />
+          <Property Name="status" Type="Int32" />
+          <Property Name="create_date" Type="DateTime" Precision="3" />
+          <Property Name="create_by" Type="Int32" />
+          <Property Name="update_date" Type="DateTime" Precision="3" />
+          <Property Name="update_by" Type="Int32" />
+          <Property Name="delete_date" Type="DateTime" Precision="3" />
+          <Property Name="delete_by" Type="Int32" />
+          <Property Name="balance_amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="overpay" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="complete_amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="discount_description" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="discount_amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="discount_percent" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="discount_type" Type="Int32" />
+        </EntityType>
+        <EntityType Name="bill_confirm_slip">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="transaction_id" Type="Int32" />
+          <Property Name="slip" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="comfirm_by" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="create_at" Type="DateTime" Precision="3" />
+          <Property Name="create_date" Type="DateTime" Precision="3" />
+          <Property Name="amount" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="accountModelStoreContainer" CdmEntityContainer="accountEntities">
+          <EntitySetMapping Name="user_login">
+            <EntityTypeMapping TypeName="accountModel.user_login">
+              <MappingFragment StoreEntitySet="user_login">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="password_expire_date" ColumnName="password_expire_date" />
+                <ScalarProperty Name="token_id" ColumnName="token_id" />
+                <ScalarProperty Name="device_type" ColumnName="device_type" />
+                <ScalarProperty Name="device_id" ColumnName="device_id" />
+                <ScalarProperty Name="device_token" ColumnName="device_token" />
+                <ScalarProperty Name="is_online" ColumnName="is_online" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="update_date" ColumnName="update_date" />
+                <ScalarProperty Name="update_by" ColumnName="update_by" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bill_transaction">
+            <EntityTypeMapping TypeName="accountModel.bill_transaction">
+              <MappingFragment StoreEntitySet="bill_transaction">
+                <ScalarProperty Name="update_by" ColumnName="update_by" />
+                <ScalarProperty Name="update_date" ColumnName="update_date" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="done_by" ColumnName="done_by" />
+                <ScalarProperty Name="done_date" ColumnName="done_date" />
+                <ScalarProperty Name="is_done" ColumnName="is_done" />
+                <ScalarProperty Name="complete_by" ColumnName="complete_by" />
+                <ScalarProperty Name="complete_date" ColumnName="complete_date" />
+                <ScalarProperty Name="is_complete" ColumnName="is_complete" />
+                <ScalarProperty Name="confirm_by" ColumnName="confirm_by" />
+                <ScalarProperty Name="confirm_date" ColumnName="confirm_date" />
+                <ScalarProperty Name="is_confirm" ColumnName="is_confirm" />
+                <ScalarProperty Name="grand_total" ColumnName="grand_total" />
+                <ScalarProperty Name="vat_amount" ColumnName="vat_amount" />
+                <ScalarProperty Name="vat" ColumnName="vat" />
+                <ScalarProperty Name="fee" ColumnName="fee" />
+                <ScalarProperty Name="sub_total" ColumnName="sub_total" />
+                <ScalarProperty Name="discount" ColumnName="discount" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="system_bank_id" ColumnName="system_bank_id" />
+                <ScalarProperty Name="file_name" ColumnName="file_name" />
+                <ScalarProperty Name="end_date" ColumnName="end_date" />
+                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="bill_type" ColumnName="bill_type" />
+                <ScalarProperty Name="company_prefix_id" ColumnName="company_prefix_id" />
+                <ScalarProperty Name="company_type_sub_id" ColumnName="company_type_sub_id" />
+                <ScalarProperty Name="company_type_id" ColumnName="company_type_id" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="month" ColumnName="month" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="no" ColumnName="no" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bill_transaction_detail">
+            <EntityTypeMapping TypeName="accountModel.bill_transaction_detail">
+              <MappingFragment StoreEntitySet="bill_transaction_detail">
+                <ScalarProperty Name="discount_type" ColumnName="discount_type" />
+                <ScalarProperty Name="discount_percent" ColumnName="discount_percent" />
+                <ScalarProperty Name="discount_amount" ColumnName="discount_amount" />
+                <ScalarProperty Name="discount_description" ColumnName="discount_description" />
+                <ScalarProperty Name="complete_amount" ColumnName="complete_amount" />
+                <ScalarProperty Name="overpay" ColumnName="overpay" />
+                <ScalarProperty Name="balance_amount" ColumnName="balance_amount" />
+                <ScalarProperty Name="delete_by" ColumnName="delete_by" />
+                <ScalarProperty Name="delete_date" ColumnName="delete_date" />
+                <ScalarProperty Name="update_by" ColumnName="update_by" />
+                <ScalarProperty Name="update_date" ColumnName="update_date" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="is_manual" ColumnName="is_manual" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="unit_price" ColumnName="unit_price" />
+                <ScalarProperty Name="unit" ColumnName="unit" />
+                <ScalarProperty Name="qty" ColumnName="qty" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="bill_transaction_id" ColumnName="bill_transaction_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bill_confirm_slip">
+            <EntityTypeMapping TypeName="accountModel.bill_confirm_slip">
+              <MappingFragment StoreEntitySet="bill_confirm_slip">
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
+                <ScalarProperty Name="comfirm_by" ColumnName="comfirm_by" />
+                <ScalarProperty Name="slip" ColumnName="slip" />
+                <ScalarProperty Name="transaction_id" ColumnName="transaction_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,211 @@
+﻿@ViewBag.quotation
+
+<link href="~/Content/styles/bill_quo.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+
+@{int Total = 1;}
+
+<div class="print-page" id="print-page">
+    <div class="page">
+
+
+        <div class="page-number" id="pageTotal"> @Total  /  @ViewBag.quotation.pageTotal </div>
+        <div>
+
+        </div>
+        <div class="print-header">
+            <div class="company-group">
+                <div class="logo-group">
+                    <img class="print-logo" src="~/img/amb-logo-full.png" alt="amb-logo">
+                    <p class="logo-text">ASKMEBET COMPANY</p>
+                </div>
+            </div>
+            <div class="title-group">
+                <h1 class="title">ใบเสนอราคา</h1>
+                <h1 class="title-2">Quotation</h1>
+            </div>
+        </div>
+
+        <div class="print-detail-group">
+            <div class="print-box">
+                <p>เรียน / To. : @ViewBag.quotation.customer.company </p>
+                <p>บริษัท / Company : @ViewBag.quotation.customer.company  </p>
+                <div class="row">
+                    <div class="col">
+                        <p>เบอร์โทร / Tel. : @ViewBag.quotation.customer.tel </p>
+                    </div>
+                    <div class="col">
+                        <p>แฟกซ์ / Fax : @ViewBag.quotation.customer.fax </p>
+                    </div>
+                </div>
+                <p>โครงการ / Project : </p>
+                <p>ที่ตั้ง / Location : </p>
+            </div>
+            <div class="print-box top-right">
+                <div class="row">
+                    <div class="col">
+                        <p>วันที่ / Date : @ViewBag.quotation.date </p>
+                    </div>
+                    <div class="col">
+                        <p>เลขที่ / No : @ViewBag.quotation.billNo </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col"></div>
+                    <div class="col">
+                        <p>รหัสลูกค้า / Cust ID : @ViewBag.quotation.customer.id </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="print-body">
+            <table class="print-table">
+                <thead>
+                    <tr>
+                        <th style="width: 10%;">ลำดับ<br />Item</th>
+                        <th style="width: 50%;">รายการ<br />Description</th>
+                        <th>จำนวน<br />Qty.</th>
+                        <th>หน่วย<br />Unit</th>
+                        <th>ราคา/หน่วย<br />Unit/Price</th>
+                        <th>จำนวนเงิน<br />Amount</th>
+                    </tr>
+                </thead>
+                <tbody class="print-table-detail">
+                    @{int index = 1; }
+                    @foreach (var item in @ViewBag.quotation.transactions)
+                    {
+                        <tr>
+                            <td class="text-center">  @index </td>
+                            <td> @item.description </td>
+                            <td class="text-center"> @item.qty </td>
+                            <td class="text-center"> @item.unit </td>
+                            <td class="text-end"> @item.unitPrice</td>
+                            <td class="text-end"> @item.amount</td>
+                        </tr>
+                        index++;
+                    }
+                    <!-- <tr *ngFor="let item of@ViewBag.quotation.transactions; index as i"> -->
+
+                </tbody>
+                <thead class="print-sumary">
+                    <tr>
+                        <td colspan="2" class="highlight">
+                            <strong class="nowrap">@ViewBag.quotation.granTotalText </strong>
+                        </td>
+                        <td colspan="3" class="text-end">รวม / Total : </td>
+                        <td class="text-end">
+                            @ViewBag.quotation.total
+                            <!--  getTotal(totalPage | toArray)  -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="3" colspan="2" style="border: 0px;">
+                            เงื่อนไขการชำระเงิน : 100% ฝากเงินสดเพื่อชำระเงินเท่านั้น
+                        </td>
+                        <td colspan="3" class="text-end">
+                            <span class="text-danger">ภาษีมูลค่าเพิ่ม / VAT 7% : </span>
+                        </td>
+                        <td class="text-end">
+                            @if (ViewBag.quotation.vat != 0)
+                            {
+                                <span>
+                                    @ViewBag.quotation.vat
+                                </span>
+                            }
+                            else
+                            {
+                                <span>-</span>
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="text-end">
+                            <span class="nowrap">รวมทั้งสิ้น / Grand Total : </span>
+                        </td>
+                        <td class="text-end">
+                            @ViewBag.quotation.grandTotal
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+
+            <div class="">
+                <p class="my-0">กำหนดส่งสินค้า&nbsp;: </p>
+                <div class="d-flex">
+                    <span>รายละเอียดอื่นๆ&nbsp;:&nbsp;</span>
+                    <span>
+                        ราคา และโปรโมชั่นรวมถึงของแถมสามารถเปลี่ยนแปลงได้โดยมิต้องแจ้งให้ทราบล่วงหน้า <br />
+                        กรุณาตรวจสอบรายละเอียดของสินค้าในกรณีมีข้อขัดแย้งกับคุณสมบัติที่ระบุในเอกสาร <br />
+                        บริษัทฯขอสงวนสิทธิ์รับรองสินค้าตามเอกสารที่เสนอมาข้างต้นนี้เท่านั้น
+                    </span>
+                </div>
+                <div class="d-flex">
+                    <span>หมายเหตุ&nbsp;:&nbsp;</span>
+                    <span *ngIf="data.bank">
+                        รบกวนชำระเงินเข้าบัญชี @ViewBag.quotation.bank.bankName<br />
+                        เลขบัญชี @ViewBag.quotation.bank.accountNo  ชื่อบัญชี @ViewBag.quotation.bank.accountName
+                    </span>
+                </div>
+            </div>
+
+            <div class="confirmation-group">
+                <div class="group">
+                    <div class="print-box">
+                        <h5 class="text-center">
+                            Validity firm for 5 day <br>
+                            ราคาและที่กำหนดเวลาที่เสนอมานี้ 5 วัน
+                        </h5>
+                        <!-- <div class="sign-space"></div> -->
+                    </div>
+                    <div class="print-box">
+                        <div class="sign-space"></div>
+                        <h5 class="text-center mb-0 mt-1">ผู้เสนอราคา</h5>
+                    </div>
+                </div>
+                <div class="group">
+                    <div class="print-box full">
+                        <h5 class="text-center">Purchase approved in accordance with this quotation</h5>
+                        <h5 class="text-center mt-1">อนุมัติสั่งซื้อตามใบเสนอราคานี้</h5>
+                        <div class="sign-space big"></div>
+                        <h5 class="text-center mt-1">Purchase authorized signature & seal</h5>
+                        <h5 class="text-center">ลงลายเซ็นผู้มีอำนาจสั่งซื้อ พร้อมประทับตรา</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    var $ = jQuery;
+    $(document).ready(function () {
+        var lst = '@ViewBag.quotation.transactions';
+        var v = '';
+        var total = @ViewBag.quotation.transactions;
+        var i
+            for (i = 0; i < lst.length; i++) {
+                v += lst[i].Name + ' ,';
+         }
+        console.log(i);
+    });
+
+    @*$(".page-number").change(function () {
+            var lst = '@ViewBag.quotation.transactions';
+            var v = '';
+
+            for (var i = 0; i < lst.length; i++) {
+                v += lst[i].Name + ' ,';
+         }
+         console.log(v);
+    });*@
+
+    @*function countTran() {
+
+       var pageTotal = 0;
+        pageTotal = @ViewBag.quotation.transactions.Length();
+        console.log(pageTotal);
+
+    }*@
+</script>

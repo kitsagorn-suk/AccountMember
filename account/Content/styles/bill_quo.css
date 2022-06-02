@@ -1,0 +1,244 @@
+﻿
+body {
+    background-color: #fff !important;
+}
+
+:host {
+    background-color: #fff;
+    height: 100%;
+    width: 100%;
+    display: block;
+}
+
+strong {
+    font-weight: bold;
+}
+.print-page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    padding: 30px;
+    background: white;
+    color: #000;
+    box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.3);
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "BrowalliaUPC", sans-serif;
+}
+
+.print-page h1, .print-page h2, .print-page h3, .print-page h4, .print-page h5 {
+    margin: 0;
+    font-family: "BrowalliaUPC", sans-serif;
+}
+
+.print-page.full-page {
+    width: 100%;
+    max-width: 800px;
+    margin: 1rem 0;
+}
+ 
+
+.logo-group .logo-text{
+    font-size: 12px;
+    margin: 0;
+    font-weight: bold;
+}
+
+.print-logo {
+    height: 38px;
+    width: auto;
+}
+
+.print-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    margin-bottom: 0.5rem;
+    justify-content: center;
+    align-items: center;
+}
+
+    .print-header .title-group {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .print-header .title, .print-header .title-2 {
+        font-family: "BrowalliaUPC", sans-serif;
+        font-weight: bold;
+    }
+
+.print-detail-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid #000;
+}
+
+.print-box {
+    padding: 10px;
+}
+
+    .print-box p, .print-box h5 {
+        margin: 0;
+    }
+
+    .print-box h5 {
+        font-size: 14px;
+        font-weight: normal;
+    }
+
+    .print-box.top-right {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .print-box.justify-center {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+
+.print-table {
+    width: 100%;
+    margin: 0.5rem 0;
+    color: #000;
+}
+
+    .print-table thead th {
+        background-color: #ccc;
+        text-align: center;
+    }
+
+    .print-table th, .print-table td {
+        padding: 0px 10px;
+    }
+
+    .print-table th {
+        border: 1px solid #000;
+    }
+
+    .print-table tbody td {
+        border-left: 1px solid #000;
+        border-right: 1px solid #000;
+    }
+
+    .print-table .print-sumary {
+        border: 0px;
+    }
+
+        .print-table .print-sumary td {
+            border: 1px solid #000;
+        }
+
+    .print-table .highlight {
+        background-color: #ccc;
+    }
+ 
+
+.condition-group {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 2rem;
+    margin: 1rem 0;
+}
+
+.confirmation-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+    .confirmation-group .print-box {
+        border: 1px solid #000;
+        padding: 20px;
+    }
+
+        .confirmation-group .print-box + .print-box {
+            margin-top: 0.5rem;
+        }
+
+        .confirmation-group .print-box.full {
+            height: 100%;
+        }
+
+
+.sign-space {
+    display: block;
+    position: relative;
+    margin-top: 20px;
+    border-bottom: 2px dotted #000;
+}
+
+    .sign-space.big {
+        margin-top: 50px;
+    }
+ 
+
+.page {
+    position: relative;
+}
+
+.page-number {
+    position: absolute;
+    top: -28px;
+    left: 0px;
+    right: 0px;
+    text-align: center;
+}
+
+
+@media print {
+    @page {
+        size: A4;
+        margin: 20px 0;
+        counter-increment: page;
+
+        @bottom-center {
+            content: "Page " counter(page) " of " counter(pages);
+        }
+    }
+
+    @page :first {
+        margin-top: 0px;
+    }
+
+    body * {
+        visibility: hidden;
+    }
+
+    strong, span {
+        background-color: transparent;
+    }
+
+    .print-page, .print-page * {
+        visibility: visible;
+    }
+
+    .print-page {
+        width: 210mm;
+        height: 297mm;
+        margin: 0;
+        border: 0px;
+        border-radius: 0px;
+        box-shadow: none;
+        display: table;
+    }
+
+        .print-page div {
+            background-color: transparent;
+        }
+
+        .print-page .print-table-detail th, .print-page .print-table-detail td {
+            border-top: 0px;
+            border-bottom: 0px;
+        }
+
+    .print-sumary {
+        page-break-before: always;
+        page-break-after: always;
+    }
+ 
+
+}

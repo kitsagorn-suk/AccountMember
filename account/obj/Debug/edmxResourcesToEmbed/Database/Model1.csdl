@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="accountModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="user_login">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="password_expire_date" Type="DateTime" Precision="3" />
+    <Property Name="token_id" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="device_type" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="device_id" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="device_token" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="is_online" Type="Boolean" />
+    <Property Name="status" Type="Boolean" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="create_by" Type="Int32" />
+    <Property Name="update_date" Type="DateTime" Precision="3" />
+    <Property Name="update_by" Type="Int32" />
+    <Property Name="company_id" Type="Int32" />
+  </EntityType>
+  <EntityContainer Name="accountEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="user_login" EntityType="Self.user_login" />
+    <EntitySet Name="bill_transaction" EntityType="accountModel.bill_transaction" />
+    <EntitySet Name="bill_transaction_detail" EntityType="accountModel.bill_transaction_detail" />
+    <EntitySet Name="bill_confirm_slip" EntityType="accountModel.bill_confirm_slip" />
+  </EntityContainer>
+  <EntityType Name="bill_transaction">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="no" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="year" Type="Int32" />
+    <Property Name="month" Type="Int32" />
+    <Property Name="company_id" Type="Int32" />
+    <Property Name="company_type_id" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="company_type_sub_id" Type="Int32" />
+    <Property Name="company_prefix_id" Type="Int32" />
+    <Property Name="bill_type" Type="Int32" />
+    <Property Name="start_date" Type="DateTime" Precision="0" />
+    <Property Name="end_date" Type="DateTime" Precision="0" />
+    <Property Name="file_name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="system_bank_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="total" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="discount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="sub_total" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="fee" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="vat" Type="Int32" />
+    <Property Name="vat_amount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="grand_total" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="is_confirm" Type="Boolean" />
+    <Property Name="confirm_date" Type="DateTime" Precision="3" />
+    <Property Name="confirm_by" Type="Int32" />
+    <Property Name="is_complete" Type="Int32" />
+    <Property Name="complete_date" Type="DateTime" Precision="3" />
+    <Property Name="complete_by" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="is_done" Type="Boolean" />
+    <Property Name="done_date" Type="DateTime" Precision="3" />
+    <Property Name="done_by" Type="Int32" />
+    <Property Name="status" Type="Int32" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="create_by" Type="Int32" />
+    <Property Name="update_date" Type="DateTime" Precision="3" />
+    <Property Name="update_by" Type="Int32" />
+  </EntityType>
+  <EntityType Name="bill_transaction_detail">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="bill_transaction_id" Type="Int32" />
+    <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="qty" Type="Int32" />
+    <Property Name="unit" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="unit_price" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="amount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="is_manual" Type="Int32" />
+    <Property Name="status" Type="Int32" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="create_by" Type="Int32" />
+    <Property Name="update_date" Type="DateTime" Precision="3" />
+    <Property Name="update_by" Type="Int32" />
+    <Property Name="delete_date" Type="DateTime" Precision="3" />
+    <Property Name="delete_by" Type="Int32" />
+    <Property Name="balance_amount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="overpay" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="complete_amount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="discount_description" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="discount_amount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="discount_percent" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="discount_type" Type="Int32" />
+  </EntityType>
+  <EntityType Name="bill_confirm_slip">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="transaction_id" Type="Int32" />
+    <Property Name="slip" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="comfirm_by" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="create_at" Type="DateTime" Precision="3" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="amount" Type="Decimal" Precision="18" Scale="2" />
+  </EntityType>
+</Schema>

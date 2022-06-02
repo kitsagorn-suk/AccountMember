@@ -1,0 +1,172 @@
+﻿@model account.Models.LoginModel
+
+@{
+    ViewBag.Title = "Login";
+}
+@using (Html.BeginForm())
+{
+    <!DOCTYPE html>
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    <head runat="server">
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=1480" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <title>Ask Me Bet</title>
+        <link rel="icon" href="img/Logo-02.jpg" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" />
+        <link href="../css/bootstrap.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <link href="../css/style.css" rel="stylesheet" />
+        <link href="~/Content/styles/mdb.min.css" rel="stylesheet" />
+        <style>
+            .waves-input-wrapper {
+                display: block !important;
+            }
+
+            #divblock {
+                position: absolute;
+                background-color: #fff;
+                color: #7E8890;
+                border-radius: .1875rem;
+                border-color: rgba(126,136,144,.5);
+                width: 110px;
+                height: 68px;
+                margin-top: 42px;
+                z-index: 999;
+                border: 1px #ddd solid;
+                padding: 5px;
+            }
+
+            .transpleng {
+                width: 280px;
+                height: auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-right: 0;
+            }
+
+            .bg {
+                width: 100%;
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-size: 300% 300%;
+                background-image: linear-gradient(-45deg, #195ED7 0%, #254E95 25%, #1B2D4D 50%, #111927 100%);
+                animation: AnimateBG 20s ease infinite;
+            }
+
+            @@keyframes AnimateBG {
+                0% {
+                    background-position: 0% 50%;
+                }
+
+                50% {
+                    background-position: 100% 50%;
+                }
+
+                100% {
+                    background-position: 0% 50%;
+                }
+            }
+        </style>
+    </head>
+
+    <body class="login-page">
+
+        <div id="myModalLoad" class="modal" data-backdrop="static" data-keyboard="false">
+            <div class="d-flex justify-content-center" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #CFA137 !important;">
+                <div class="spinner-border" role="status" style="width: 10rem; height: 10rem; font-size: 5rem;">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </div>
+
+        <form runat="server" class="login-page">
+            <div class="bg wrapper h-100 d-flex justify-content-center align-items-center">
+                <div class="login-section">
+                    <div class="card">
+
+
+                        <div class="card-header text-center">
+                            <a href="#" class="transpleng mx-auto">
+                                @*<img src="~/img/Logo-02.jpeg" alt="logo" />*@
+                                <img src="~/img/Logo-02-removebg-preview.png" width="280px" height="150px" />
+                            </a>
+                            @*<h2>Welcome</h2>*@
+                            <div class="card-header-text" set-lan="html:We are the future of gaming" style="font-size: 16pt; display: none;"></div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-body-holder">
+                                <div class="form-group row mb-4">
+                                    <div class="col-12">
+                                        <div class="md-form md-outline">
+                                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control form-control-lg", type = "text", placeholder = "username" } })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row mb-4">
+                                    <div class="col-12">
+                                        <div class="md-form md-outline">
+                                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control form-control-lg", type = "password", placeholder = "password" } })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row mb-4 text-center">
+                                    <div class="col-12">
+                                        <input type="submit" value="Login" class="btn btn-warning btn-block" />
+                                    </div>
+                                </div>
+                                <div class="note-text white-text text-center">
+                                    <span style="font-size: 9pt;" set-lan="html:Contact your associate in case you forgot the password or unable to sign in"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="modalAlert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body mx-3 text-center">
+                            <label id="lbAlert"></label>
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center">
+                            <button type="button" class="btn btn-yellow font-weight-bold" data-dismiss="modal" aria-label="Close" set-lan="text:Close"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </form>
+
+        <!-- SCRIPTS -->
+        <!-- JQuery -->
+        <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="../js/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <!-- <script type="text/javascript" src="js/bootstrap.min.js"></script>-->
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="../js/mdb.min.js"></script>
+        <!-- ACE core JavaScript -->
+        <script type="text/javascript" src="../js/ace.min.js"></script>
+        <!-- Language core JavaScript -->
+        <script type="text/javascript" src="../js/language_Login.js"></script>
+        <script src="~/Scripts/jquery.validate.min.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    </body>
+   
+</html>
+}

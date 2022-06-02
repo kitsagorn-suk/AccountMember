@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="accountModelStoreContainer" CdmEntityContainer="accountEntities">
+    <EntitySetMapping Name="user_login">
+      <EntityTypeMapping TypeName="accountModel.user_login">
+        <MappingFragment StoreEntitySet="user_login">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="password_expire_date" ColumnName="password_expire_date" />
+          <ScalarProperty Name="token_id" ColumnName="token_id" />
+          <ScalarProperty Name="device_type" ColumnName="device_type" />
+          <ScalarProperty Name="device_id" ColumnName="device_id" />
+          <ScalarProperty Name="device_token" ColumnName="device_token" />
+          <ScalarProperty Name="is_online" ColumnName="is_online" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="create_by" ColumnName="create_by" />
+          <ScalarProperty Name="update_date" ColumnName="update_date" />
+          <ScalarProperty Name="update_by" ColumnName="update_by" />
+          <ScalarProperty Name="company_id" ColumnName="company_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="bill_transaction">
+      <EntityTypeMapping TypeName="accountModel.bill_transaction">
+        <MappingFragment StoreEntitySet="bill_transaction">
+          <ScalarProperty Name="update_by" ColumnName="update_by" />
+          <ScalarProperty Name="update_date" ColumnName="update_date" />
+          <ScalarProperty Name="create_by" ColumnName="create_by" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="done_by" ColumnName="done_by" />
+          <ScalarProperty Name="done_date" ColumnName="done_date" />
+          <ScalarProperty Name="is_done" ColumnName="is_done" />
+          <ScalarProperty Name="complete_by" ColumnName="complete_by" />
+          <ScalarProperty Name="complete_date" ColumnName="complete_date" />
+          <ScalarProperty Name="is_complete" ColumnName="is_complete" />
+          <ScalarProperty Name="confirm_by" ColumnName="confirm_by" />
+          <ScalarProperty Name="confirm_date" ColumnName="confirm_date" />
+          <ScalarProperty Name="is_confirm" ColumnName="is_confirm" />
+          <ScalarProperty Name="grand_total" ColumnName="grand_total" />
+          <ScalarProperty Name="vat_amount" ColumnName="vat_amount" />
+          <ScalarProperty Name="vat" ColumnName="vat" />
+          <ScalarProperty Name="fee" ColumnName="fee" />
+          <ScalarProperty Name="sub_total" ColumnName="sub_total" />
+          <ScalarProperty Name="discount" ColumnName="discount" />
+          <ScalarProperty Name="total" ColumnName="total" />
+          <ScalarProperty Name="system_bank_id" ColumnName="system_bank_id" />
+          <ScalarProperty Name="file_name" ColumnName="file_name" />
+          <ScalarProperty Name="end_date" ColumnName="end_date" />
+          <ScalarProperty Name="start_date" ColumnName="start_date" />
+          <ScalarProperty Name="bill_type" ColumnName="bill_type" />
+          <ScalarProperty Name="company_prefix_id" ColumnName="company_prefix_id" />
+          <ScalarProperty Name="company_type_sub_id" ColumnName="company_type_sub_id" />
+          <ScalarProperty Name="company_type_id" ColumnName="company_type_id" />
+          <ScalarProperty Name="company_id" ColumnName="company_id" />
+          <ScalarProperty Name="month" ColumnName="month" />
+          <ScalarProperty Name="year" ColumnName="year" />
+          <ScalarProperty Name="no" ColumnName="no" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="bill_transaction_detail">
+      <EntityTypeMapping TypeName="accountModel.bill_transaction_detail">
+        <MappingFragment StoreEntitySet="bill_transaction_detail">
+          <ScalarProperty Name="discount_type" ColumnName="discount_type" />
+          <ScalarProperty Name="discount_percent" ColumnName="discount_percent" />
+          <ScalarProperty Name="discount_amount" ColumnName="discount_amount" />
+          <ScalarProperty Name="discount_description" ColumnName="discount_description" />
+          <ScalarProperty Name="complete_amount" ColumnName="complete_amount" />
+          <ScalarProperty Name="overpay" ColumnName="overpay" />
+          <ScalarProperty Name="balance_amount" ColumnName="balance_amount" />
+          <ScalarProperty Name="delete_by" ColumnName="delete_by" />
+          <ScalarProperty Name="delete_date" ColumnName="delete_date" />
+          <ScalarProperty Name="update_by" ColumnName="update_by" />
+          <ScalarProperty Name="update_date" ColumnName="update_date" />
+          <ScalarProperty Name="create_by" ColumnName="create_by" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="is_manual" ColumnName="is_manual" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="unit_price" ColumnName="unit_price" />
+          <ScalarProperty Name="unit" ColumnName="unit" />
+          <ScalarProperty Name="qty" ColumnName="qty" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="bill_transaction_id" ColumnName="bill_transaction_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="bill_confirm_slip">
+      <EntityTypeMapping TypeName="accountModel.bill_confirm_slip">
+        <MappingFragment StoreEntitySet="bill_confirm_slip">
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="create_at" ColumnName="create_at" />
+          <ScalarProperty Name="comfirm_by" ColumnName="comfirm_by" />
+          <ScalarProperty Name="slip" ColumnName="slip" />
+          <ScalarProperty Name="transaction_id" ColumnName="transaction_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

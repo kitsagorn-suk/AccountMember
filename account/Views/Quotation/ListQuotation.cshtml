@@ -1,0 +1,181 @@
+﻿@model IEnumerable<account.Database.bill_transaction>
+@{
+    ViewBag.Title = "ListQuotation";
+}
+@Html.Hidden("ViewData", @Url.Action("UploadSlip", "Quotation"))
+
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/styles/dataTables.min.css" rel="stylesheet" />
+<script src="~/Scripts/dataTables.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script>
+    function OpenPage() {
+
+        var urlAction = $('#ViewData').val();
+        window.location.href = urlAction;
+
+    }
+    function searchQuotationByDate() {
+        var urlAction = $('#SearchQuotation').val();
+        $.ajax({
+            url: urlAction,
+            type: "POST",
+            dataType: "JSON",
+            data: {
+                start_date: $("#txtStartDate").val(),
+                end_date: $("#txtEndDate").val(),
+            },
+            success: function (obj) {
+
+                $("#listquotation > tbody").html("");
+                var htmlDetail = "";
+                var obj = JSON.parse(obj.result);
+
+                if (obj.length == 0) {
+                    htmlDetail += "<tr><td colspan='5' style='text-align: center;'>No data.</td></tr>";
+                }
+                else {
+
+                    var no = 1;
+                    for (var i = 0; i < obj.length; i++) {
+                        htmlDetail += "<tr>";
+                        htmlDetail += "<td>" + obj[i].start_date + "</td>";
+                        htmlDetail += "<td>" + obj[i].no + "</td>";
+                        htmlDetail += "<td style='text-align:center'><a class='btn btn-lg btn-outline-success fa fa-cloud-upload' href='/Quotation/UploadSlip?id=" + obj[i].id +"'> Upload Slip</a></td>";
+                        if (obj[i].is_complete == 1) {
+                            htmlDetail += "<td>no complete and confirm bill</td>";
+                        }
+                        else if (obj[i].is_complete == 2) {
+                            htmlDetail += "<td>complete</td>";
+                        }
+                        else if (obj[i].is_complete == 3) {
+                            htmlDetail += "<td>done</td>>";
+                        }
+                        else {
+                            htmlDetail += "<td>-</td>";
+                        }
+                        htmlDetail += "<td style='text-align: center'><button class='btn btn-outline-warning btn-block' id='" + obj[i].id + "'><i class='fa fa-edit' style='font-size: 24px'></i></button></td>";
+
+
+                        htmlDetail += "</tr>";
+                        no++;
+                    }
+                }
+
+                $("#listquotation > tbody").append(htmlDetail);
+
+
+                //if (obj.result == "Update Car Brand Complete!") {
+                //    var urlAction = $('#ViewData').val();
+                //    window.location.href = urlAction;
+                //}
+            }
+        });
+    }
+</script>
+
+<body style="background-color:#fff">
+
+    @{Html.RenderPartial("~/Views/Quotation/Menu.cshtml");}
+    @Html.Hidden("SearchQuotation", @Url.Action("SearchQuotationDate", "Quotation"))
+
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-2 col-md-9">
+            <div class="card" style="margin-top:15px">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-2 textcen">
+                            <label>start date :</label>
+                        </div>
+                        <div class="col-md-2">
+                            <span>
+                                <input type="date" id="txtStartDate" class="form-control" />
+                            </span>
+                        </div>
+                        <div class="col-md-2 textcen">
+                            <label>end date :</label>
+                        </div>
+                        <div class="col-md-2">
+                            <span>
+                                <input type="date" id="txtEndDate" class="form-control" />
+                            </span>
+                        </div>
+                        <div class="col-md-3">
+                            <button type="button" class="btn btn-outline-primary" onclick="searchQuotationByDate()">search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="card" style="margin-top:20px">
+                <div class="card-body">
+                    <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                        <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
+                            <div class="col-sm-12">
+                                <table id="listquotation" class="table table-bordered table-hover table-striped wrap" style="width:100%">
+                                    <thead>
+                                        <tr>
+
+                                            <th>Date</th>
+                                            <th>Quotation No.</th>
+                                            <th>Upload Slip</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+
+                                                <td>@item.create_date</td>
+                                                <td>@item.no</td>
+                                                <td style="text-align:center">@Html.ActionLink(" Upload Slip", "UploadSlip", "Quotation", new { id = item.id}, new {@class = "btn btn-lg btn-outline-success fa fa-cloud-upload" })</td>
+                                                @if (@item.is_complete == 1)
+                                                {
+                                                    <td>no complete and confirm bill</td>
+                                                }
+                                                else if (@item.is_complete == 2)
+                                                {
+                                                    <td>complete</td>
+                                                }
+                                                else if (@item.is_complete == 3)
+                                                {
+                                                    <td>done</td>
+                                                }
+                                                else
+                                                {
+                                                    <td>-</td>
+                                                }
+                                                <td style="text-align:center"><button class="btn btn-outline-warning btn-block" value=""><i class="fa fa-edit" style="font-size:24px"></i></button></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<script>
+    $(document).ready(function () {
+        $('#listquotation').DataTable();
+    });
+
+</script>
+
+<style>
+    .textcen {
+        padding-top: 10px;
+    }
+</style>

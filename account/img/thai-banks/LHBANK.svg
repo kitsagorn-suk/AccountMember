@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="54" height="54" viewBox="0 0 54 54">
+  <g id="Group_10049" data-name="Group 10049" transform="translate(8673 4724)">
+    <g id="Rectangle" transform="translate(-8673 -4724)" fill="#fff" stroke="#fff" stroke-miterlimit="10" stroke-width="1">
+      <rect width="54" height="54" rx="27" stroke="none"/>
+      <rect x="0.5" y="0.5" width="53" height="53" rx="26.5" fill="none"/>
+    </g>
+    <g id="Group_9970" data-name="Group 9970" transform="translate(-10631 -6879)">
+      <path id="Path_8550" data-name="Path 8550" d="M19.235,24.319H9.7V9.7h2.169V22.1h7.366Z" transform="translate(1963.3 2160.3)" fill="#6d6e72"/>
+      <path id="Path_8551" data-name="Path 8551" d="M77.815,9.7v5.739H70.969V9.7H68.8V24.319h2.169V17.631h6.846v6.688h2.169V9.7Z" transform="translate(1917.554 2160.3)" fill="#6d6e70"/>
+      <g id="Group_9944" data-name="Group 9944" transform="translate(1973 2188.649)">
+        <rect id="Rectangle_6309" data-name="Rectangle 6309" width="3.07" height="5.351" transform="translate(0 0)" fill="#dbd53b"/>
+        <rect id="Rectangle_6310" data-name="Rectangle 6310" width="3.07" height="5.351" transform="translate(3.07 0)" fill="#6abdc6"/>
+        <rect id="Rectangle_6311" data-name="Rectangle 6311" width="3.07" height="5.351" transform="translate(6.14 0)" fill="#844f95"/>
+        <rect id="Rectangle_6312" data-name="Rectangle 6312" width="3.07" height="5.351" transform="translate(9.21 0)" fill="#e78b72"/>
+        <rect id="Rectangle_6313" data-name="Rectangle 6313" width="3.07" height="5.351" transform="translate(12.28 0)" fill="#3388c0"/>
+        <rect id="Rectangle_6314" data-name="Rectangle 6314" width="3.07" height="5.351" transform="translate(15.35 0)" fill="#f4c335"/>
+        <rect id="Rectangle_6315" data-name="Rectangle 6315" width="3.07" height="5.351" transform="translate(18.42 0)" fill="#9d9e94"/>
+        <rect id="Rectangle_6316" data-name="Rectangle 6316" width="3.07" height="5.351" transform="translate(21.491 0)" fill="#ea963b"/>
+      </g>
+    </g>
+  </g>
+</svg>

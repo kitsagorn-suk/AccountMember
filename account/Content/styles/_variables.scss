@@ -1,0 +1,78 @@
+@import "bootstrap/functions";
+@import "bootstrap/basecolor";
+
+$variable_prefix: bs- !default;
+
+$body_bg: #111927;
+$body_color: #433d5a;
+$content_bg: #e6e9f1;
+$font_color_inverse: #f5f5f5;
+
+// $primary: #011552;
+$primary: #4d90ff;
+$secondary: #fbe20b;
+$success: #21b34c;
+$info: #3b9cff;
+$warning: #8140f5;
+$danger: #EA5455;
+
+$link_color: #3761ff;
+$link_decoration: none;
+
+$border_color: #d5e1f5;
+$border_width: 1px;
+$border_style: solid;
+$border: $border_width $border_style $border_color;
+
+$border_radius:               .5rem;
+$border_radius_sm:            .4rem;
+$border_radius_lg:            .8rem;
+$border_radius_pill:          50rem;
+
+$input_bg: #fff;
+$input_disabled_bg: darken($border_color, 20%);
+$input_color: $body_color;
+$input_border_color: $border_color;
+
+$spacer: 1rem;
+$spacer_sm: $spacer * 0.75;
+
+$app_font_family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$headings_font_family: "Kanit", sans-serif;
+$print_font_family: "BrowalliaUPC", sans-serif;
+
+$font_size_base: 1rem;
+$font_size_sm: $font_size_base * 0.875;
+$font_size_lg: $font_size_base * 1.25;
+
+$font_weight_light: 200;
+$font_weight_normal: 300;
+$font_weight_bold: 400;
+$font_weight_bolder: 500;
+
+$app_font_weight: $font_weight_normal;
+$headings_font_weight: 400;
+
+$z_index: 800;
+$z_index_2x: $z_index * 2;
+$z_index_modal: ($z_index * 2) + 10;
+
+$pagination_size: 36px;
+
+$pagination_color: $body_color;
+$pagination_hover_color: $link_color;
+
+$box_shadow: 0 4px 24px 0 rgb(36 69 103 / 10%);
+$gradient: linear-gradient(72deg, #ff375f 0%, #ff0088 100%);
+
+
+:root {
+  --#{$variable-prefix}-font-family: #{$app_font_family};
+  --#{$variable-prefix}-app-font-weight: #{$app_font_weight};
+  --#{$variable-prefix}-headings-font-family: #{$headings_font_family};
+  --#{$variable-prefix}-headings-font-weight: #{$headings_font_weight};
+  --#{$variable-prefix}-spacer: #{$spacer};
+  --#{$variable-prefix}-border: #{$border};
+}
+
+@import 'bootstrap/variables';

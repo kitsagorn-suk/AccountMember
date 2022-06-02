@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="54" height="54" viewBox="0 0 54 54">
+  <g id="Group_10042" data-name="Group 10042" transform="translate(-33 -1656)">
+    <g id="Rectangle" transform="translate(33 1656)" fill="#fff" stroke="#fff" stroke-miterlimit="10" stroke-width="1">
+      <rect width="54" height="54" rx="27" stroke="none"/>
+      <rect x="0.5" y="0.5" width="53" height="53" rx="26.5" fill="none"/>
+    </g>
+    <g id="hsbc" transform="translate(40 1641)">
+      <path id="Path_8545" data-name="Path 8545" d="M52.089,32H32L42.044,42.044Z" transform="translate(-21.956)" fill="#c83530" fill-rule="evenodd"/>
+      <path id="Path_8546" data-name="Path 8546" d="M32,74.044H52.089L42.044,64Z" transform="translate(-21.956 -21.956)" fill="#c83530" fill-rule="evenodd"/>
+      <path id="Path_8547" data-name="Path 8547" d="M96,32V52.089l10.044-10.044Z" transform="translate(-65.867)" fill="#c83530" fill-rule="evenodd"/>
+      <path id="Path_8548" data-name="Path 8548" d="M0,42.044,10.044,52.089V32Z" fill="#c83530" fill-rule="evenodd"/>
+    </g>
+  </g>
+</svg>

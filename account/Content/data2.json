@@ -1,0 +1,191 @@
+{
+  "_id": "61f0015cb783f3c88a665529",
+  "bank": {
+    "bankName": "ธ. ธนชาต จำกัด (มหาชน)",
+    "accountName": "mr. Dio",
+    "accountNo": "3448967358",
+    "bankShortName": "TBANK"
+  },
+  "customer": {
+    "id": "243",
+    "company": "sb234",
+    "companyType": "SPORTBOOK"
+  },
+  "discount": 0,
+  "vat": 0,
+  "transactions": [
+    {
+      "_id": "61f0015db783f3c88a665549",
+      "id": "50",
+      "description": "AMB_GAME2 : W/L",
+      "qty": 1,
+      "unit": "",
+      "unitPrice": 207.81,
+      "amount": 207.81
+    },
+    {
+      "_id": "61f0015db783f3c88a665548",
+      "id": "51",
+      "description": "EBET : W/L",
+      "qty": 1,
+      "unit": "",
+      "unitPrice": 97.4,
+      "amount": 97.4
+    },
+    {
+      "_id": "61f0015db783f3c88a665547",
+      "id": "52",
+      "description": "FUNKY_SLOT : W/L",
+      "qty": 1,
+      "unit": "",
+      "unitPrice": 270.44,
+      "amount": 270.44
+    },
+    {
+      "_id": "61f0015db783f3c88a665546",
+      "id": "53",
+      "description": "PRETTY_GAME : W/L",
+      "qty": 1,
+      "unit": "",
+      "unitPrice": -463.91,
+      "amount": -463.91
+    },
+    {
+      "_id": "61f0015db783f3c88a665545",
+      "id": "54",
+      "description": "ICONIC_SLOT : W/L",
+      "qty": 1,
+      "unit": "",
+      "unitPrice": 98.71,
+      "amount": 98.71
+    },
+    {
+      "_id": "61f0015db783f3c88a665544",
+      "id": "55",
+      "description": "MICRO_GAME : W/L",
+      "qty": 1,
+      "unit": "",
+      "unitPrice": 322.74,
+      "amount": 322.74
+    },
+    {
+      "_id": "61f0015db783f3c88a665543",
+      "id": "56",
+      "description": "GANAPATI : W/L",
+      "qty": 1,
+      "unit": "",
+      "unitPrice": 62.83,
+      "amount": 62.83
+    },
+    {
+      "_id": "61f0015db783f3c88a665542",
+      "id": "57",
+      "description": "WAZDAN_SLOT : W/L",
+      "qty": 1,
+      "unit": "",
+      "unitPrice": 195.1,
+      "amount": 195.1
+    },
+    {
+      "_id": "61f0015db783f3c88a665541",
+      "id": "58",
+      "description": "AWS_SLOT : W/L",
+      "qty": 1,
+      "unit": "",
+      "unitPrice": 94.7,
+      "amount": 94.7
+    },
+    {
+      "_id": "61f0015db783f3c88a665540",
+      "id": "59",
+      "description": "AMEBA : W/L",
+      "qty": 1,
+      "unit": "",
+      "unitPrice": -518.9,
+      "amount": -518.9
+    },
+    {
+      "_id": "61f0015db783f3c88a66553f",
+      "id": "60",
+      "description": "AMB_SLOT : W/L",
+      "qty": 1,
+      "unit": "",
+      "unitPrice": 868.99,
+      "amount": 868.99
+    },
+    {
+      "_id": "61f0015db783f3c88a66553e",
+      "id": "61",
+      "description": "SEXY_BACCARAT : W/L",
+      "qty": 1,
+      "unit": "",
+      "unitPrice": 13806.25,
+      "amount": 13806.25
+    },
+    {
+      "_id": "61f0015db783f3c88a66553d",
+      "id": "62",
+      "description": "M2_MUAY : W/L",
+      "qty": 1,
+      "unit": "",
+      "unitPrice": 0.56,
+      "amount": 0.56
+    },
+    {
+      "_id": "61f0015db783f3c88a66553c",
+      "id": "63",
+      "description": "SPADE_GAME : W/L",
+      "qty": 1,
+      "unit": "",
+      "unitPrice": 876.48,
+      "amount": 876.48
+    },
+    {
+      "_id": "61f0015db783f3c88a66553b",
+      "id": "64",
+      "description": "EVO_SLOT : W/L",
+      "qty": 1,
+      "unit": "",
+      "unitPrice": 70.38,
+      "amount": 70.38
+    },
+    {
+      "_id": "61f0015db783f3c88a66553a",
+      "id": "65",
+      "description": "PRAGMATIC_SLOT : W/L",
+      "qty": 1,
+      "unit": "",
+      "unitPrice": 493.65,
+      "amount": 493.65
+    },
+    {
+      "_id": "61f0015db783f3c88a665539",
+      "id": "66",
+      "description": "MANNA_SLOT : W/L",
+      "qty": 1,
+      "unit": "",
+      "unitPrice": 86.12,
+      "amount": 86.12
+    },
+    {
+      "_id": "61f0015db783f3c88a665538",
+      "id": "67",
+      "description": "ALL_BET : W/L",
+      "qty": 1,
+      "unit": "",
+      "unitPrice": 251.52,
+      "amount": 251.52
+    }
+  ],
+  "createDate": "2022-01-25T13:55:40.990Z",
+  "updateDate": "2022-02-08T08:38:04.103Z",
+  "prefix": "sb234",
+  "prefixType": "SPORTBOOK",
+  "billNo": "21122244",
+  "date": "2022-01-13T07:34:17.000Z",
+  "total": 192854.625,
+  "subTotal": 192854.625,
+  "grandTotal": 192854.625,
+  "status": "PENDING",
+  "pageTotal": 2
+}

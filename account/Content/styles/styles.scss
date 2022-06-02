@@ -1,0 +1,79 @@
+@import 'public/font';
+
+// Not change this pattern
+@import "bootstrap/functions";
+// @import "bootstrap/basecolor";
+@import "variables";
+@import "bootstrap/mixins";
+@import "public/mixin";
+@import "bootstrap/bootstrap";
+
+
+
+// @import '~ngx-toastr/toastr';
+// @import '~ngx-toastr/toastr-bs4-alert';
+// @import '~ngx-toastr/toastr-bs4-alert';
+
+@import 'public/toast';
+@import 'public/btn';
+@import 'public/pagination';
+@import 'public/table';
+@import "public/sweetalert";
+// @import "public/bankCard";
+// @import '~ngx-toastr/toastr-bs4-alert';
+
+@keyframes dropdownAnimation {
+  0% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdown{
+  .dropdown-menu{
+    // &.show{
+    //   animation-name: dropdownAnimation;
+    //   animation-duration: .5s;
+    //   animation-iteration-count: 1;
+    //   animation-timing-function: ease;
+    //   animation-fill-mode: forwards;
+    // }
+  }
+}
+
+// helper
+.font-heading{
+  font-family: $headings_font_family;
+}
+
+.card {
+  box-shadow: $box_shadow;
+  transition: all 0.3s ease-in-out, background 0s, color 0s, border-color 0s;
+  word-wrap: break-word;
+  background-color: rgba($color: #ffffff, $alpha: 0.8);
+  background-clip: border-box;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.card-body{
+  padding: 1.5rem;
+}
+
+.card-footer {
+  border-top: $border;
+  display: flex;
+  justify-content: flex-end;
+  button, .btn{
+    margin-left: $spacer_sm;
+    min-width: 120px;
+  }
+}
+
+.nowrap{
+  white-space: nowrap !important;
+}

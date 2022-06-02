@@ -1,0 +1,145 @@
+﻿@model account.Database.bill_transaction
+
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+
+@{Html.RenderPartial("~/Views/Quotation/Menu.cshtml");}
+@Html.Hidden("insSlip", @Url.Action("insSlip", "Quotation"))
+@Html.Hidden("ViewData", @Url.Action("ListQuotation", "Quotation"))
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<br />
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-2 col-md-9">
+        <div class="card bg-light text-dark">
+            <div class="card-body">
+                <h1>Upload Slip</h1>
+                <br />
+                <div class="row">
+                    <div class="col-md-6">
+                        <br />
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-7">
+                                <label>Bill No:</label>
+                                <span>
+                                    @Html.EditorFor(model => model.no, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <br />
+                        <div class="col-md-5">
+                            <label>Amount:</label>
+                            <span>
+                                <input id="amount" class="form-control" />
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-6">
+                        <br />
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-7">
+                                    <label>Slip:</label>
+                                    <span>
+                                        <input type="file" class="form-control" id="Slip" name="image" multiple="multiple" />
+                                        @*@Html.ValidationMessageFor(model => model.CarPicPath, "", new { @class = "text-danger" })*@
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <br />
+                        <div class="form-group">
+                            <div class="row">
+
+                                <div class="col-md-7">
+                                    <button class="btn btn-lg btn-secondary" onclick="insSlip()">Upload</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function insSlip() {
+        var urlAction = $('#insSlip').val();
+
+        const linkUrl = window.location.search;
+        const urlParams = new URLSearchParams(linkUrl);
+        const id = urlParams.get('id');
+        console.log(id);
+        var fileUpload = $("#Slip").get(0);
+        var files = fileUpload.files;
+
+        // Create  a FormData object
+        var fileData = new FormData();
+
+        // if there are multiple files , loop through each files
+        for (var i = 0; i < files.length; i++) {
+            fileData.append(files[i].name, files[i]);
+        }
+
+        fileData.append('transaction_id', id);
+        fileData.append('amount', $("#amount").val());
+        fileData.append('Slip', $("#Slip").val());
+        var param = {
+            transaction_id: $("#no").val(),
+            amount: $("#amount").val(),
+            Slip: $("#Slip").val(),
+        };
+        console.log(param);
+        $.ajax({
+            url: urlAction,
+            type: "POST",
+            contentType: false, // Not to set any content header
+            processData: false, // Not to process data
+            data: fileData,
+            success: function (obj) {
+                //alert(obj.result);
+                if (obj.result == "Add New Car Complete!") {
+                    var urlAction = $('#ViewData').val();
+                    window.location.href = urlAction;
+                }
+            }
+        });
+    }
+</script>
+
+<style>
+    h1 {
+        text-align: center;
+    }
+
+    label {
+        float: left;
+    }
+
+    span {
+        display: block;
+        overflow: hidden;
+        padding: 0 4px 0 6px;
+    }
+
+    input {
+        width: 100%;
+        float: right;
+    }
+</style>

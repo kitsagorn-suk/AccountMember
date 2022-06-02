@@ -1,0 +1,119 @@
+﻿body {
+}
+
+#login-page {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #111927;
+    color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.app-logo {
+    display: block;
+    margin: auto;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+    .app-logo ::ng-deep svg {
+        height: 30px;
+        width: auto;
+    }
+
+.form-wrapper {
+    border: 2px solid #304a6f;
+    border-radius: 15px;
+    padding: 2rem;
+    display: block;
+    width: 450px;
+    min-height: 500px;
+    margin-bottom: 3rem;
+    position: relative;
+    z-index: 1024;
+}
+
+    .form-wrapper .form-control {
+        background: #20304b;
+        border-color: transparent;
+        color: #fff;
+        padding-left: 54px;
+        border-radius: 0.5rem !important;
+    }
+
+        .form-wrapper .form-control:disabled {
+            background: #5175b3;
+        }
+
+    .form-wrapper .input-group-text {
+        background: #20304b;
+        color: #fff;
+        border: none;
+    }
+
+    .form-wrapper .input-adon-icon ::ng-deep svg {
+        height: 20px;
+        width: auto;
+    }
+
+    .form-wrapper .input-group-text {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 9;
+        border-radius: 0.5rem;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 48px;
+    }
+
+.ocean {
+    height: 5%;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: #01112b;
+}
+
+.wave {
+    background: url('~src/imag/wave.svg') repeat-x;
+    position: absolute;
+    top: -198px;
+    width: 6400px;
+    height: 198px;
+    animation: wave 12s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
+    transform: translate3d(0, 0, 0);
+}
+
+    .wave:nth-of-type(2) {
+        top: -175px;
+        animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite, swell 10s ease -1.25s infinite;
+        opacity: 1;
+    }
+
+@keyframes wave {
+    0% {
+        margin-left: 0;
+    }
+
+    100% {
+        margin-left: -1600px;
+    }
+}
+
+@keyframes swell {
+    0%, 100% {
+        transform: translate3d(0,-25px,0);
+    }
+
+    50% {
+        transform: translate3d(0,5px,0);
+    }
+}
