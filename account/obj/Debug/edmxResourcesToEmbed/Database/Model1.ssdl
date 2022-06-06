@@ -78,6 +78,22 @@
     <Property Name="discount_percent" Type="decimal" Precision="18" Scale="2" />
     <Property Name="discount_type" Type="int" />
   </EntityType>
+  <EntityType Name="company">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="250" />
+    <Property Name="url" Type="varchar" MaxLength="200" />
+    <Property Name="status" Type="bit" />
+    <Property Name="company_type_id" Type="int" />
+    <Property Name="remark" Type="text" />
+    <Property Name="create_date" Type="datetime" />
+    <Property Name="create_by" Type="int" />
+    <Property Name="update_date" Type="datetime" />
+    <Property Name="update_by" Type="int" />
+    <Property Name="in_house" Type="int" />
+  </EntityType>
   <EntityType Name="user_login">
     <Key>
       <PropertyRef Name="id" />
@@ -102,6 +118,7 @@
     <EntitySet Name="bill_confirm_slip" EntityType="Self.bill_confirm_slip" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="bill_transaction" EntityType="Self.bill_transaction" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="bill_transaction_detail" EntityType="Self.bill_transaction_detail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="company" EntityType="Self.company" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="user_login" EntityType="Self.user_login" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>
