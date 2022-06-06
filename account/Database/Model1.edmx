@@ -83,6 +83,22 @@
           <Property Name="discount_percent" Type="decimal" Precision="18" Scale="2" />
           <Property Name="discount_type" Type="int" />
         </EntityType>
+        <EntityType Name="company">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="250" />
+          <Property Name="url" Type="varchar" MaxLength="200" />
+          <Property Name="status" Type="bit" />
+          <Property Name="company_type_id" Type="int" />
+          <Property Name="remark" Type="text" />
+          <Property Name="create_date" Type="datetime" />
+          <Property Name="create_by" Type="int" />
+          <Property Name="update_date" Type="datetime" />
+          <Property Name="update_by" Type="int" />
+          <Property Name="in_house" Type="int" />
+        </EntityType>
         <EntityType Name="user_login">
           <Key>
             <PropertyRef Name="id" />
@@ -107,6 +123,7 @@
           <EntitySet Name="bill_confirm_slip" EntityType="Self.bill_confirm_slip" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="bill_transaction" EntityType="Self.bill_transaction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="bill_transaction_detail" EntityType="Self.bill_transaction_detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="company" EntityType="Self.company" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="user_login" EntityType="Self.user_login" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -138,6 +155,7 @@
           <EntitySet Name="bill_transaction" EntityType="accountModel.bill_transaction" />
           <EntitySet Name="bill_transaction_detail" EntityType="accountModel.bill_transaction_detail" />
           <EntitySet Name="bill_confirm_slip" EntityType="accountModel.bill_confirm_slip" />
+          <EntitySet Name="companies" EntityType="accountModel.company" />
         </EntityContainer>
         <EntityType Name="bill_transaction">
           <Key>
@@ -216,6 +234,22 @@
           <Property Name="create_at" Type="DateTime" Precision="3" />
           <Property Name="create_date" Type="DateTime" Precision="3" />
           <Property Name="amount" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="company">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="url" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="company_type_id" Type="Int32" />
+          <Property Name="remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="create_date" Type="DateTime" Precision="3" />
+          <Property Name="create_by" Type="Int32" />
+          <Property Name="update_date" Type="DateTime" Precision="3" />
+          <Property Name="update_by" Type="Int32" />
+          <Property Name="in_house" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -321,6 +355,23 @@
                 <ScalarProperty Name="comfirm_by" ColumnName="comfirm_by" />
                 <ScalarProperty Name="slip" ColumnName="slip" />
                 <ScalarProperty Name="transaction_id" ColumnName="transaction_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="companies">
+            <EntityTypeMapping TypeName="accountModel.company">
+              <MappingFragment StoreEntitySet="company">
+                <ScalarProperty Name="in_house" ColumnName="in_house" />
+                <ScalarProperty Name="update_by" ColumnName="update_by" />
+                <ScalarProperty Name="update_date" ColumnName="update_date" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="company_type_id" ColumnName="company_type_id" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
