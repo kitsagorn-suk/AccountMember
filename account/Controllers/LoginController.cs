@@ -52,7 +52,7 @@ namespace account.Controllers
 
         public ActionResult LogOut()
         {
-            HttpCookie cookie = new HttpCookie("AccountMember", "");
+            HttpCookie cookie = new HttpCookie("account", "");
             cookie.Expires = DateTime.Now.AddYears(-1);
             Response.Cookies.Add(cookie);
 
