@@ -1,31 +1,84 @@
-﻿<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+﻿@Html.Hidden("getNameCompany", @Url.Action("getNameCompany", "Quotation"))
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <!-- Sidebar -->
-    <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:15%;">
-        @*<h3 class="w3-bar-item">Menu</h3>*@
-        <div style="background-color:#102E64">
-            <img src="~/img/Logo-02-removebg-preview.png" width="175px" height="85px" style="align-text:center"/>
+<!-- Sidebar -->
+<div class="w3-sidebar w3-light-grey w3-bar-block" style="width:15%;">
+    @*<h3 class="w3-bar-item">Menu</h3>*@
+    <div style="background-color:#102E64">
+        <img src="~/img/Logo-02-removebg-preview.png" width="175px" height="85px" style="align-text:center" />
+    </div>
+
+    <a href="~/Quotation/Quotations" class="w3-bar-item w3-button">Link 1</a>
+    <a href="#" class="w3-bar-item w3-button">Link 2</a>
+    <a href="#" class="w3-bar-item w3-button">Link 3</a>
+</div>
+
+<!-- Page Content -->
+<div style="margin-left:15%">
+
+    <div class="w3-container" style="background-color:#102E64; height:85px">
+        <br />
+        <div style="align-items:center">
+            <text class="setForm"><i class="fa fa-user-circle" style="color:lightgray;font-size:22px"></i>  @Session["UserName"].ToString()</text>
+            <text class="setForm" id="company"><i class="fa fa-briefcase" style="color:lightgray;font-size:22px"></i> admin</text>
+            <text class="setForm"><i class="fa fa-clock-o" style="color:lightgray;font-size:22px"> <span id="time" class="setTime"></span></i> </text>
+            <a class="setForm" style="float:right" href="@Url.Action("Login", "Login")"><i class="fa fa-sign-out"></i>&nbsp;Log Out</a>
         </div>
+        <br />
+    </div>
+</div>
+
+<script>
+    ////var datetime = new Date();
+    ////console.log(datetime);
+    ////document.getElementById("time").textContent = datetime;
+
+    function refreshTime() {
+        const timeDisplay = document.getElementById("time");
+        const dateString = new Date().toLocaleString();
+        const formattedString = dateString.replace(", ", "   ");
+        timeDisplay.textContent = formattedString;
+    }
+    setInterval(refreshTime, 1000);
+    @*getNameCompany();
+
+    function getNameCompany() {
+        var _id = @Session["UserID"].ToString();
+        console.log(_id);
+
+        var urlAction = $('#getNameCompany').val();
         
-        <a href="~/Quotation/Quotations" class="w3-bar-item w3-button">Link 1</a>
-        <a href="#" class="w3-bar-item w3-button">Link 2</a>
-        <a href="#" class="w3-bar-item w3-button">Link 3</a>
-    </div>
+        $.ajax({
+            url: urlAction,
+            type: "POST",
+            dataType: "JSON",
+            data: {
+                id = _id.val(),
+            },
+            success: function (obj) {
+                alert(obj);
+                alert(obj.result);
+                document.getElementById("company").textContent = obj.result["name"];
+            }
+        });
+    }*@
+</script>
 
-    <!-- Page Content -->
-    <div style="margin-left:15%">
+<style>
+    .setTime {
+        float: right;
+        font-size: 16px;
+        font-family: Arial, Helvetica, sans-serif;
+        margin-left: 5px;
+        padding: 4px;
+    }
 
-        <div class="w3-container" style="background-color:#102E64; height:85px">
-            <br />
-            <div style="align-items:center">
-                <a style="color:lightgray;font-size:16px; font-family:Arial, Helvetica, sans-serif;"><i class="fa fa-user-circle" style="color:lightgray;font-size:22px"></i>  @Session["UserName"].ToString()</a>
-                <a style="color:lightgray;font-size:16px; font-family:Arial, Helvetica, sans-serif;"><i class="fa fa-briefcase" style="color:lightgray;font-size:22px"></i>  admin</a>
-                <a style="color:lightgray;font-size:16px; font-family:Arial, Helvetica, sans-serif;"><i class="fa fa-clock-o" style="color:lightgray;font-size:22px"></i>  &nbsp;30/05/22 15:55:07 GMT+7</a>
-                <a style="color:lightgray;font-size:16px; font-family:Arial, Helvetica, sans-serif;float:right" href="@Url.Action("Login", "Login")"><i class="fa fa-sign-out"></i>&nbsp;Log Out</a>
-                
-            </div>
-            <br />
-        </div>
-    </div>
+    .setForm {
+        color: lightgray;
+        font-size: 16px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+</style>
 

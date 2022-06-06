@@ -25,7 +25,7 @@ namespace account.Controllers
             return View();
         }
 
-        public ActionResult Quotations(int id)
+        public ActionResult Quotations()
         {
             Treatment treatment = new Treatment();
             //var db = new accountEntities();
@@ -52,6 +52,16 @@ namespace account.Controllers
             return View(aaa);
         }
 
+        public ActionResult getNameCompany(int id)
+        {
+            var db = new accountEntities();
+            var _user = db.user_login.Where(x => x.id == id).FirstOrDefault();
+            var compID = _user.company_id;
+            var aaa = db.companies.Where(z => z.id == compID).FirstOrDefault();
+
+            return View(aaa);
+        }
+
         public JsonResult SearchQuotationDate(string start_date, string end_date)
         {
             try
@@ -67,7 +77,7 @@ namespace account.Controllers
             }
             catch (Exception ex)
             {
-                return Json(new { result = "error", message = "request successfully" });
+                return Json(new { result = "error", message = "request failed" });
             }
         }
 
@@ -110,7 +120,7 @@ namespace account.Controllers
                     dbcontext.bill_confirm_slip.Add(insSlip);
                     var i = dbcontext.SaveChanges();
                 }
-                msg = "Add New Car Complete!";
+                msg = "Upload slip complete!";
 
             }
             catch (DbEntityValidationException e)

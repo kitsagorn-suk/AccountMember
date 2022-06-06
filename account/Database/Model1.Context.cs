@@ -29,5 +29,6 @@ namespace account.Database
         public virtual DbSet<bill_transaction> bill_transaction { get; set; }
         public virtual DbSet<bill_transaction_detail> bill_transaction_detail { get; set; }
         public virtual DbSet<bill_confirm_slip> bill_confirm_slip { get; set; }
+        public virtual DbSet<company> companies { get; set; }
     }
 }
