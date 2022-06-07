@@ -4,10 +4,15 @@
 }
 @Html.Hidden("ViewData", @Url.Action("UploadSlip", "Quotation"))
 
-<link href="~/Content/bootstrap.css" rel="stylesheet" />
-<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+@*<link href="~/Content/bootstrap.css" rel="stylesheet" />*@
+<script src="~/Scripts/jquery-3.5.1.js"></script>
 <link href="~/Content/styles/dataTables.min.css" rel="stylesheet" />
-<script src="~/Scripts/dataTables.min.js"></script>
+<script src="~/Scripts/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/dataTables.bootstrap4.min.js"></script>
+
+<link href="~/Content/styles/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
@@ -34,7 +39,7 @@
                 var htmlDetail = "";
                 var obj = JSON.parse(obj.result);
 
-               
+
                 if (obj.length == 0) {
                     htmlDetail += "<tr><td colspan='5' style='text-align: center;'>No data.</td></tr>";
                 }
@@ -48,7 +53,7 @@
                         htmlDetail += "<tr>";
                         htmlDetail += "<td>" + DateCreate + "</td>";
                         htmlDetail += "<td>" + obj[i].no + "</td>";
-                        htmlDetail += "<td style='text-align:center'><a class='btn btn-lg btn-outline-success fa fa-cloud-upload' href='/Quotation/UploadSlip?id=" + obj[i].id +"'> Upload Slip</a></td>";
+                        htmlDetail += "<td style='text-align:center'><a class='btn btn-lg btn-outline-success fa fa-cloud-upload' href='/Quotation/UploadSlip?id=" + obj[i].id + "'> Upload Slip</a></td>";
                         if (obj[i].is_complete == 1) {
                             htmlDetail += "<td>no complete and confirm bill</td>";
                         }
@@ -86,7 +91,7 @@
     @{Html.RenderPartial("~/Views/Quotation/Menu.cshtml");}
     @Html.Hidden("SearchQuotation", @Url.Action("SearchQuotationDate", "Quotation"))
 
-    <div class="row">
+    <div class="row" style="margin-top:85px">
         <div class="col-md-2"></div>
         <div class="col-md-2 col-md-9">
             <div class="card" style="margin-top:15px">
@@ -117,58 +122,50 @@
             <br />
             <div class="card" style="margin-top:20px">
                 <div class="card-body">
-                    <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                        <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
-                            <div class="col-sm-12">
-                                <table id="listquotation" class="table table-bordered table-hover table-striped wrap" style="width:100%">
-                                    <thead>
-                                        <tr>
+                    <table id="listquotation" class="table table-bordered table-hover table-striped wrap" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Start Date</th>
+                                <th>Quotation No.</th>
+                                <th>Upload Slip</th>
+                                <th>Status</th>
+                                <th>Quotation</th>
+                            </tr>
+                        </thead>
 
-                                            <th>Date</th>
-                                            <th>Quotation No.</th>
-                                            <th>Upload Slip</th>
-                                            <th>Status</th>
-                                            <th>Quotation</th>
-                                        </tr>
-                                    </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
 
-                                    <tbody>
-                                        @foreach (var item in Model)
-                                        {
-                                            <tr>
-
-                                                <td>@item.create_date.ToString("dd/MM/yyyy")</td>
-                                                <td>@item.no</td>
-                                                <td style="text-align:center">@Html.ActionLink(" Upload Slip", "UploadSlip", "Quotation", new { id = item.id}, new {@class = "btn btn-lg btn-outline-success fa fa-cloud-upload" })</td>
-                                                @if (@item.is_complete == 1)
-                                                {
-                                                    <td>no complete and confirm bill</td>
-                                                }
-                                                else if (@item.is_complete == 2)
-                                                {
-                                                    <td>complete</td>
-                                                }
-                                                else if (@item.is_complete == 3)
-                                                {
-                                                    <td>done</td>
-                                                }
-                                                else
-                                                {
-                                                    <td>-</td>
-                                                }
-                                                    <td style="text-align:center">@Html.ActionLink(" ", "Quotations", "Quotation", new { id = item.id }, new { @class = "btn btn-lg btn-outline-warning fa fa-file-pdf-o" })</td>
-                                            </tr>
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+                                    <td>@item.start_date.ToString("dd/MM/yyyy")</td>
+                                    <td>@item.no</td>
+                                    <td style="text-align:center">@Html.ActionLink(" Upload Slip", "UploadSlip", "Quotation", new { id = item.id }, new { @class = "btn btn-lg btn-outline-success fa fa-cloud-upload" })</td>
+                                    @if (@item.is_complete == 1)
+                                    {
+                                        <td>no complete and confirm bill</td>
+                                    }
+                                    else if (@item.is_complete == 2)
+                                    {
+                                        <td>complete</td>
+                                    }
+                                    else if (@item.is_complete == 3)
+                                    {
+                                        <td>done</td>
+                                    }
+                                    else
+                                    {
+                                        <td>-</td>
+                                    }
+                                    <td style="text-align:center">@Html.ActionLink(" ", "Quotations", "Quotation", new { id = item.id }, new { @class = "btn btn-lg btn-outline-warning fa fa-file-pdf-o" })</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
-
 </body>
 
 <script>

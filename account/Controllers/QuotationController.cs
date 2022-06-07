@@ -28,9 +28,7 @@ namespace account.Controllers
         public ActionResult Quotations()
         {
             Treatment treatment = new Treatment();
-            //var db = new accountEntities();
-            //var quoList = db.bill_transaction_detail.Where(x => x.bill_transaction_id == id).ToList();
-            //ViewBag.quotation = quoList;
+            //ทดลองอ่าน json flie รอ crystal report
             using (StreamReader sr = new StreamReader(Server.MapPath("~/Content/data.json")))
             {
                 ViewBag.quotation = JsonConvert.DeserializeObject<Treatment>(sr.ReadToEnd());
@@ -52,14 +50,14 @@ namespace account.Controllers
             return View(aaa);
         }
 
-        public ActionResult getNameCompany(int id)
+        public JsonResult getNameCompany(int id)
         {
             var db = new accountEntities();
             var _user = db.user_login.Where(x => x.id == id).FirstOrDefault();
             var compID = _user.company_id;
             var aaa = db.companies.Where(z => z.id == compID).FirstOrDefault();
-
-            return View(aaa);
+            ViewBag.company = aaa;
+            return Json(new { success = ViewBag.company }, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult SearchQuotationDate(string start_date, string end_date)

@@ -1,10 +1,22 @@
 ﻿@Html.Hidden("getNameCompany", @Url.Action("getNameCompany", "Quotation"))
 
+<script src="~/Scripts/jquery-3.5.1.js"></script>
+<link href="~/Content/styles/dataTables.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/dataTables.bootstrap4.min.js"></script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+
+@*<script src="~/Scripts/jquery-3.6.0.min.js"></script>*@
+
+
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+
 <!-- Sidebar -->
-<div class="w3-sidebar w3-light-grey w3-bar-block" style="width:15%;">
+<div class="sidenav w3-bar-block" style="width:15%;">
     @*<h3 class="w3-bar-item">Menu</h3>*@
     <div style="background-color:#102E64">
         <img src="~/img/Logo-02-removebg-preview.png" width="175px" height="85px" style="align-text:center" />
@@ -18,11 +30,11 @@
 <!-- Page Content -->
 <div style="margin-left:15%">
 
-    <div class="w3-container" style="background-color:#102E64; height:85px">
+    <div class="topnav">
         <br />
         <div style="align-items:center">
-            <text class="setForm"><i class="fa fa-user-circle" style="color:lightgray;font-size:22px"></i>  @Session["UserName"].ToString()</text>
-            <text class="setForm" id="company"><i class="fa fa-briefcase" style="color:lightgray;font-size:22px"></i> admin</text>
+            <text class="setForm" style="margin-left:20px"><i class="fa fa-user-circle" style="color:lightgray;font-size:22px"></i>  @Session["UserName"].ToString()</text>
+            <text class="setForm"><i class="fa fa-briefcase" style="color:lightgray;font-size:22px"></i> <i id="company"></i> </text>
             <text class="setForm"><i class="fa fa-clock-o" style="color:lightgray;font-size:22px"> <span id="time" class="setTime"></span></i> </text>
             <a class="setForm" style="float:right" href="@Url.Action("Login", "Login")"><i class="fa fa-sign-out"></i>&nbsp;Log Out</a>
         </div>
@@ -31,9 +43,6 @@
 </div>
 
 <script>
-    ////var datetime = new Date();
-    ////console.log(datetime);
-    ////document.getElementById("time").textContent = datetime;
 
     function refreshTime() {
         const timeDisplay = document.getElementById("time");
@@ -42,28 +51,34 @@
         timeDisplay.textContent = formattedString;
     }
     setInterval(refreshTime, 1000);
-    @*getNameCompany();
 
     function getNameCompany() {
         var _id = @Session["UserID"].ToString();
         console.log(_id);
 
         var urlAction = $('#getNameCompany').val();
-        
+
         $.ajax({
             url: urlAction,
             type: "POST",
             dataType: "JSON",
             data: {
-                id = _id.val(),
+                id : _id,
             },
             success: function (obj) {
-                alert(obj);
-                alert(obj.result);
-                document.getElementById("company").textContent = obj.result["name"];
+                console.log(obj.success);
+                //alert(obj);
+                //alert(obj.result);
+                document.getElementById("company").textContent = obj.success["name"];
+                document.getElementById("company").style.color = "lightgray";
+                document.getElementById("company").style.fontSize = "16px";
+                document.getElementById("company").style.fontFamily = "Arial, Helvetica, sans-serif";
+                document.getElementById("company").style.fontStyle = "normal";
             }
         });
-    }*@
+    }
+    getNameCompany();
+
 </script>
 
 <style>
@@ -79,6 +94,27 @@
         color: lightgray;
         font-size: 16px;
         font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .topnav {
+        background-color: #102E64;
+        height: 85px;
+        position: fixed; /* Set the navbar to fixed position */
+        top: 0; /* Position the navbar at the top of the page */
+        width: 100%; /* Full width */
+        z-index: 999;
+    }
+
+    .sidenav {
+        height: 100%; /* Full-height: remove this if you want "auto" height */
+        width: 100%; /* Set the width of the sidebar */
+        position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+        z-index: 1; /* Stay on top */
+        top: 0; /* Stay at the top */
+        left: 0;
+        background-color: #fff; /* Black */
+        overflow-x: hidden; /* Disable horizontal scroll */
+        padding-top: 0;
     }
 </style>
 

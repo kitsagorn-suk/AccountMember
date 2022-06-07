@@ -1,18 +1,23 @@
 ﻿@model account.Database.bill_transaction
 
-<link href="~/Content/bootstrap.css" rel="stylesheet" />
-<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 
-
-@{Html.RenderPartial("~/Views/Quotation/Menu.cshtml");}
 @Html.Hidden("insSlip", @Url.Action("insSlip", "Quotation"))
 @Html.Hidden("ViewData", @Url.Action("ListQuotation", "Quotation"))
 
+
+<script src="~/Scripts/jquery-3.5.1.js"></script>
+<link href="~/Content/styles/dataTables.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/dataTables.bootstrap4.min.js"></script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
+
+@{Html.RenderPartial("~/Views/Quotation/Menu.cshtml");}
 <br />
-<div class="row">
+<div class="row" style="margin-top:85px">
     <div class="col-md-2"></div>
     <div class="col-md-2 col-md-9">
         <div class="card bg-light text-dark">

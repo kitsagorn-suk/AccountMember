@@ -23,7 +23,7 @@ namespace account.Database
         public Nullable<int> company_type_sub_id { get; set; }
         public Nullable<int> company_prefix_id { get; set; }
         public Nullable<int> bill_type { get; set; }
-        public Nullable<System.DateTime> start_date { get; set; }
+        public System.DateTime start_date { get; set; }
         public Nullable<System.DateTime> end_date { get; set; }
         public string file_name { get; set; }
         public string system_bank_id { get; set; }
@@ -44,7 +44,7 @@ namespace account.Database
         public Nullable<System.DateTime> done_date { get; set; }
         public Nullable<int> done_by { get; set; }
         public Nullable<int> status { get; set; }
-        public Nullable<System.DateTime> create_date { get; set; }
+        public System.DateTime create_date { get; set; }
         public Nullable<int> create_by { get; set; }
         public Nullable<System.DateTime> update_date { get; set; }
         public Nullable<int> update_by { get; set; }
