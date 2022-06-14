@@ -94,6 +94,36 @@
     <Property Name="update_by" Type="int" />
     <Property Name="in_house" Type="int" />
   </EntityType>
+  <EntityType Name="system_user">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="varchar" MaxLength="255" />
+    <Property Name="role" Type="int" />
+    <Property Name="firstname" Type="varchar" MaxLength="255" />
+    <Property Name="lastname" Type="varchar" MaxLength="255" />
+    <Property Name="nickname" Type="varchar" MaxLength="150" />
+    <Property Name="mobile" Type="varchar" MaxLength="15" />
+    <Property Name="company_name" Type="varchar" MaxLength="200" />
+    <Property Name="status" Type="bit" />
+    <Property Name="create_date" Type="datetime" />
+    <Property Name="create_by" Type="int" />
+    <Property Name="update_date" Type="datetime" />
+    <Property Name="update_by" Type="int" />
+    <Property Name="password" Type="varchar" MaxLength="255" />
+    <Property Name="login_date" Type="datetime" />
+    <Property Name="logout_date" Type="datetime" />
+    <Property Name="is_active" Type="bit" />
+    <Property Name="is_cancel" Type="bit" />
+    <Property Name="cancel_date" Type="datetime" />
+    <Property Name="cancel_by" Type="int" />
+    <Property Name="company_id" Type="int" />
+    <Property Name="update_is_active_by" Type="int" />
+    <Property Name="update_is_active_date" Type="datetime" />
+    <Property Name="token_id" Type="varchar(max)" />
+    <Property Name="token_expire_date" Type="datetime" />
+  </EntityType>
   <EntityType Name="user_login">
     <Key>
       <PropertyRef Name="id" />
@@ -119,6 +149,7 @@
     <EntitySet Name="bill_transaction" EntityType="Self.bill_transaction" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="bill_transaction_detail" EntityType="Self.bill_transaction_detail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="company" EntityType="Self.company" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="system_user" EntityType="Self.system_user" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="user_login" EntityType="Self.user_login" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

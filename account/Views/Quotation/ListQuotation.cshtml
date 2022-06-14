@@ -3,6 +3,7 @@
     ViewBag.Title = "ListQuotation";
 }
 @Html.Hidden("ViewData", @Url.Action("UploadSlip", "Quotation"))
+@Html.Hidden("ViewQuo", @Url.Action("Quotations", "Quotation"))
 
 @*<link href="~/Content/bootstrap.css" rel="stylesheet" />*@
 <script src="~/Scripts/jquery-3.5.1.js"></script>
@@ -20,6 +21,13 @@
     function OpenPage() {
 
         var urlAction = $('#ViewData').val();
+        window.location.href = urlAction;
+
+    }
+
+    function OpenQuo() {
+
+        var urlAction = $('#ViewQuo').val();
         window.location.href = urlAction;
 
     }
@@ -66,7 +74,7 @@
                         else {
                             htmlDetail += "<td>-</td>";
                         }
-                        htmlDetail += "<td style='text-align: center'><button class='btn btn-outline-warning btn-block' id='" + obj[i].id + "'><i class='fa fa-edit' style='font-size: 24px'></i></button></td>";
+                        htmlDetail += "<td style='text-align: center'><a class='btn btn-outline-warning btn-block' style='width: auto;' href='../Quotation/Quotations?Id=" + obj[i].id + "'><i class='fbtn btn-lg btn-outline-warning fa fa-file-pdf-o'></i></a></td>";
 
 
                         htmlDetail += "</tr>";
@@ -84,6 +92,7 @@
             }
         });
     }
+
 </script>
 
 <body style="background-color:#fff">
@@ -157,7 +166,7 @@
                                     {
                                         <td>-</td>
                                     }
-                                    <td style="text-align:center">@Html.ActionLink(" ", "Quotations", "Quotation", new { id = item.id }, new { @class = "btn btn-lg btn-outline-warning fa fa-file-pdf-o" })</td>
+                                    <td style="text-align:center">@Html.ActionLink(" ", "Quotations", "Quotation", new { id = item.id }, new { @class = "btn btn-lg btn-outline-warning fa fa-file-pdf-o"})</td>
                                 </tr>
                             }
                         </tbody>

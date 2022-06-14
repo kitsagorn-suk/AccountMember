@@ -99,6 +99,36 @@
           <Property Name="update_by" Type="int" />
           <Property Name="in_house" Type="int" />
         </EntityType>
+        <EntityType Name="system_user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="255" />
+          <Property Name="role" Type="int" />
+          <Property Name="firstname" Type="varchar" MaxLength="255" />
+          <Property Name="lastname" Type="varchar" MaxLength="255" />
+          <Property Name="nickname" Type="varchar" MaxLength="150" />
+          <Property Name="mobile" Type="varchar" MaxLength="15" />
+          <Property Name="company_name" Type="varchar" MaxLength="200" />
+          <Property Name="status" Type="bit" />
+          <Property Name="create_date" Type="datetime" />
+          <Property Name="create_by" Type="int" />
+          <Property Name="update_date" Type="datetime" />
+          <Property Name="update_by" Type="int" />
+          <Property Name="password" Type="varchar" MaxLength="255" />
+          <Property Name="login_date" Type="datetime" />
+          <Property Name="logout_date" Type="datetime" />
+          <Property Name="is_active" Type="bit" />
+          <Property Name="is_cancel" Type="bit" />
+          <Property Name="cancel_date" Type="datetime" />
+          <Property Name="cancel_by" Type="int" />
+          <Property Name="company_id" Type="int" />
+          <Property Name="update_is_active_by" Type="int" />
+          <Property Name="update_is_active_date" Type="datetime" />
+          <Property Name="token_id" Type="varchar(max)" />
+          <Property Name="token_expire_date" Type="datetime" />
+        </EntityType>
         <EntityType Name="user_login">
           <Key>
             <PropertyRef Name="id" />
@@ -124,6 +154,7 @@
           <EntitySet Name="bill_transaction" EntityType="Self.bill_transaction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="bill_transaction_detail" EntityType="Self.bill_transaction_detail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="company" EntityType="Self.company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="system_user" EntityType="Self.system_user" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="user_login" EntityType="Self.user_login" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -156,6 +187,7 @@
           <EntitySet Name="bill_transaction_detail" EntityType="accountModel.bill_transaction_detail" />
           <EntitySet Name="bill_confirm_slip" EntityType="accountModel.bill_confirm_slip" />
           <EntitySet Name="companies" EntityType="accountModel.company" />
+          <EntitySet Name="system_user" EntityType="accountModel.system_user" />
         </EntityContainer>
         <EntityType Name="bill_transaction">
           <Key>
@@ -250,6 +282,36 @@
           <Property Name="update_date" Type="DateTime" Precision="3" />
           <Property Name="update_by" Type="Int32" />
           <Property Name="in_house" Type="Int32" />
+        </EntityType>
+        <EntityType Name="system_user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="role" Type="Int32" />
+          <Property Name="firstname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="lastname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="nickname" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="mobile" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="company_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="create_date" Type="DateTime" Precision="3" />
+          <Property Name="create_by" Type="Int32" />
+          <Property Name="update_date" Type="DateTime" Precision="3" />
+          <Property Name="update_by" Type="Int32" />
+          <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="login_date" Type="DateTime" Precision="3" />
+          <Property Name="logout_date" Type="DateTime" Precision="3" />
+          <Property Name="is_active" Type="Boolean" />
+          <Property Name="is_cancel" Type="Boolean" />
+          <Property Name="cancel_date" Type="DateTime" Precision="3" />
+          <Property Name="cancel_by" Type="Int32" />
+          <Property Name="company_id" Type="Int32" />
+          <Property Name="update_is_active_by" Type="Int32" />
+          <Property Name="update_is_active_date" Type="DateTime" Precision="3" />
+          <Property Name="token_id" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="token_expire_date" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -372,6 +434,37 @@
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="url" ColumnName="url" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="system_user">
+            <EntityTypeMapping TypeName="accountModel.system_user">
+              <MappingFragment StoreEntitySet="system_user">
+                <ScalarProperty Name="token_expire_date" ColumnName="token_expire_date" />
+                <ScalarProperty Name="token_id" ColumnName="token_id" />
+                <ScalarProperty Name="update_is_active_date" ColumnName="update_is_active_date" />
+                <ScalarProperty Name="update_is_active_by" ColumnName="update_is_active_by" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="cancel_by" ColumnName="cancel_by" />
+                <ScalarProperty Name="cancel_date" ColumnName="cancel_date" />
+                <ScalarProperty Name="is_cancel" ColumnName="is_cancel" />
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="logout_date" ColumnName="logout_date" />
+                <ScalarProperty Name="login_date" ColumnName="login_date" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="update_by" ColumnName="update_by" />
+                <ScalarProperty Name="update_date" ColumnName="update_date" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="company_name" ColumnName="company_name" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+                <ScalarProperty Name="nickname" ColumnName="nickname" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

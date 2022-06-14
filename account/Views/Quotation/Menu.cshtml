@@ -30,15 +30,15 @@
 <!-- Page Content -->
 <div style="margin-left:15%">
 
-    <div class="topnav">
-        <br />
+    <div class="topnav" style="display:flex;justify-content: space-between;width:85%;align-items: center;">
         <div style="align-items:center">
             <text class="setForm" style="margin-left:20px"><i class="fa fa-user-circle" style="color:lightgray;font-size:22px"></i>  @Session["UserName"].ToString()</text>
             <text class="setForm"><i class="fa fa-briefcase" style="color:lightgray;font-size:22px"></i> <i id="company"></i> </text>
-            <text class="setForm"><i class="fa fa-clock-o" style="color:lightgray;font-size:22px"> <span id="time" class="setTime"></span></i> </text>
-            <a class="setForm" style="float:right" href="@Url.Action("Login", "Login")"><i class="fa fa-sign-out"></i>&nbsp;Log Out</a>
+            <text class="setForm"><i class="fa fa-clock-o" style="color:lightgray;font-size:22px"> <span id="time" class="setTime"></span></i> </text>   
         </div>
-        <br />
+        <div style="margin-right: 16px;">
+            <a class="setForm" style="text-align:right" href="@Url.Action("Login", "Login")"><i class="fa fa-sign-out"></i>&nbsp;Log Out</a>
+        </div>
     </div>
 </div>
 
@@ -69,7 +69,7 @@
                 console.log(obj.success);
                 //alert(obj);
                 //alert(obj.result);
-                document.getElementById("company").textContent = obj.success["name"];
+                document.getElementById("company").textContent = obj.success;
                 document.getElementById("company").style.color = "lightgray";
                 document.getElementById("company").style.fontSize = "16px";
                 document.getElementById("company").style.fontFamily = "Arial, Helvetica, sans-serif";

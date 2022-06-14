@@ -120,5 +120,36 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="system_user">
+      <EntityTypeMapping TypeName="accountModel.system_user">
+        <MappingFragment StoreEntitySet="system_user">
+          <ScalarProperty Name="token_expire_date" ColumnName="token_expire_date" />
+          <ScalarProperty Name="token_id" ColumnName="token_id" />
+          <ScalarProperty Name="update_is_active_date" ColumnName="update_is_active_date" />
+          <ScalarProperty Name="update_is_active_by" ColumnName="update_is_active_by" />
+          <ScalarProperty Name="company_id" ColumnName="company_id" />
+          <ScalarProperty Name="cancel_by" ColumnName="cancel_by" />
+          <ScalarProperty Name="cancel_date" ColumnName="cancel_date" />
+          <ScalarProperty Name="is_cancel" ColumnName="is_cancel" />
+          <ScalarProperty Name="is_active" ColumnName="is_active" />
+          <ScalarProperty Name="logout_date" ColumnName="logout_date" />
+          <ScalarProperty Name="login_date" ColumnName="login_date" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="update_by" ColumnName="update_by" />
+          <ScalarProperty Name="update_date" ColumnName="update_date" />
+          <ScalarProperty Name="create_by" ColumnName="create_by" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="company_name" ColumnName="company_name" />
+          <ScalarProperty Name="mobile" ColumnName="mobile" />
+          <ScalarProperty Name="nickname" ColumnName="nickname" />
+          <ScalarProperty Name="lastname" ColumnName="lastname" />
+          <ScalarProperty Name="firstname" ColumnName="firstname" />
+          <ScalarProperty Name="role" ColumnName="role" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

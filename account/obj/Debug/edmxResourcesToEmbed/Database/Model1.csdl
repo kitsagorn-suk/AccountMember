@@ -26,6 +26,7 @@
     <EntitySet Name="bill_transaction_detail" EntityType="accountModel.bill_transaction_detail" />
     <EntitySet Name="bill_confirm_slip" EntityType="accountModel.bill_confirm_slip" />
     <EntitySet Name="companies" EntityType="accountModel.company" />
+    <EntitySet Name="system_user" EntityType="accountModel.system_user" />
   </EntityContainer>
   <EntityType Name="bill_transaction">
     <Key>
@@ -120,5 +121,35 @@
     <Property Name="update_date" Type="DateTime" Precision="3" />
     <Property Name="update_by" Type="Int32" />
     <Property Name="in_house" Type="Int32" />
+  </EntityType>
+  <EntityType Name="system_user">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="role" Type="Int32" />
+    <Property Name="firstname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="lastname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="nickname" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="mobile" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="company_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="Boolean" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="create_by" Type="Int32" />
+    <Property Name="update_date" Type="DateTime" Precision="3" />
+    <Property Name="update_by" Type="Int32" />
+    <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="login_date" Type="DateTime" Precision="3" />
+    <Property Name="logout_date" Type="DateTime" Precision="3" />
+    <Property Name="is_active" Type="Boolean" />
+    <Property Name="is_cancel" Type="Boolean" />
+    <Property Name="cancel_date" Type="DateTime" Precision="3" />
+    <Property Name="cancel_by" Type="Int32" />
+    <Property Name="company_id" Type="Int32" />
+    <Property Name="update_is_active_by" Type="Int32" />
+    <Property Name="update_is_active_date" Type="DateTime" Precision="3" />
+    <Property Name="token_id" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="token_expire_date" Type="DateTime" Precision="3" />
   </EntityType>
 </Schema>

@@ -9,6 +9,10 @@ using account.Models;
 using account.Database;
 using System.Globalization;
 using System.Data.Entity.Validation;
+using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.ReportAppServer.DataDefModel;
+using CrystalDecisions.Shared;
+using ConnectionInfo = CrystalDecisions.Shared.ConnectionInfo;
 
 namespace account.Controllers
 {
@@ -25,27 +29,27 @@ namespace account.Controllers
             return View();
         }
 
-        public ActionResult Quotations()
+        public RedirectResult Quotations(int Id)
         {
-            Treatment treatment = new Treatment();
-            //ทดลองอ่าน json flie รอ crystal report
-            using (StreamReader sr = new StreamReader(Server.MapPath("~/Content/data.json")))
-            {
-                ViewBag.quotation = JsonConvert.DeserializeObject<Treatment>(sr.ReadToEnd());
-            }
+            //Treatment treatment = new Treatment();
+            ////ทดลองอ่าน json flie รอ crystal report
+            //using (StreamReader sr = new StreamReader(Server.MapPath("~/Content/data.json")))
+            //{
+            //    ViewBag.quotation = JsonConvert.DeserializeObject<Treatment>(sr.ReadToEnd());
+            //}
+            return Redirect("/viewQuotation.aspx?id=" + Id);
 
-
-            return View();
         }
 
-        public ActionResult ListQuotation()
+        public ActionResult ListQuotation(int id)
         {
             int iMonth = 0, iYear = 0;
             iMonth = DateTime.Now.Month;
             iYear = DateTime.Now.Year;
-
+            //list from create because comnyid in system_user = 1 all
             var db = new accountEntities();
-            var aaa = db.bill_transaction.Where(z => z.month == iMonth && z.year == iYear).ToList();
+            var _comp = db.system_user.Where(x => x.id == id).FirstOrDefault();
+            var aaa = db.bill_transaction.Where(z => z.month == iMonth && z.year == iYear && z.create_by == id).ToList();
 
             return View(aaa);
         }
@@ -53,10 +57,10 @@ namespace account.Controllers
         public JsonResult getNameCompany(int id)
         {
             var db = new accountEntities();
-            var _user = db.user_login.Where(x => x.id == id).FirstOrDefault();
-            var compID = _user.company_id;
-            var aaa = db.companies.Where(z => z.id == compID).FirstOrDefault();
-            ViewBag.company = aaa;
+            var _user = db.system_user.Where(x => x.id == id).FirstOrDefault();
+            var compID = _user.company_name;
+            
+            ViewBag.company = compID;
             return Json(new { success = ViewBag.company }, JsonRequestBehavior.AllowGet);
         }
 
@@ -160,5 +164,6 @@ namespace account.Controllers
             }
             return View();
         }
+        
     }
 }
