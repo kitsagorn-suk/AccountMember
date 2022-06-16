@@ -134,8 +134,14 @@ C:\Users\pleng\Desktop\AccountMember\account\bin\roslyn\vbc.rsp
 C:\Users\pleng\Desktop\AccountMember\account\bin\roslyn\VBCSCompiler.exe
 C:\Users\pleng\Desktop\AccountMember\account\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\pleng\Desktop\AccountMember\account\bin\Antlr3.Runtime.dll
+C:\Users\pleng\Desktop\AccountMember\account\bin\CrystalDecisions.CrystalReports.Engine.dll
+C:\Users\pleng\Desktop\AccountMember\account\bin\CrystalDecisions.ReportAppServer.DataSetConversion.dll
+C:\Users\pleng\Desktop\AccountMember\account\bin\CrystalDecisions.ReportSource.dll
+C:\Users\pleng\Desktop\AccountMember\account\bin\CrystalDecisions.Shared.dll
+C:\Users\pleng\Desktop\AccountMember\account\bin\CrystalDecisions.Web.dll
 C:\Users\pleng\Desktop\AccountMember\account\bin\EntityFramework.dll
 C:\Users\pleng\Desktop\AccountMember\account\bin\EntityFramework.SqlServer.dll
+C:\Users\pleng\Desktop\AccountMember\account\bin\log4net.dll
 C:\Users\pleng\Desktop\AccountMember\account\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\pleng\Desktop\AccountMember\account\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\pleng\Desktop\AccountMember\account\bin\Newtonsoft.Json.dll
@@ -149,6 +155,7 @@ C:\Users\pleng\Desktop\AccountMember\account\bin\System.Web.WebPages.Razor.dll
 C:\Users\pleng\Desktop\AccountMember\account\bin\WebGrease.dll
 C:\Users\pleng\Desktop\AccountMember\account\bin\EntityFramework.xml
 C:\Users\pleng\Desktop\AccountMember\account\bin\EntityFramework.SqlServer.xml
+C:\Users\pleng\Desktop\AccountMember\account\bin\log4net.xml
 C:\Users\pleng\Desktop\AccountMember\account\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\pleng\Desktop\AccountMember\account\bin\Newtonsoft.Json.xml
 C:\Users\pleng\Desktop\AccountMember\account\bin\System.Web.Helpers.xml
@@ -163,10 +170,4 @@ C:\Users\pleng\Desktop\AccountMember\account\obj\Debug\account.csproj.CoreCompil
 C:\Users\pleng\Desktop\AccountMember\account\obj\Debug\account.csproj.CopyComplete
 C:\Users\pleng\Desktop\AccountMember\account\obj\Debug\account.dll
 C:\Users\pleng\Desktop\AccountMember\account\obj\Debug\account.pdb
-C:\Users\pleng\Desktop\AccountMember\account\bin\CrystalDecisions.CrystalReports.Engine.dll
-C:\Users\pleng\Desktop\AccountMember\account\bin\CrystalDecisions.ReportAppServer.DataSetConversion.dll
-C:\Users\pleng\Desktop\AccountMember\account\bin\CrystalDecisions.Shared.dll
-C:\Users\pleng\Desktop\AccountMember\account\bin\log4net.dll
-C:\Users\pleng\Desktop\AccountMember\account\bin\log4net.xml
-C:\Users\pleng\Desktop\AccountMember\account\bin\CrystalDecisions.ReportSource.dll
-C:\Users\pleng\Desktop\AccountMember\account\bin\CrystalDecisions.Web.dll
+C:\Users\pleng\Desktop\AccountMember\account\obj\Debug\account.csprojAssemblyReference.cache

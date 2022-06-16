@@ -15,7 +15,7 @@ namespace account
         {
             ReportDocument rpt1 = new ReportDocument();
 
-            rpt1.Load(Server.MapPath("\\Report\\rptQuotationPaid.rpt"));
+            rpt1.Load(Server.MapPath("\\Report\\rptQuotation.rpt"));
 
             rpt1.SetParameterValue("billtranid", Page.ClientQueryString.Substring(3));
 

@@ -30,7 +30,7 @@ namespace account.Controllers
             {
                 accountEntities db = new accountEntities();
                 var _pass = Base64Encode(login.Password);
-                var user = (from userlist in db.system_user
+                var user = (from userlist in db.user_login
                             where userlist.username == login.UserName && userlist.password == _pass
                             select new
                             {
@@ -41,6 +41,7 @@ namespace account.Controllers
                 {
                     Session["UserName"] = user.FirstOrDefault().username;
                     Session["UserID"] = user.FirstOrDefault().id;
+
                     return Redirect("/Quotation/ListQuotation?id="+ user.FirstOrDefault().id);
                 }
                 else

@@ -8,11 +8,6 @@
     <title></title>
 </head>
 <body>
-     <style>
-        .backimg{
-            z-index:0;
-        }
-    </style>
     <form id="form1" runat="server">
         <div>
             <CR:CrystalReportViewer ID="CrystalReportViewer1" runat="server" AutoDataBind="true" />

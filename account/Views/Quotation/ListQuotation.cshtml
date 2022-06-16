@@ -1,19 +1,21 @@
 ﻿@model IEnumerable<account.Database.bill_transaction>
 @{
     ViewBag.Title = "ListQuotation";
+    //Layout = "~/Views/Quotation/SiteMaster.cshtml";
 }
 @Html.Hidden("ViewData", @Url.Action("UploadSlip", "Quotation"))
 @Html.Hidden("ViewQuo", @Url.Action("Quotations", "Quotation"))
+@Html.Hidden("SearchQuotation", @Url.Action("SearchQuotationDate", "Quotation"))
 
 @*<link href="~/Content/bootstrap.css" rel="stylesheet" />*@
+
 <script src="~/Scripts/jquery-3.5.1.js"></script>
 <link href="~/Content/styles/dataTables.min.css" rel="stylesheet" />
 <script src="~/Scripts/jquery.dataTables.min.js"></script>
 <script src="~/Scripts/dataTables.bootstrap4.min.js"></script>
-
+<script src="~/Scripts/language_Login.js"></script>
 <link href="~/Content/styles/bootstrap.css" rel="stylesheet" />
 <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
@@ -61,7 +63,7 @@
                         htmlDetail += "<tr>";
                         htmlDetail += "<td>" + DateCreate + "</td>";
                         htmlDetail += "<td>" + obj[i].no + "</td>";
-                        htmlDetail += "<td style='text-align:center'><a class='btn btn-lg btn-outline-success fa fa-cloud-upload' href='/Quotation/UploadSlip?id=" + obj[i].id + "'> Upload Slip</a></td>";
+                        htmlDetail += "<td style='text-align:center'><a class='btn btn-lg btn-green fa fa-plus-square' href='/Quotation/UploadSlip?id=" + obj[i].id + "'> Upload Slip</a></td>";
                         if (obj[i].is_complete == 1) {
                             htmlDetail += "<td>no complete and confirm bill</td>";
                         }
@@ -74,7 +76,14 @@
                         else {
                             htmlDetail += "<td>-</td>";
                         }
-                        htmlDetail += "<td style='text-align: center'><a class='btn btn-outline-warning btn-block' style='width: auto;' href='../Quotation/Quotations?Id=" + obj[i].id + "'><i class='fbtn btn-lg btn-outline-warning fa fa-file-pdf-o'></i></a></td>";
+
+                        if (obj[i].is_confirm != true) {
+                            htmlDetail += "<td style='text-align: center'><a class='btn btn-yellow btn-block' style='width: auto;' href='../Quotation/Quotations?Id=" + obj[i].id + "'><i class='fbtn btn-lg btn-outline-warning fa fa-file-pdf-o'></i></a></td>";
+                        } else {
+                            htmlDetail += "<td style='text-align: center'><a class='btn btn-green btn-block' style='width: auto;' href='../Quotation/QuotationsPaid?Id=" + obj[i].id + "'><i class='fbtn btn-lg btn-outline-success fa fa-file-pdf-o'></i></a></td>";
+                        }
+
+
 
 
                         htmlDetail += "</tr>";
@@ -95,19 +104,19 @@
 
 </script>
 
-<body style="background-color:#fff">
+<body>
 
-    @{Html.RenderPartial("~/Views/Quotation/Menu.cshtml");}
-    @Html.Hidden("SearchQuotation", @Url.Action("SearchQuotationDate", "Quotation"))
+    @*@{Html.RenderPartial("~/Views/Quotation/SiteMaster.cshtml");}*@
 
-    <div class="row" style="margin-top:85px">
+
+    <div class="row" style="margin-top:90px">
         <div class="col-md-2"></div>
         <div class="col-md-2 col-md-9">
             <div class="card" style="margin-top:15px">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-2 textcen">
-                            <label>start date :</label>
+                            <label set-lan="text:Start date"></label>
                         </div>
                         <div class="col-md-2">
                             <span>
@@ -115,7 +124,7 @@
                             </span>
                         </div>
                         <div class="col-md-2 textcen">
-                            <label>end date :</label>
+                            <label set-lan="text:End date"></label>
                         </div>
                         <div class="col-md-2">
                             <span>
@@ -134,11 +143,11 @@
                     <table id="listquotation" class="table table-bordered table-hover table-striped wrap" style="width:100%">
                         <thead>
                             <tr>
-                                <th>Start Date</th>
-                                <th>Quotation No.</th>
-                                <th>Upload Slip</th>
-                                <th>Status</th>
-                                <th>Quotation</th>
+                                <th set-lan="text:Start date"></th>
+                                <th set-lan="text:Quotation No"></th>
+                                <th set-lan="text:Upload Silp"></th>
+                                <th set-lan="text:Status"></th>
+                                <th set-lan="text:PDF File"></th>
                             </tr>
                         </thead>
 
@@ -149,7 +158,7 @@
 
                                     <td>@item.start_date.ToString("dd/MM/yyyy")</td>
                                     <td>@item.no</td>
-                                    <td style="text-align:center">@Html.ActionLink(" Upload Slip", "UploadSlip", "Quotation", new { id = item.id }, new { @class = "btn btn-lg btn-outline-success fa fa-cloud-upload" })</td>
+                                    <td style="text-align:center">@Html.ActionLink(" ", "UploadSlip", "Quotation", new { id = item.id }, new { @class = "btn btn-lg btn-green fa fa-plus-square" })</td>
                                     @if (@item.is_complete == 1)
                                     {
                                         <td>no complete and confirm bill</td>
@@ -166,7 +175,15 @@
                                     {
                                         <td>-</td>
                                     }
-                                    <td style="text-align:center">@Html.ActionLink(" ", "Quotations", "Quotation", new { id = item.id }, new { @class = "btn btn-lg btn-outline-warning fa fa-file-pdf-o"})</td>
+                                    @if (@item.is_confirm != true)
+                                    {
+                                        <td style="text-align:center">@Html.ActionLink(" ", "Quotations", "Quotation", new { id = item.id }, new { @class = "btn btn-lg btn-yellow fa fa-file-pdf-o" })</td>
+                                    }
+                                    else
+                                    {
+                                        <td style="text-align:center">@Html.ActionLink(" ", "QuotationsPaid", "Quotation", new { id = item.id }, new { @class = "btn btn-lg btn-green fa fa-file-pdf-o" })</td>
+                                    }
+
                                 </tr>
                             }
                         </tbody>
@@ -175,6 +192,7 @@
             </div>
         </div>
     </div>
+    @Html.Partial("SiteMaster")
 </body>
 
 <script>
@@ -187,5 +205,10 @@
 <style>
     .textcen {
         padding-top: 10px;
+    }
+
+    table.table .link, table.table thead .sorting:not(.no-sort), table.table thead .sorting_asc:not(.no-sort), table.table thead .sorting_desc:not(.no-sort) {
+        color: white;
+        font-weight: bold;
     }
 </style>
