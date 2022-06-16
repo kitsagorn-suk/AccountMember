@@ -246,6 +246,13 @@
     <Compile Include="Views\Quotation\ReportViewer.aspx.designer.cs">
       <DependentUpon>ReportViewer.aspx</DependentUpon>
     </Compile>
+    <Compile Include="viewQuotationPaid.aspx.cs">
+      <DependentUpon>viewQuotationPaid.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewQuotationPaid.aspx.designer.cs">
+      <DependentUpon>viewQuotationPaid.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="aspnet_client\system_web\2_0_50727\crystalreportviewers13\ActiveXControls\PrintControl.cab" />
@@ -1378,6 +1385,8 @@
     <Content Include="aspnet_client\system_web\4_0_30319\crystalreportviewers13\prompting\js\promptengine_strings_zh_TW.js" />
     <Content Include="aspnet_client\system_web\4_0_30319\crystalreportviewers13\urlreporting\activexviewer.js" />
     <Content Include="aspnet_client\system_web\4_0_30319\crystalreportviewers13\urlreporting\appletviewer.js" />
+    <Content Include="Content\bootstrap-datepicker3.css" />
+    <Content Include="Content\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -1394,6 +1403,13 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\font\fa5\fa-brands-400.svg" />
+    <Content Include="Content\font\fa5\fa-regular-400.svg" />
+    <Content Include="Content\font\fa5\fa-solid-900.svg" />
+    <Content Include="Content\font\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\jquery-ui.css" />
+    <Content Include="Content\pagination.css" />
+    <Content Include="Content\style.css" />
     <Content Include="Content\styles\bill_quo.css" />
     <Content Include="Content\styles\login.css" />
     <Content Include="Content\styles\mdb.min.css" />
@@ -1414,68 +1430,37 @@
     <Content Include="img\amb-logo-full.png" />
     <Content Include="img\amb.svg" />
     <Content Include="img\gnome.svg" />
-    <Content Include="img\icons\010-casino-1.svg" />
-    <Content Include="img\icons\014-gambling.svg" />
-    <Content Include="img\icons\020-comment-speech-bubble.svg" />
-    <Content Include="img\icons\021-game.svg" />
-    <Content Include="img\icons\027-24-7.svg" />
-    <Content Include="img\icons\031-dashboard.svg" />
-    <Content Include="img\icons\032-clipboard.svg" />
-    <Content Include="img\icons\038-funnel.svg" />
-    <Content Include="img\icons\040-ellipsis.svg" />
-    <Content Include="img\icons\041-download.svg" />
-    <Content Include="img\icons\043-copy.svg" />
-    <Content Include="img\icons\045-selfie.svg" />
-    <Content Include="img\icons\046-logout.svg" />
-    <Content Include="img\icons\051-calendar.svg" />
-    <Content Include="img\icons\053-cogwheel.svg" />
-    <Content Include="img\icons\056-copy-1.svg" />
-    <Content Include="img\icons\057-excel.svg" />
-    <Content Include="img\icons\059-bank.svg" />
-    <Content Include="img\icons\068-copy-2.svg" />
-    <Content Include="img\icons\072-pin.svg" />
-    <Content Include="img\icons\076-calendar-1.svg" />
-    <Content Include="img\icons\077-email.svg" />
-    <Content Include="img\icons\accounting.svg" />
-    <Content Include="img\icons\add-user.svg" />
-    <Content Include="img\icons\bank.svg" />
-    <Content Include="img\icons\bell.svg" />
-    <Content Include="img\icons\cancel.svg" />
-    <Content Include="img\icons\check-1.svg" />
-    <Content Include="img\icons\check-circle.svg" />
-    <Content Include="img\icons\check.svg" />
-    <Content Include="img\icons\discount.svg" />
-    <Content Include="img\icons\download-arrow.svg" />
-    <Content Include="img\icons\edit.svg" />
-    <Content Include="img\icons\eye.svg" />
-    <Content Include="img\icons\floppy-disk.svg" />
-    <Content Include="img\icons\global.svg" />
-    <Content Include="img\icons\hierarchy.svg" />
-    <Content Include="img\icons\home.svg" />
-    <Content Include="img\icons\id-card.svg" />
-    <Content Include="img\icons\image.svg" />
-    <Content Include="img\icons\invoice.svg" />
-    <Content Include="img\icons\left-arrow.svg" />
-    <Content Include="img\icons\lock.svg" />
-    <Content Include="img\icons\online-banking-1.svg" />
-    <Content Include="img\icons\online-banking.svg" />
-    <Content Include="img\icons\password.svg" />
-    <Content Include="img\icons\payment.svg" />
-    <Content Include="img\icons\pencil.svg" />
-    <Content Include="img\icons\picture.svg" />
-    <Content Include="img\icons\plus.svg" />
-    <Content Include="img\icons\print.svg" />
-    <Content Include="img\icons\reload.svg" />
-    <Content Include="img\icons\remove.svg" />
-    <Content Include="img\icons\right-arrow.svg" />
-    <Content Include="img\icons\search.svg" />
-    <Content Include="img\icons\time.svg" />
-    <Content Include="img\icons\trash.svg" />
-    <Content Include="img\icons\undo.svg" />
-    <Content Include="img\icons\upload.svg" />
-    <Content Include="img\icons\user-circle.svg" />
-    <Content Include="img\icons\user-lock.svg" />
-    <Content Include="img\icons\user.svg" />
+    <Content Include="Content\img\icons\ic-add.svg" />
+    <Content Include="Content\img\icons\ic-arr-right.svg" />
+    <Content Include="Content\img\icons\ic-dashboard-active.svg" />
+    <Content Include="Content\img\icons\ic-dashboard.svg" />
+    <Content Include="Content\img\icons\ic-draw-results-active.svg" />
+    <Content Include="Content\img\icons\ic-draw-results.svg" />
+    <Content Include="Content\img\icons\ic-edit.svg" />
+    <Content Include="Content\img\icons\ic-eye-slash.svg" />
+    <Content Include="Content\img\icons\ic-eye.svg" />
+    <Content Include="Content\img\icons\ic-guide.svg" />
+    <Content Include="Content\img\icons\ic-info.svg" />
+    <Content Include="Content\img\icons\ic-input-minus.svg" />
+    <Content Include="Content\img\icons\ic-input-plus.svg" />
+    <Content Include="Content\img\icons\ic-member-active.svg" />
+    <Content Include="Content\img\icons\ic-member.svg" />
+    <Content Include="Content\img\icons\ic-mobile.svg" />
+    <Content Include="Content\img\icons\ic-payment-active.svg" />
+    <Content Include="Content\img\icons\ic-payment.svg" />
+    <Content Include="Content\img\icons\ic-payout-rates-active.svg" />
+    <Content Include="Content\img\icons\ic-payout-rates.svg" />
+    <Content Include="Content\img\icons\ic-print.svg" />
+    <Content Include="Content\img\icons\ic-refresh.svg" />
+    <Content Include="Content\img\icons\ic-report-active.svg" />
+    <Content Include="Content\img\icons\ic-report.svg" />
+    <Content Include="Content\img\icons\ic-search.svg" />
+    <Content Include="Content\img\icons\ic-settings-active.svg" />
+    <Content Include="Content\img\icons\ic-settings.svg" />
+    <Content Include="Content\img\icons\ic-success-sm.svg" />
+    <Content Include="Content\img\icons\ic-times.svg" />
+    <Content Include="Content\img\icons\ic-upload-file.svg" />
+    <Content Include="Content\img\icons\ic-user.svg" />
     <Content Include="img\Logo-02-removebg-preview.png" />
     <Content Include="img\Logo-02.jpeg" />
     <Content Include="img\logo.svg" />
@@ -1507,12 +1492,21 @@
     <Content Include="img\thai-banks\TTB.svg" />
     <Content Include="img\thai-banks\UOB.svg" />
     <Content Include="img\toppng.com-paid-rectangle-stamp-1024x627.jpg" />
+    <Content Include="img\thailand.png" />
+    <Content Include="img\usa.png" />
     <Content Include="img\wave-2.svg" />
     <Content Include="img\wave.svg" />
     <Content Include="Content\data2.json" />
     <Content Include="Content\styles\styles.scss" />
     <Content Include="Content\styles\_variables.scss" />
-    <Content Include="img\icons\.DS_Store" />
+    <Content Include="Scripts\ace.min.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\language_Login.js" />
+    <Content Include="Scripts\mdb.js" />
+    <Content Include="Scripts\mdb.min.js" />
+    <Content Include="Scripts\popper.min.js" />
     <Content Include="viewQuotation.aspx" />
     <Content Include="Views\Quotation\ReportViewer.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -1544,18 +1538,54 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Content\data.json" />
+    <Content Include="viewQuotationPaid.aspx" />
     <EntityDeploy Include="Database\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <Content Include="Database\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Scripts\CReport\CrystalReport.js" />
     <Content Include="Scripts\dataTables.min.js" />
     <Content Include="aspnet_client\system_web\4_0_30319\crystalreportviewers13\.vs\ProjectSettings.json" />
     <Content Include="aspnet_client\system_web\4_0_30319\crystalreportviewers13\.vs\slnx.sqlite" />
     <Content Include="aspnet_client\system_web\4_0_30319\crystalreportviewers13\.vs\VSWorkspaceState.json" />
+    <Content Include="Content\font\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\font\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\font\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\font\fa5\fa-brands-400.eot" />
+    <Content Include="Content\font\fa5\fa-brands-400.ttf" />
+    <Content Include="Content\font\fa5\fa-brands-400.woff" />
+    <Content Include="Content\font\fa5\fa-brands-400.woff2" />
+    <Content Include="Content\font\fa5\fa-regular-400.eot" />
+    <Content Include="Content\font\fa5\fa-regular-400.ttf" />
+    <Content Include="Content\font\fa5\fa-regular-400.woff2" />
+    <Content Include="Content\font\fa5\fa-solid-900.eot" />
+    <Content Include="Content\font\fa5\fa-solid-900.ttf" />
+    <Content Include="Content\font\fa5\fa-solid-900.woff" />
+    <Content Include="Content\font\fa5\fa-solid-900.woff2" />
+    <Content Include="Content\font\roboto\Roboto-Bold.eot" />
+    <Content Include="Content\font\roboto\Roboto-Bold.ttf" />
+    <Content Include="Content\font\roboto\Roboto-Bold.woff" />
+    <Content Include="Content\font\roboto\Roboto-Bold.woff2" />
+    <Content Include="Content\font\roboto\Roboto-Light.eot" />
+    <Content Include="Content\font\roboto\Roboto-Light.ttf" />
+    <Content Include="Content\font\roboto\Roboto-Light.woff" />
+    <Content Include="Content\font\roboto\Roboto-Light.woff2" />
+    <Content Include="Content\font\roboto\Roboto-Medium.eot" />
+    <Content Include="Content\font\roboto\Roboto-Medium.ttf" />
+    <Content Include="Content\font\roboto\Roboto-Medium.woff" />
+    <Content Include="Content\font\roboto\Roboto-Medium.woff2" />
+    <Content Include="Content\font\roboto\Roboto-Regular.eot" />
+    <Content Include="Content\font\roboto\Roboto-Regular.ttf" />
+    <Content Include="Content\font\roboto\Roboto-Regular.woff" />
+    <Content Include="Content\font\roboto\Roboto-Regular.woff2" />
+    <Content Include="Content\font\roboto\Roboto-Thin.eot" />
+    <Content Include="Content\font\roboto\Roboto-Thin.ttf" />
+    <Content Include="Content\font\roboto\Roboto-Thin.woff" />
+    <Content Include="Content\font\roboto\Roboto-Thin.woff2" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -1585,6 +1615,7 @@
     <Content Include="Views\Quotation\ListQuotation.cshtml" />
     <Content Include="Views\Quotation\Menu.cshtml" />
     <Content Include="Views\Quotation\UploadSlip.cshtml" />
+    <Content Include="Views\Quotation\SiteMaster.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

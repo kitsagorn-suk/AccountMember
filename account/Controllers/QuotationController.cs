@@ -29,6 +29,11 @@ namespace account.Controllers
             return View();
         }
 
+        public ActionResult SiteMaster()
+        {
+            return View();
+        }
+
         public RedirectResult Quotations(int Id)
         {
             //Treatment treatment = new Treatment();
@@ -41,6 +46,18 @@ namespace account.Controllers
 
         }
 
+        public RedirectResult QuotationsPaid(int Id)
+        {
+            //Treatment treatment = new Treatment();
+            ////ทดลองอ่าน json flie รอ crystal report
+            //using (StreamReader sr = new StreamReader(Server.MapPath("~/Content/data.json")))
+            //{
+            //    ViewBag.quotation = JsonConvert.DeserializeObject<Treatment>(sr.ReadToEnd());
+            //}
+            return Redirect("/viewQuotationPaid.aspx?id=" + Id);
+
+        }
+
         public ActionResult ListQuotation(int id)
         {
             int iMonth = 0, iYear = 0;
@@ -48,7 +65,7 @@ namespace account.Controllers
             iYear = DateTime.Now.Year;
             //list from create because comnyid in system_user = 1 all
             var db = new accountEntities();
-            var _comp = db.system_user.Where(x => x.id == id).FirstOrDefault();
+            var _comp = db.user_login.Where(x => x.id == id).FirstOrDefault();
             var aaa = db.bill_transaction.Where(z => z.month == iMonth && z.year == iYear && z.create_by == id).ToList();
 
             return View(aaa);
@@ -57,8 +74,9 @@ namespace account.Controllers
         public JsonResult getNameCompany(int id)
         {
             var db = new accountEntities();
-            var _user = db.system_user.Where(x => x.id == id).FirstOrDefault();
-            var compID = _user.company_name;
+            var _user = db.user_login.Where(x => x.id == id).FirstOrDefault();
+            var comp = db.companies.Where(y => y.id == _user.company_id).FirstOrDefault();
+            var compID = comp.name;
             
             ViewBag.company = compID;
             return Json(new { success = ViewBag.company }, JsonRequestBehavior.AllowGet);

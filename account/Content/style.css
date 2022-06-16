@@ -1,0 +1,63 @@
+.linkCancel {
+    color: #CFA137 !important;
+    text-decoration: underline !important;
+}
+
+.linkClick {
+    text-decoration: underline;
+}
+
+.overflowTable {
+    margin: 0px !important;
+    width: 10.5em;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 0.8rem;
+}
+
+.testDate {
+    position: relative;
+    color: white;
+}
+
+    .testDate:before {
+        position: absolute;
+        content: attr(data-date);
+        display: inline-block;
+        color: black;
+    }
+
+    .testDate::-webkit-datetime-edit, .testDate::-webkit-inner-spin-button, .testDate::-webkit-clear-button {
+        display: none;
+    }
+
+    .testDate::-webkit-calendar-picker-indicator {
+        background: transparent;
+        bottom: 0;
+        color: transparent;
+        height: auto;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: auto;
+        z-index: 999;
+    }
+
+.input-wrapper {
+    position: relative;
+}
+
+.iconCalendar {
+    position: absolute;
+    top: 12px;
+    left: 121px;
+    z-index: 9;
+}
+
+.iconTime {
+    position: absolute;
+    top: 12px;
+    left: 121px;
+    z-index: 9;
+}
