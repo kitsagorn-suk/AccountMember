@@ -17,9 +17,8 @@
 
 
 
-<div class="row" style="margin-top:90px; margin-right:10px">
-    <div class="col-md-2"></div>
-    <div class="col-md-2 col-md-9" style="margin-left: 10px;">
+<div class="row">
+    <div class="col-md-11">
         <div class="card bg-light text-dark">
             <div class="card-body" style="background :#fff">
                 <h1 set-lan="text:Upload Silp"></h1>
@@ -40,7 +39,7 @@
                     </div>
                     <div class="col-md-6">
                         <br />
-                        <div class="col-md-5">
+                        <div class="col-md-8">
                             <label set-lan="text:Amount"> :</label>
                             <span>
                                 <input id="amount" class="form-control" />
@@ -65,7 +64,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-4">
                         <br />
                         <div class="form-group">
                             <div class="row">
@@ -82,7 +82,6 @@
         </div>
     </div>
 </div>
-@{Html.RenderPartial("~/Views/Quotation/SiteMaster.cshtml");}
 
 <script>
     function insSlip() {

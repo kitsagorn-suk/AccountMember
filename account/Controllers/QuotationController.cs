@@ -66,7 +66,7 @@ namespace account.Controllers
             //list from create because comnyid in system_user = 1 all
             var db = new accountEntities();
             var _comp = db.user_login.Where(x => x.id == id).FirstOrDefault();
-            var aaa = db.bill_transaction.Where(z => z.month == iMonth && z.year == iYear && z.create_by == id).ToList();
+            var aaa = db.bill_transaction.Where(z => z.month == iMonth && z.year == iYear && z.company_id == _comp.company_id).ToList();
 
             return View(aaa);
         }

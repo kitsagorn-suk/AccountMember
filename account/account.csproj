@@ -1462,7 +1462,9 @@
     <Content Include="Content\img\icons\ic-upload-file.svg" />
     <Content Include="Content\img\icons\ic-user.svg" />
     <Content Include="img\Logo-02-removebg-preview.png" />
+    <Content Include="img\Logo-02.ico" />
     <Content Include="img\Logo-02.jpeg" />
+    <Content Include="img\logo-icon.jpeg" />
     <Content Include="img\logo.svg" />
     <Content Include="img\thai-banks\BAAC.svg" />
     <Content Include="img\thai-banks\BAY.svg" />
@@ -1615,6 +1617,7 @@
     <Content Include="Views\Quotation\Menu.cshtml" />
     <Content Include="Views\Quotation\UploadSlip.cshtml" />
     <Content Include="Views\Quotation\SiteMaster.cshtml" />
+    <Content Include="Views\Shared\SiteMaster1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

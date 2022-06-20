@@ -2,17 +2,18 @@
 
 @{
     ViewBag.Title = "Login";
+    Layout = null;
+    <title>askmebet</title>
+    <link rel="icon" href="../img/logo-icon.jpeg" type="image/ico" />
 }
 @using (Html.BeginForm())
 {
     <!DOCTYPE html>
     <html xmlns="http://www.w3.org/1999/xhtml">
-    <head runat="server">
+    <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=1480" />
         <meta http-equiv="x-ua-compatible" content="ie=edge" />
-        <title>askmebet</title>
-        <link rel="icon" href="../img/Logo-02.jpeg" />
         <link href="../Content/bootstrap.min.css" rel="stylesheet" />
         <link href="../Content/style.css" rel="stylesheet" />
         <link href="../Content/styles/mdb.min.css" rel="stylesheet" />
@@ -74,7 +75,7 @@
                                 </div>
                                 <div class="form-group row mb-4">
                                     <div class="col-12">
-                                            <button class="btn btn-lg btn-yellow font-weight-bold btn-block waves-effect waves-light" id="Login" type="submit" set-lan="text:Sign in" value="Sign in" />
+                                        <button class="btn btn-lg btn-yellow font-weight-bold btn-block waves-effect waves-light" id="Login" type="submit" set-lan="text:Sign in" value="Sign in" />
                                     </div>
                                 </div>
                                 <div class="note-text white-text text-center">
