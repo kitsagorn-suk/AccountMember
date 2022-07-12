@@ -42,6 +42,15 @@ namespace account.Controllers
                     Session["UserName"] = user.FirstOrDefault().username;
                     Session["UserID"] = user.FirstOrDefault().id;
 
+                    var _id = user.FirstOrDefault().id;
+
+                    var _login = db.user_login.Where(x => x.id == _id).FirstOrDefault();
+                    if(_login != null)
+                    {
+                        _login.login_date = DateTime.Now;
+                        var i = db.SaveChanges();
+                    }
+
                     return Redirect("/Quotation/ListQuotation?id="+ user.FirstOrDefault().id);
                 }
                 else

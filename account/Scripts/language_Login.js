@@ -51,6 +51,7 @@
     "Dashboard": "Dashboard",
     "Quotation List": "Quotation List",
     "Quotation No": "Quotation No",
+    "Quotation No_": "Quotation No : ",
     "Upload Silp": "Upload Silp",
     "PDF File": "PDF File",
     "Slip": "Slip",
@@ -87,8 +88,8 @@
     "to": "to",
     "Start date-": "Start date :",
     "To date-": "To date :",
-    "Start date": "Start date",
-    "End date": "End date",
+    "Start date": "Start date : ",
+    "End date": "End date : ",
     "To date": "To date",
     "missing 'Start-To Date' field": "'To date' must greater than 'Start date'.",
     "Basic Info": "Basic Info",
@@ -172,7 +173,7 @@
     "Delete Bank": "Delete Bank",
     "Delete bank success.": "Delete bank success.",
     "Bank": "Bank",
-    "Bank-": "Bank :",
+    "Bank--": "Bank :",
     "Bank_": "Bank<label style='color: red;'>&nbsp;*</label>",
     "missing 'Bank' field": "Please select 'Bank'.",
     "Company ID": "Company ID",
@@ -568,6 +569,31 @@
 
 
     "Data recording failed.": "Data recording failed. Please try again.",
+    //pleng
+    "Period": "Period",
+    "ACN": "Account ",
+    "account no": "Account No",
+    "ACN Detail": "3448967358",
+    "Account Name": "Account Name",
+    "Name": "mr. Dio",
+    "Bank-": "Bank Name",
+    "Bank Name": "Thanachart Bank",
+    "CPB": "Completed Bill",
+    "ID": "Id",
+    "SF": "Slip File",
+    "Grand Total": "Grand Total",
+    "Grand Total_": "Grand Total :",
+    "Complete Date": "Complete Date",
+    "Upload Date": "Upload Date",
+    "Balance Amount": "Balance Amount :",
+    "Bank1": "Savings Account",
+    "Bank2": "Fixed Deposit Account",
+    "Bank3": "Current Account",
+    "Bank4": "Crypto Currency",
+    "AddSlip": " Add New Payment",
+    "DelSlip": " Delete Payment",
+    "selectAll": " Select All",
+
 };
 
 var Thai = {
@@ -620,6 +646,7 @@ var Thai = {
     "Dashboard": "รายละเอียดของคุณ",
     "Quotation List": "รายการใบเสนอราคา",
     "Quotation No": "เลขที่ใบเสนอราคา",
+    "Quotation No_": "เลขที่ใบเสนอราคา : ",
     "Upload Silp": "อัพโหลดสลิป",
     "PDF File": "ไฟล์พีดีเอฟ",
     "Slip": "สลิป",
@@ -656,8 +683,8 @@ var Thai = {
     "to": "ถึง",
     "Start date-": "วันที่เริ่มต้น :",
     "To date-": "ถึงวันที่ :",
-    "Start date": "วันที่เริ่มต้น",
-    "End date": "วันที่สิ้นสุด",
+    "Start date": "วันที่เริ่มต้น : ",
+    "End date": "วันที่สิ้นสุด : ",
     "To date": "ถึงวันที่",
     "missing 'Start-To Date' field": "'ถึงวันที่' ต้องมีค่ามากกว่า 'วันที่เริ่มต้น'.",
     "Basic Info": "ข้อมูลพื้นฐาน",
@@ -745,7 +772,7 @@ var Thai = {
     "Edit bank success.": "แก้ไขธนาคารสำเร็จ.",
     "Delete bank success.": "ลบธนาคารสำเร็จ.",
     "Bank": "ธนาคาร",
-    "Bank-": "ธนาคาร :",
+    "Bank--": "ธนาคาร :",
     "Bank_": "ธนาคาร<label style='color: red;'>&nbsp;*</label>",
     "missing 'Bank' field": "กรุณาเลือก 'ธนาคาร'.",
     "Company ID": "รหัสบริษัท",
@@ -1136,15 +1163,33 @@ var Thai = {
     "missing 'Fee' field": "กรุณากรอก 'ค่าธรรมเนียม'.",
     "Cannot Delete": "รายการนี้มีการจ่ายเงินแล้วไม่สามารถลบได้.<br/> กรุณาติดต่อแอดมิน.",
 
-    
-
-
-
-
-
-
-
     "Data recording failed.": "ข้อมูลไม่ถูกต้อง,  โปรดลองอีกครั้ง.",
+
+    //pleng
+    "Period": "ช่วงเวลา",
+    "ACN": "บัญชี",
+    "account no": "หมายเลขบัญชี",
+    "ACN Detail": " 3448967358",
+    "Account Name": "ชื่อบัญชี",
+    "Name": "mr. Dio",
+    "Bank-": "ชื่อธนาคาร",
+    "Bank Name": "ธนชาต จำกัด (มหาชน)",
+    "CPB": "บิลที่ชำระเรียบร้อย",
+    "ID": "ลำดับ",
+    "SF": "ไฟล์สลิป",
+    "Grand Total": "ยอดรวมทั้งหมด",
+    "Grand Total_": "ยอดรวมทั้งหมด :",
+    "Complete Date": "วันที่อนุมัติ",
+    "Upload Date": "วันที่อัพโหลด",
+    "Balance Amount": "ยอดคงเหลือ :",
+    "Bank1": "บัญชีเงินฝากออมทรัพย์",
+    "Bank2": "บัญชีเงินฝากประจำ",
+    "Bank3": "บัญชีเงินฝากกระแสรายวัน หรือบัญชีเงินฝากเดินสะพัด",
+    "Bank4": "คริปโทเคอร์เรนซี",
+    "AddSlip": " เพิ่มรายการจ่าย",
+    "DelSlip": " ลบรายการจ่าย",
+    "selectAll": " เลือกทั้งหมด",
+    
 };
 
 var Chinese = {

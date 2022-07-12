@@ -21132,8 +21132,10 @@ a.btn:not([href]):not([tabindex]), a.btn:not([href]):not([tabindex]):focus, a.bt
     height: 1.375rem;
     border-top: 2px solid transparent;
     border-left: 2px solid transparent;
-    border-right: 2px solid #4285f4;
-    border-bottom: 2px solid #4285f4;
+    /*border-right: 2px solid #4285f4;
+    border-bottom: 2px solid #4285f4;*/
+    border-right: 5px solid #f9ee72;
+    border-bottom: 5px solid #f9ee72;
     transform: rotate(40deg);
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
@@ -36817,12 +36819,12 @@ body.opened-menu .navbar {
 
 .logo {
     width: 217px;
-    height: 80px;
+    height: 100px;
     background: #0B926C;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 0;
+    margin-right: 0 !important;
 }
 
 .languages {

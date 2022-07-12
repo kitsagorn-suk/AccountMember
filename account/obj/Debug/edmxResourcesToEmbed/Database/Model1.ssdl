@@ -1,17 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="accountModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityType Name="bill_confirm_slip">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="transaction_id" Type="int" />
-    <Property Name="slip" Type="varchar" MaxLength="255" />
-    <Property Name="comfirm_by" Type="varchar" MaxLength="200" />
-    <Property Name="create_at" Type="datetime" />
-    <Property Name="create_date" Type="datetime" />
-    <Property Name="amount" Type="decimal" Precision="18" Scale="2" />
-  </EntityType>
   <EntityType Name="bill_transaction">
     <Key>
       <PropertyRef Name="id" />
@@ -94,6 +82,38 @@
     <Property Name="update_by" Type="int" />
     <Property Name="in_house" Type="int" />
   </EntityType>
+  <EntityType Name="log_pay_member">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="bill_transaction_id" Type="int" />
+    <Property Name="currency_id" Type="int" />
+    <Property Name="rate" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="amount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="amount_thai" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="status" Type="int" />
+    <Property Name="create_date" Type="datetime" />
+    <Property Name="create_by" Type="int" />
+    <Property Name="file_code" Type="varchar" MaxLength="50" />
+    <Property Name="balance_amount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="complete_amount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="overpay" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="account_type" Type="int" />
+  </EntityType>
+  <EntityType Name="system_currency">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="150" />
+    <Property Name="fullname" Type="varchar" MaxLength="200" />
+    <Property Name="status" Type="bit" />
+    <Property Name="create_date" Type="datetime" />
+    <Property Name="create_by" Type="int" />
+    <Property Name="update_date" Type="datetime" />
+    <Property Name="update_by" Type="int" />
+  </EntityType>
   <EntityType Name="system_user">
     <Key>
       <PropertyRef Name="id" />
@@ -143,12 +163,15 @@
     <Property Name="update_date" Type="datetime" />
     <Property Name="update_by" Type="int" />
     <Property Name="company_id" Type="int" />
+    <Property Name="company_type" Type="int" />
+    <Property Name="login_date" Type="datetime" />
   </EntityType>
   <EntityContainer Name="accountModelStoreContainer">
-    <EntitySet Name="bill_confirm_slip" EntityType="Self.bill_confirm_slip" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="bill_transaction" EntityType="Self.bill_transaction" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="bill_transaction_detail" EntityType="Self.bill_transaction_detail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="company" EntityType="Self.company" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="log_pay_member" EntityType="Self.log_pay_member" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="system_currency" EntityType="Self.system_currency" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="system_user" EntityType="Self.system_user" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="user_login" EntityType="Self.user_login" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
