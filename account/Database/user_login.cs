@@ -29,5 +29,7 @@ namespace account.Database
         public Nullable<System.DateTime> update_date { get; set; }
         public Nullable<int> update_by { get; set; }
         public Nullable<int> company_id { get; set; }
+        public Nullable<int> company_type { get; set; }
+        public Nullable<System.DateTime> login_date { get; set; }
     }
 }

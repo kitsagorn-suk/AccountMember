@@ -1,0 +1,361 @@
+﻿@*@model IEnumerable<account.Database.bill_transaction>*@
+@using PagedList.Mvc;
+@model PagedList.IPagedList<account.Models.QuotationAll>
+@{
+
+}
+@Html.Hidden("ViewData", @Url.Action("UploadSlip", "Quotation"))
+@Html.Hidden("ViewQuo", @Url.Action("Quotations", "Quotation"))
+@Html.Hidden("SearchQuotationNo", @Url.Action("SearchQuotationNo", "Quotation"))
+@Html.Hidden("getBank", @Url.Action("getBank", "Quotation"))
+
+
+<script src="~/Scripts/language_Login.js"></script>
+
+
+<script>
+    function OpenPage() {
+
+        var urlAction = $('#ViewData').val();
+        window.location.href = urlAction;
+    }
+
+    function OpenQuo() {
+        var urlAction = $('#ViewQuo').val();
+        window.location.href = urlAction;
+    }
+    const UrlStr = window.location.search;
+    const UrlParam = new URLSearchParams(UrlStr);
+    const _id = UrlParam.get('id');
+    const _date = UrlParam.get('date');
+
+    function SearchQuotationNo2() {
+        var urlAction = $('#SearchQuotationNo').val();
+        const options = {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        };
+        console.log(_date);
+        $.ajax({
+            url: urlAction,
+            type: "POST",
+            dataType: "JSON",
+            data: {
+                quo: $("#txtQuo").val(),
+                date: _date,
+                id: _id,
+            },
+            success: function (obj) {
+                console.log(obj);
+                console.log(obj.result.length);
+
+                $("#listPrefix > tbody").html("");
+                var htmlDetail = "";
+
+
+                if (obj.result.length == 0) {
+                    htmlDetail += "<tr><td colspan='6' style='text-align: center;'>No data.</td></tr>";
+                }
+                else {
+
+                    var no = 1;
+                    for (var i = 0; i < obj.result.length; i++) {
+
+                        htmlDetail += "<tr>";
+                        htmlDetail += "<td><label set-lan='text:Start date' class='fontbold'></label>" + obj.result[i].start + "<br/><label set-lan='text:End date' class='fontbold'></label>" + obj.result[i].end + "</td>";
+                        htmlDetail += "<td><label set-lan='text:Company Name-' class='fontbold'></label>" + obj.result[i].name + "<br/><label set-lan='text:Company Prefix-' class='fontbold'></label>" + obj.result[i].name_prefix + "<br/><label set-lan='text:Bank--' class='fontbold'></label><button class='btn-green fa fa-question-circle' type='button' id='banklist' name='banklist' value='" + obj.result[i].bank + "' style='border:hidden'></button></td>";
+                        htmlDetail += "<td><label set-lan='text:Quotation No_' class='fontbold'></label>" + obj.result[i].no + "</td>";
+                        htmlDetail += "<td><label set-lan='text:Grand Total_' class='fontbold'></label>" + obj.result[i].grand_total.toLocaleString('en', options) + "<br /><label set-lan='text:Balance Paid_' class='fontbold'></label>" + obj.result[i].complete_amount.toLocaleString('en', options) + "<br /><label set-lan='text:Balance Amount' class='fontbold'></label>" + obj.result[i].balance_amount.toLocaleString('en', options) + "<br /><label set-lan='text:Overpayment-' class='fontbold'></label>" + obj.result[i].overpay.toLocaleString('en', options) + "</td>";
+                        //htmlDetail += "<td><label set-lan='text:Status' class='fontbold'></label>" + obj.result[i].no + "</td>";
+                        if (obj.result[i].status == 1) {
+                            htmlDetail += "<td><label set-lan='text:Confirm' class='fontbold'></label></td>";
+                        }
+                        else if (obj.result[i].status == 2) {
+                            htmlDetail += "<td><label set-lan='text:Complete' class='fontbold'></label></td>";
+                        }
+                        else if (obj.result[i].status == 3) {
+                            htmlDetail += "<td><label set-lan='text:Done' class='fontbold'></label></td>";
+                        }
+                        else {
+                            htmlDetail += "<td><label class='fontbold'>-</label></td>";
+                        }
+                        if (obj.result[i].status == 3) {
+                            htmlDetail += "<td style='text-align:center'><a class=' btn-lg btn-green fa fa-file-pdf-o' href='/Quotation/Quotations?id=" + obj.result[i].id + "'></a></td>";
+                        } else {
+                            htmlDetail += "<td style='text-align:center'><a class=' btn-lg btn-yellow fa fa-file-pdf-o' href='/Quotation/Quotations?id=" + obj.result[i].id + "'></a></td>";
+                        }
+                        htmlDetail += "</tr>";
+                        no++;
+                    }
+                }
+                $("#listPrefix > tbody").append(htmlDetail);
+               
+                SetLan($('#txtLan').val());
+            }
+        });
+    }
+
+
+    function OpenModal() {
+
+        $("#exampleModal").modal('show');
+
+    }
+
+    function openUpload() {
+        var urlAction = $('#ViewData').val();
+        var _url = urlAction + "?id=" + _id + "&date=" + _date;
+        console.log(_url);
+        window.location.href = _url;
+    }
+
+</script>
+
+<body>
+
+    @* Modal start*@
+    <div class="modal fade" id="ModalPopUp" role="dialog">
+        <div class="modal-dialog modal-lg" style="">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button id="DivClose" type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" style="text-align:center;">
+                    <table class="table table-border" id="bankListModal">
+                        <thead>
+                            <tr>
+                                <th><label set-lan="text:No." class="fontbold"></label></th>
+                                <th><label set-lan="text:Bank" class="fontbold"></label></th>
+                                <th><label set-lan="text:Type" class="fontbold"></label></th>
+                                <th><label set-lan="text:Account Receive No." class="fontbold"></label></th>
+                                <th><label set-lan="text:Account Receive Name" class="fontbold"></label></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button id="btnclose" type="button" class="btn btn-yellow font-weight-bold waves-effect waves-light" data-dismiss="modal" aria-label="Close" set-lan="text:Close"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @* Modal end*@
+    <div class="card col-md-12">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 textcen">
+                    <label set-lan="text:Quotation No"></label>
+                    <span>
+                        <input id="txtQuo" class="form-control" />
+                    </span>
+                </div>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-yellow" onclick="SearchQuotationNo2();" set-lan="text:Search" style="top:10px"></button>
+                </div>
+                <div class="col-md-3">
+                    <span @*href="@Url.Action("UploadSlip", "Quotation")"*@ id="btnUpload" onclick="openUpload()" class="btn btn-green" set-lan="text:Upload Silp" style="top:10px"></span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <br />
+
+    <section style="float: right; margin-top: -2.2rem;">
+        <div class="data-container"></div>
+        <div id="pagination-demo2"></div>
+    </section>
+    <div style="margin:5px;">
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("ListQuotation",
+       new { page,sortOrder = ViewBag.CurrentSort,currentFilter = ViewBag.CurrentFilter}))
+    </div>
+    <table id="listPrefix" class="table table-border xxx" style="width:100%">
+        <thead>
+            <tr>
+                <th set-lan="text:Period"></th>
+                <th set-lan="text:Company Name"></th>
+                <th set-lan="text:Quotation No"></th>
+                <th set-lan="text:Amount"></th>
+                <th set-lan="text:Status"></th>
+                <th set-lan="text:PDF File"></th>
+                @*<th set-lan="text:Upload Silp"></th>
+                    <th set-lan="text:PDF File"></th>*@
+            </tr>
+        </thead>
+
+        <tbody>
+            @if (Model.Count() != 0)
+            {
+                foreach (var item in Model)
+                {
+                    string _id = @item.year.ToString() + @item.month.ToString();
+                    <tr>
+                        <td>
+                            <label set-lan="text:Start date" class="fontbold"></label>@item.start <br />
+                            <label set-lan="text:End date" class="fontbold"></label>@item.end
+                            @*<label set-lan="text:Start date" class="fontbold"></label>@item.start_date.ToString("dd/MM/yyyy")
+                                <br />
+                                <label set-lan="text:End date" class="fontbold"></label>@item.end_date.ToString("dd/MM/yyyy")*@
+                        </td>
+                        <td>
+                            <label set-lan="text:Company Name-" class="fontbold"></label>@item.name <br />
+                            <label set-lan="text:Company Prefix-" class="fontbold">@item.name_prefix</label><br />
+                            <label set-lan="text:Bank--" class="fontbold"></label>
+                            <button class="btn-green fa fa-question-circle" type="button" id="banklist" name="banklist" value="@item.bank" style="border:hidden"></button>
+                            @*<a id="banklist" class="btn-green fa fa-question-circle" type="button" value="@item.bank" style="border:hidden" @*data-toggle="modal" data-target="#ModalPopUp"></a>*@
+                        </td>
+                        <td>
+                            <label set-lan="text:Quotation No_" class="fontbold"></label>@item.no <br />
+                        </td>
+                        <td>
+                            @*amount*@
+                            <label set-lan="text:Grand Total_" class="fontbold"></label><span style="float:right">@item.grand_total.ToString("0,000.00")</span><br />
+                            <label set-lan="text:Balance Paid_" class="fontbold"></label><span style="float:right">@item.complete_amount.ToString("0,000.00")</span><br />
+                            <label set-lan="text:Balance Amount" class="fontbold"></label><span style="float:right">@item.balance_amount.ToString("0,000.00")</span><br />
+                            <label set-lan="text:Overpayment-" class="fontbold"></label><span style="float:right">@item.overpay.ToString("0,000.00")</span>
+                        </td>
+                        @if (@item.status == 1)
+                        {
+                            <td><label set-lan="text:Confirm" class="fontbold"></label></td>
+                        }
+                        else if (@item.status == 2)
+                        {
+                            <td><label set-lan="text:Complete" class="fontbold"></label></td>
+                        }
+                        else if (@item.status == 3)
+                        {
+                            <td><label set-lan="text:Done" class="fontbold"></label></td>
+                        }
+                        else
+                        {
+                            <td>-</td>
+                        }
+
+                        @*<td style="text-align:center">@Html.ActionLink(" ", "ListPrefix", "Quotation", new { id = item.company_id, date = @_id }, new { @class = "btn-sm btn-green fa fa-search" })</td>*@
+                        @*<td style="text-align:center">@Html.ActionLink(" ", "UploadSlip", "Quotation", new { id = item.id }, new { @class = " btn-lg btn-green fa fa-plus-square" })</td>*@
+                        @if (@item.is_confirm != true)
+                        {
+                            <td style="text-align:center">@Html.ActionLink(" ", "Quotations", "Quotation", new { id = item.id }, new { @class = " btn-lg btn-yellow fa fa-file-pdf-o", target = "_blank" })</td>
+                        }
+                        else
+                        {
+                            <td style="text-align:center">@Html.ActionLink(" ", "QuotationsPaid", "Quotation", new { id = item.id }, new { @class = " btn-lg btn-green fa fa-file-pdf-o", target = "_blank" })</td>
+                        }
+
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="8" style="text-align:center"> No data.</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</body>
+
+<script src="https://code.jquery.com/jquery-1.10.0.min.js"
+        integrity="sha256-2+LznWeWgL7AJ1ciaIG5rFP7GKemzzl+K75tRyTByOE="
+        crossorigin="anonymous"></script>
+<script>
+    $("#banklist").click(function () {
+        $('#ModalPopUp').modal('show');
+
+        var BankL = $('#banklist').val();
+        console.log(BankL);
+        var urlAction = $('#getBank').val();
+        console.log(urlAction);
+
+        $.ajax({
+            url: urlAction,
+            type: "POST",
+            dataType: "JSON",
+            data: {
+                LBank: BankL,
+            },
+            success: function (obj) {
+                console.log(obj.result.length);
+
+                $("#bankListModal > tbody").html("");
+                var htmlDetail = "";
+                //var obj = JSON.parse(obj.result);
+                
+                if (obj.result.length == 0) {
+                    htmlDetail += "<tr><td colspan='5' style='text-align: center;'>No data.</td></tr>";
+                }
+                else {
+
+                    var no = 1;
+                    for (var i = 0; i < obj.result.length; i++) {
+                       
+
+                        htmlDetail += "<tr>";
+                        htmlDetail += "<td>" + no + "</td>";
+                        htmlDetail += "<td>" + obj.result[i].bank + "</td>";
+                        if (obj.result[i].type == 1) {
+                            htmlDetail += "<td><label set-lan='text:Bank1'></label</td>";
+                        } else if (obj.result[i].type == 2) {
+                            htmlDetail += "<td><label set-lan='text:Bank2'></label</td>";
+                        } else if (obj.result[i].type == 2) {
+                            htmlDetail += "<td><label set-lan='text:Bank3'></label</td>";
+                        } else {
+                            htmlDetail += "<td><label set-lan='text:Bank4'></label</td>";
+                        }
+                        htmlDetail += "<td>" + obj.result[i].account + "</td>";
+                        htmlDetail += "<td>" + obj.result[i].accountName + "</td>";
+                        
+
+
+                        htmlDetail += "</tr>";
+                        no++;
+                    }
+                }
+                $("#bankListModal > tbody").append(htmlDetail);
+
+                SetLan($('#txtLan').val());
+            }
+        });
+    })
+
+    $('#btnclose').click(function () {
+        $('#ModalPopUp').modal('hide');
+    });
+    
+</script>
+
+<style>
+    .textcen {
+        padding-top: 10px;
+    }
+
+    table.table .link, table.table thead .sorting:not(.no-sort), table.table thead .sorting_asc:not(.no-sort), table.table thead .sorting_desc:not(.no-sort) {
+        color: white !important;
+        font-weight: bold !important;
+    }
+
+    label {
+        float: left;
+    }
+
+    span {
+        display: block;
+        overflow: hidden;
+        padding: 0 4px 0 6px;
+    }
+
+    input {
+        width: 100%;
+        float: right;
+    }
+
+    .fontbold {
+        font-weight: bold;
+    }
+</style>

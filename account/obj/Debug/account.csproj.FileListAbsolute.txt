@@ -145,6 +145,8 @@ C:\Users\pleng\Desktop\AccountMember\account\bin\log4net.dll
 C:\Users\pleng\Desktop\AccountMember\account\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\pleng\Desktop\AccountMember\account\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\pleng\Desktop\AccountMember\account\bin\Newtonsoft.Json.dll
+C:\Users\pleng\Desktop\AccountMember\account\bin\PagedList.dll
+C:\Users\pleng\Desktop\AccountMember\account\bin\PagedList.Mvc.dll
 C:\Users\pleng\Desktop\AccountMember\account\bin\System.Web.Helpers.dll
 C:\Users\pleng\Desktop\AccountMember\account\bin\System.Web.Mvc.dll
 C:\Users\pleng\Desktop\AccountMember\account\bin\System.Web.Optimization.dll
@@ -158,6 +160,8 @@ C:\Users\pleng\Desktop\AccountMember\account\bin\EntityFramework.SqlServer.xml
 C:\Users\pleng\Desktop\AccountMember\account\bin\log4net.xml
 C:\Users\pleng\Desktop\AccountMember\account\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\pleng\Desktop\AccountMember\account\bin\Newtonsoft.Json.xml
+C:\Users\pleng\Desktop\AccountMember\account\bin\PagedList.xml
+C:\Users\pleng\Desktop\AccountMember\account\bin\PagedList.Mvc.xml
 C:\Users\pleng\Desktop\AccountMember\account\bin\System.Web.Helpers.xml
 C:\Users\pleng\Desktop\AccountMember\account\bin\System.Web.Mvc.xml
 C:\Users\pleng\Desktop\AccountMember\account\bin\System.Web.Razor.xml
@@ -166,8 +170,8 @@ C:\Users\pleng\Desktop\AccountMember\account\bin\System.Web.WebPages.Deployment.
 C:\Users\pleng\Desktop\AccountMember\account\bin\System.Web.WebPages.Razor.xml
 C:\Users\pleng\Desktop\AccountMember\account\bin\System.Web.Optimization.xml
 C:\Users\pleng\Desktop\AccountMember\account\bin\Antlr3.Runtime.pdb
+C:\Users\pleng\Desktop\AccountMember\account\obj\Debug\account.csprojAssemblyReference.cache
 C:\Users\pleng\Desktop\AccountMember\account\obj\Debug\account.csproj.CoreCompileInputs.cache
 C:\Users\pleng\Desktop\AccountMember\account\obj\Debug\account.csproj.CopyComplete
 C:\Users\pleng\Desktop\AccountMember\account\obj\Debug\account.dll
 C:\Users\pleng\Desktop\AccountMember\account\obj\Debug\account.pdb
-C:\Users\pleng\Desktop\AccountMember\account\obj\Debug\account.csprojAssemblyReference.cache

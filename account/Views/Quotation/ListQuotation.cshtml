@@ -1,22 +1,19 @@
-﻿@model IEnumerable<account.Database.bill_transaction>
+﻿@*@model IEnumerable<account.Database.bill_transaction>*@
+@using PagedList.Mvc;
+@model PagedList.IPagedList<account.Models.QuotationAll>
 @{
-    ViewBag.Title = "ListQuotation";
+    
 }
 @Html.Hidden("ViewData", @Url.Action("UploadSlip", "Quotation"))
 @Html.Hidden("ViewQuo", @Url.Action("Quotations", "Quotation"))
-@Html.Hidden("SearchQuotation", @Url.Action("SearchQuotationDate", "Quotation"))
+@Html.Hidden("SearchMonthYear", @Url.Action("SearchMonthYear", "Quotation"))
 
-<script src="~/Scripts/jquery-3.5.1.js"></script>
-<link href="~/Content/styles/dataTables.min.css" rel="stylesheet" />
-<script src="~/Scripts/jquery.dataTables.min.js"></script>
-<script src="~/Scripts/dataTables.bootstrap4.min.js"></script>
+
 <script src="~/Scripts/language_Login.js"></script>
-@*<link href="~/Content/styles/bootstrap.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>*@
+
 
 <script>
+  
     function OpenPage() {
 
         var urlAction = $('#ViewData').val();
@@ -27,158 +24,304 @@
         var urlAction = $('#ViewQuo').val();
         window.location.href = urlAction;
     }
-    function searchQuotationByDate() {
-        var urlAction = $('#SearchQuotation').val();
+
+    function SearchQuotationNo() {
+       
+
+
+        console.log("aaaaaaaaaaaaaa");
+    }
+
+    function SearchMonthYear2() {
+        var urlAction = $('#SearchMonthYear').val();
+        var _id = @Session["UserID"].ToString();
+       
+
+        console.log(urlAction);
+
         $.ajax({
             url: urlAction,
             type: "POST",
             dataType: "JSON",
             data: {
-                start_date: $("#txtStartDate").val(),
-                end_date: $("#txtEndDate").val(),
+                month: $("#ddlMonths").val(),
+                year: $("#ddlYears").val(),
+                id: _id,
             },
             success: function (obj) {
+                console.log(obj);
+                console.log(obj.result.length);
+                const options = {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                };
 
                 $("#listquotation > tbody").html("");
                 var htmlDetail = "";
-                var obj = JSON.parse(obj.result);
+                //var obj = JSON.parse(obj.result);
 
-
-                if (obj.length == 0) {
-                    htmlDetail += "<tr><td colspan='5' style='text-align: center;'>No data.</td></tr>";
+                
+                if (obj.result.length == 0) {
+                    htmlDetail += "<tr><td colspan='6' style='text-align: center;'>No data.</td></tr>";
                 }
                 else {
 
                     var no = 1;
-                    for (var i = 0; i < obj.length; i++) {
-                        var date2 = new Date(obj[i].start_date);
-                        var DateCreate = ("0" + date2.getDate()).slice(-2) + "/" + ("0" + (date2.getMonth() + 1)).slice(-2) + "/" + date2.getFullYear();
+                    for (var i = 0; i < obj.result.length; i++) {
+                        //var date2 = new Date(obj[i].start_date);
+                        //var date3 = new Date(obj[i].end_date);
+                        //var DateCreate = ("0" + date2.getDate()).slice(-2) + "/" + ("0" + (date2.getMonth() + 1)).slice(-2) + "/" + date2.getFullYear();
+                        //var DateEnd = ("0" + date3.getDate()).slice(-2) + "/" + ("0" + (date3.getMonth() + 1)).slice(-2) + "/" + date3.getFullYear();
+                        var monthN = "";
+                        if (obj.result[i].month == 1) {
+                            monthN = "January"
+                        } else if (obj.result[i].month == 2) {
+                            monthN = "February"
+                        } else if (obj.result[i].month == 3) {
+                            monthN = "March"
+                        } else if (obj.result[i].month == 4) {
+                            monthN = "April"
+                        } else if (obj.result[i].month == 5) {
+                            monthN = "May"
+                        } else if (obj.result[i].month == 6) {
+                            monthN = "June"
+                        } else if (obj.result[i].month == 7) {
+                            monthN = "July"
+                        } else if (obj.result[i].month == 8) {
+                            monthN = "August"
+                        } else if (obj.result[i].month == 9) {
+                            monthN = "September"
+                        } else if (obj.result[i].month == 10) {
+                            monthN = "October"
+                        } else if (obj.result[i].month == 11) {
+                            monthN = "November"
+                        } else if (obj.result[i].month == 12) {
+                            monthN = "December"
+                        }
 
                         htmlDetail += "<tr>";
-                        htmlDetail += "<td>" + DateCreate + "</td>";
-                        htmlDetail += "<td>" + obj[i].no + "</td>";
-                        htmlDetail += "<td style='text-align:center'><a class='btn btn-lg btn-green fa fa-plus-square' href='/Quotation/UploadSlip?id=" + obj[i].id + "'> Upload Slip</a></td>";
-                        if (obj[i].is_complete == 1) {
-                            htmlDetail += "<td>no complete and confirm bill</td>";
-                        }
-                        else if (obj[i].is_complete == 2) {
-                            htmlDetail += "<td>complete</td>";
-                        }
-                        else if (obj[i].is_complete == 3) {
-                            htmlDetail += "<td>done</td>>";
-                        }
-                        else {
-                            htmlDetail += "<td>-</td>";
-                        }
+                        htmlDetail += "<td><label set-lan='text:Start date' class='fontbold'></label>" + monthN + " " + obj.result[i].year + "</td>";
+                        htmlDetail += "<td><label set-lan='text:Company Name-' class='fontbold'></label>" + obj.result[i].name + "</td>";
+                        htmlDetail += "<td><label set-lan='text:Bank' class='fontbold'></label><label set-lan='text:Bank Name'></label><br /><label set-lan='text:account no' class='fontbold'></label><label set-lan='text:ACN Detail'></label><br /><label set-lan='text:Account Name' class='fontbold'></label><label set-lan='text:Name'></label></td>";
+                        htmlDetail += "<td><label set-lan='text:Grand Total_' class='fontbold'></label>" + obj.result[i].grand_total.toLocaleString('en', options) + "<br /><label set-lan='text:Balance Paid_' class='fontbold'></label>" + obj.result[i].complete_amount.toLocaleString('en', options) + "<br /><label set-lan='text:Balance Amount' class='fontbold'></label>" + obj.result[i].balance_amount.toLocaleString('en', options)+ "<br /><label set-lan='text:Overpayment-' class='fontbold'></label>" + obj.result[i].overpay.toLocaleString('en', options) +"</td>";
+                        //if (obj.result[i].status == 1) {
+                        //    htmlDetail += "<td>comfirm</td>";
+                        //}
+                        //else if (obj.result[i].status == 2) {
+                        //    htmlDetail += "<td>complete</td>";
+                        //}
+                        //else if (obj.result[i].status == 3) {
+                        //    htmlDetail += "<td>done</td>>";
+                        //}
+                        //else {
+                        //    htmlDetail += "<td>-</td>";
+                        //}
+                        htmlDetail += "<td style='text-align:center'><a class='btn-sm btn-green fa fa-search' href='/Quotation/ListPrefix?id=" + obj.result[i].year+obj.result[i].month + "'></a></td>";
 
-                        if (obj[i].is_confirm != true) {
-                            htmlDetail += "<td style='text-align: center'><a class='btn btn-yellow btn-block' style='width: auto;' href='../Quotation/Quotations?Id=" + obj[i].id + "'><i class='fbtn btn-lg btn-outline-warning fa fa-file-pdf-o'></i></a></td>";
-                        } else {
-                            htmlDetail += "<td style='text-align: center'><a class='btn btn-green btn-block' style='width: auto;' href='../Quotation/QuotationsPaid?Id=" + obj[i].id + "'><i class='fbtn btn-lg btn-outline-success fa fa-file-pdf-o'></i></a></td>";
-                        }
+
+                        
                         htmlDetail += "</tr>";
                         no++;
                     }
                 }
                 $("#listquotation > tbody").append(htmlDetail);
+
+                SetLan($('#txtLan').val());
             }
         });
     }
-
+    
 </script>
 
 <body>
-    @*<div class="row">
-        <div class="col-md-12">*@
-    <div class="card col-md-11">
+    <div class="card col-md-12">
         <div class="card-body">
+            @*<div class="row">
+                    <div class="col-md-4 textcen">
+                        <label set-lan="text:Quotation No"></label>
+                        <span>
+                            <input id="txtQuo" class="form-control" />
+                        </span>
+                    </div>
+                </div>*@
             <div class="row">
-                <div class="col-md-2 textcen">
-                    <label set-lan="text:Start date"></label>
-                </div>
-                <div class="col-md-2">
+                <div class="col-md-4 textcen">
+                    <label set-lan="text:Month-"></label>
                     <span>
-                        <input type="date" id="txtStartDate" class="form-control" />
+                        @Html.DropDownList("linktoMonthId", null, "--Select--", new
+                   {
+                       @id = "ddlMonths",
+                       @class = "form-control",
+                       @style = "width:200px ; display:block !important"
+                   })
+                        @*<input type="date" id="txtStartDate" class="form-control" />*@
                     </span>
                 </div>
-                <div class="col-md-2 textcen">
-                    <label set-lan="text:End date"></label>
-                </div>
-                <div class="col-md-2">
+                <div class="col-md-4 textcen">
+                    <label set-lan="text:Year-"></label>
                     <span>
-                        <input type="date" id="txtEndDate" class="form-control" />
+                        @Html.DropDownList("linktoYearId", null, "--Select--", new
+                   {
+                       @id = "ddlYears",
+                       @class = "form-control",
+                       @style = "width:200px ; display:block !important"
+                   })
+                        @*<input type="date" id="txtEndDate" class="form-control" />*@
                     </span>
                 </div>
                 <div class="col-md-3">
-                    <button type="button" class="btn btn-yellow" onclick="searchQuotationByDate()" set-lan="text:Search"></button>
+                    <button type="button" class="btn btn-yellow" onclick="SearchMonthYear2()" set-lan="text:Search" style="top:10px"></button>
                 </div>
             </div>
         </div>
     </div>
     <br />
-    <div class="card col-md-11" style="margin-top:20px">
-        <div class="card-body">
-            <table id="listquotation" class="table table-bordered table-hover table-striped wrap" style="width:100%">
-                <thead>
-                    <tr>
-                        <th set-lan="text:Start date"></th>
-                        <th set-lan="text:Quotation No"></th>
-                        <th set-lan="text:Upload Silp"></th>
-                        <th set-lan="text:Status"></th>
-                        <th set-lan="text:PDF File"></th>
-                    </tr>
-                </thead>
+    @*<div class="card col-md-12" style="margin-top:20px">
+        <div class="card-body">*@
+    <section style="float: right; margin-top: -2.2rem;">
+        <div class="data-container"></div>
+        <div id="pagination-demo2"></div>
+    </section>
+    <div style="margin:5px;">
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
-                <tbody>
-                    @foreach (var item in Model)
+        @Html.PagedListPager(Model, page => Url.Action("ListQuotation",
+       new { page,sortOrder = ViewBag.CurrentSort,currentFilter = ViewBag.CurrentFilter}))
+    </div>
+    <table id="listquotation" class="table table-border xxx" style="width:100%">
+        <thead>
+            <tr>
+                <th set-lan="text:Period"></th>
+                <th set-lan="text:Company Name"></th>
+                @*<th set-lan="text:ACN"></th>*@
+                <th set-lan="text:Amount"></th>
+                @*<th set-lan="text:Status"></th>*@
+                <th set-lan="text:Action"></th>
+                @*<th set-lan="text:Upload Silp"></th>
+                    <th set-lan="text:PDF File"></th>*@
+            </tr>
+        </thead>
+
+        <tbody>
+            @if (Model.Count() != 0)
+            {
+                foreach (var item in Model)
+                {
+                    string monthN = "";
+                    if (item.month == 1)
                     {
-                        <tr>
-
-                            <td>@item.start_date.ToString("dd/MM/yyyy")</td>
-                            <td>@item.no</td>
-                            <td style="text-align:center">@Html.ActionLink(" ", "UploadSlip", "Quotation", new { id = item.id }, new { @class = "btn btn-lg btn-green fa fa-plus-square" })</td>
-                            @if (@item.is_complete == 1)
+                        monthN = "January";
+                    }
+                    else if (item.month == 2)
+                    {
+                        monthN = "February";
+                    }
+                    else if (item.month == 3)
+                    {
+                        monthN = "March";
+                    }
+                    else if (item.month == 4)
+                    {
+                        monthN = "April";
+                    }
+                    else if (item.month == 5)
+                    {
+                        monthN = "May";
+                    }
+                    else if (item.month == 6)
+                    {
+                        monthN = "June";
+                    }
+                    else if (item.month == 7)
+                    {
+                        monthN = "July";
+                    }
+                    else if (item.month == 8)
+                    {
+                        monthN = "August";
+                    }
+                    else if (item.month == 9)
+                    {
+                        monthN = "September";
+                    }
+                    else if (item.month == 10)
+                    {
+                        monthN = "October";
+                    }
+                    else if (item.month == 11)
+                    {
+                        monthN = "November";
+                    }
+                    else if (item.month == 12)
+                    {
+                        monthN = "December";
+                    }
+                    string _id = @item.year.ToString() + @item.month.ToString();
+                    <tr>
+                        <td>
+                            <label set-lan="text:Start date" class="fontbold"></label>@monthN @item.year
+                            @*<label set-lan="text:Start date" class="fontbold"></label>@item.start_date.ToString("dd/MM/yyyy")
+                                <br />
+                                <label set-lan="text:End date" class="fontbold"></label>@item.end_date.ToString("dd/MM/yyyy")*@
+                        </td>
+                        <td>
+                            <label set-lan="text:Company Name-" class="fontbold"></label>@item.name
+                        </td>
+                        @*<td>
+                                <label set-lan="text:Bank" class="fontbold"></label> <label set-lan="text:Bank Name"></label><br />
+                                <label set-lan="text:account no" class="fontbold"></label> <label set-lan="text:ACN Detail"></label><br />
+                                <label set-lan="text:Account Name" class="fontbold"></label> <label set-lan="text:Name"></label>
+                            </td>*@
+                        <td>
+                            @*amount*@
+                            <label set-lan="text:Grand Total_" class="fontbold"></label><span style="float:right">@item.grand_total.ToString("0,000.00")</span><br />
+                            <label set-lan="text:Balance Paid_" class="fontbold"></label><span style="float:right">@item.complete_amount.ToString("0,000.00")</span><br />
+                            <label set-lan="text:Balance Amount" class="fontbold"></label><span style="float:right">@item.balance_amount.ToString("0,000.00")</span><br />
+                            <label set-lan="text:Overpayment-" class="fontbold"></label><span style="float:right">@item.overpay.ToString("0,000.00")</span>
+                        </td>
+                        @*@if (@item.status == 1)
                             {
-                                <td>no complete and confirm bill</td>
+                                <td>confirm</td>
                             }
-                            else if (@item.is_complete == 2)
+                            else if (@item.status == 2)
                             {
                                 <td>complete</td>
                             }
-                            else if (@item.is_complete == 3)
+                            else if (@item.status == 3)
                             {
                                 <td>done</td>
                             }
                             else
                             {
                                 <td>-</td>
-                            }
+                            }*@
+
+                        <td style="text-align:center">@Html.ActionLink(" ", "ListPrefix", "Quotation", new { id = item.company_id, date = @_id }, new { @class = "btn-sm btn-green fa fa-search" })</td>
+                        @*<td style="text-align:center">@Html.ActionLink(" ", "UploadSlip", "Quotation", new { id = item.id }, new { @class = " btn-lg btn-green fa fa-plus-square" })</td>
                             @if (@item.is_confirm != true)
                             {
-                                <td style="text-align:center">@Html.ActionLink(" ", "Quotations", "Quotation", new { id = item.id }, new { @class = "btn btn-lg btn-yellow fa fa-file-pdf-o" })</td>
+                                <td style="text-align:center">@Html.ActionLink(" ", "Quotations", "Quotation", new { id = item.id }, new { @class = " btn-lg btn-yellow fa fa-file-pdf-o" })</td>
                             }
                             else
                             {
-                                <td style="text-align:center">@Html.ActionLink(" ", "QuotationsPaid", "Quotation", new { id = item.id }, new { @class = "btn btn-lg btn-green fa fa-file-pdf-o" })</td>
-                            }
+                                <td style="text-align:center">@Html.ActionLink(" ", "QuotationsPaid", "Quotation", new { id = item.id }, new { @class = " btn-lg btn-green fa fa-file-pdf-o" })</td>
+                            }*@
 
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    </div>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="8" style="text-align:center"> No data.</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
     @*</div>
         </div>*@
-    @*@Html.Partial("SiteMaster")*@
 </body>
-
-<script>
-    $(document).ready(function () {
-        $('#listquotation').DataTable();
-    });
-
-</script>
 
 <style>
     .textcen {
@@ -188,5 +331,24 @@
     table.table .link, table.table thead .sorting:not(.no-sort), table.table thead .sorting_asc:not(.no-sort), table.table thead .sorting_desc:not(.no-sort) {
         color: white !important;
         font-weight: bold !important;
+    }
+
+    label {
+        float: left;
+    }
+
+    span {
+        display: block;
+        overflow: hidden;
+        padding: 0 4px 0 6px;
+    }
+
+    input {
+        width: 100%;
+        float: right;
+    }
+
+    .fontbold {
+        font-weight: bold;
     }
 </style>

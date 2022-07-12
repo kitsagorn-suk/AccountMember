@@ -3,17 +3,18 @@
 <html lang="en">
 <head runat="server">
     <meta charset="utf-8">
-    <meta name="viewport" content="width=1480" />
+    @*<meta name="viewport" content="width=1480" />*@
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--<meta http-equiv="x-ua-compatible" content="ie=edge">-->
     <title>askmebet</title>
     <link rel="icon" href="../img/logo-icon.jpeg" type="image/png" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- Bootstrap core CSS -->
-    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
+
     <!-- Material Design Bootstrap -->
     <link href="../Content/styles/mdb.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
     <!-- Your custom styles (optional) -->
     <link href="../Content/style.css" rel="stylesheet">
     <link href="../Content/jquery-ui.css" rel="stylesheet" />
@@ -47,7 +48,7 @@
                             <div class="d-flex align-items-center nav-top" style="margin-left: 10px;">
                                 <div class="row" style="float: left;display: contents;">
                                     <a class="nav-link overflow ellipsis" aria-expanded="false" id="nameLogin" href="#" style="inline-size: fit-content;">
-                                        <i class="far fa-user-circle"> @Session["UserName"].ToString()</i>
+                                        <i class="far fa-user-circle" style="font-family:Arial, Helvetica, sans-serif;font-size:14px"> @Session["UserName"].ToString()</i>
                                     </a>
                                     <a class="nav-link" aria-expanded="false" id="position" style="margin-left: 1rem;inline-size: fit-content;">
                                         <i class="fas fa-briefcase"></i> <i id="company"></i>
@@ -57,6 +58,7 @@
                                     </a>
                                 </div>
                             </div>
+                            <input type="hidden" id="userID" value="@Session["UserID"].ToString()" />
                             <div class="d-flex align-items-center nav-top-links">
                                 <a onclick="ModalLanguage();" id="txtLan">
                                     <img src="../img/usa.png" style="width: 20px; margin-right: .4rem;" />English
@@ -89,20 +91,25 @@
                         <li>
                             <ul class="accordion collapsible collapsible-accordion">
                                 <li id="menuDasboard" class="menuMain">
-                                    <a class="collapsible-header waves-effect" onclick="OpenPage()">
+                                    <a class="collapsible-header waves-effect" onclick="OpenMenu1()">
                                         <i class="sv-slim-icon fas fa-dashboard"></i>
                                         <label class="main iconright" set-lan="text:Quotation List"></label>
+                                    </a>
+                                </li>
+                                <li id="menuCompleteBill" class="menuMain">
+                                    <a class="collapsible-header waves-effect" onclick="OpenMenu2()">
+                                        <i class="sv-slim-icon far fa-report"></i>
+                                        <label class="main iconright" set-lan="text:CPB"></label>
                                     </a>
                                 </li>
                             </ul>
                         </li>
                         <!--/. Side navigation links -->
                     </ul>
-                    @*<div class="sidenav-bg rgba-white-strong"></div>*@
                 </div>
                 <!--/. Sidebar navigation -->
             </header>
-            <main style="padding-top: 70px; padding-left:250px !important">
+            <main style="padding-top: 70px; padding-left:21% !important;width: 95%;">
                 <div class="container body-content">
                     @RenderBody()
                     <footer>
@@ -121,7 +128,7 @@
 
         .setsidebar {
             top: 100px !important;
-            left: 152px !important;
+            left: 10% !important;
         }
     </style>
     <!-- SCRIPTS -->
@@ -166,16 +173,15 @@
     getNameCompany();
 
 
-        function OpenPage() {
-
-            var urlAction = $('#ViewMain').val();
+        function OpenMenu1() {
             window.location.href = "ListQuotation?id="+@Session["UserID"].ToString();
+        }
 
+        function OpenMenu2() {
+            window.location.href = "HistoryList?id="+@Session["UserID"].ToString();
         }
         var role = "";
         var token;
-        //var Position = $("#<%=LoginPosi.ClientID%>").val();
-        //var Position_ID = $("#<%=LoginPosi_ID.ClientID%>").val();
 
         $(document).ready(function () {
         //if (navigator.geolocation) {
@@ -406,6 +412,5 @@
         }
 
     </script>
-    @*<asp:ContentPlaceHolder ID="MainScript" runat="server"></asp:ContentPlaceHolder>*@
 </body>
 </html>

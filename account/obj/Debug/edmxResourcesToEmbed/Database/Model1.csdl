@@ -19,14 +19,17 @@
     <Property Name="update_date" Type="DateTime" Precision="3" />
     <Property Name="update_by" Type="Int32" />
     <Property Name="company_id" Type="Int32" />
+    <Property Name="company_type" Type="Int32" />
+    <Property Name="login_date" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityContainer Name="accountEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="user_login" EntityType="Self.user_login" />
     <EntitySet Name="bill_transaction" EntityType="accountModel.bill_transaction" />
     <EntitySet Name="bill_transaction_detail" EntityType="accountModel.bill_transaction_detail" />
-    <EntitySet Name="bill_confirm_slip" EntityType="accountModel.bill_confirm_slip" />
     <EntitySet Name="companies" EntityType="accountModel.company" />
     <EntitySet Name="system_user" EntityType="accountModel.system_user" />
+    <EntitySet Name="log_pay_member" EntityType="accountModel.log_pay_member" />
+    <EntitySet Name="system_currency" EntityType="accountModel.system_currency" />
   </EntityContainer>
   <EntityType Name="bill_transaction">
     <Key>
@@ -94,18 +97,6 @@
     <Property Name="discount_percent" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="discount_type" Type="Int32" />
   </EntityType>
-  <EntityType Name="bill_confirm_slip">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="transaction_id" Type="Int32" />
-    <Property Name="slip" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="comfirm_by" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-    <Property Name="create_at" Type="DateTime" Precision="3" />
-    <Property Name="create_date" Type="DateTime" Precision="3" />
-    <Property Name="amount" Type="Decimal" Precision="18" Scale="2" />
-  </EntityType>
   <EntityType Name="company">
     <Key>
       <PropertyRef Name="id" />
@@ -151,5 +142,37 @@
     <Property Name="update_is_active_date" Type="DateTime" Precision="3" />
     <Property Name="token_id" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="token_expire_date" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="log_pay_member">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="bill_transaction_id" Type="Int32" />
+    <Property Name="currency_id" Type="Int32" />
+    <Property Name="rate" Type="Decimal" Precision="18" Scale="8" />
+    <Property Name="amount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="amount_thai" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="status" Type="Int32" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="create_by" Type="Int32" />
+    <Property Name="file_code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="balance_amount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="complete_amount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="overpay" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="account_type" Type="Int32" />
+  </EntityType>
+  <EntityType Name="system_currency">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="fullname" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="Boolean" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="create_by" Type="Int32" />
+    <Property Name="update_date" Type="DateTime" Precision="3" />
+    <Property Name="update_by" Type="Int32" />
   </EntityType>
 </Schema>

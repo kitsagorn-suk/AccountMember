@@ -4,6 +4,8 @@
     <EntitySetMapping Name="user_login">
       <EntityTypeMapping TypeName="accountModel.user_login">
         <MappingFragment StoreEntitySet="user_login">
+          <ScalarProperty Name="login_date" ColumnName="login_date" />
+          <ScalarProperty Name="company_type" ColumnName="company_type" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="username" ColumnName="username" />
           <ScalarProperty Name="password" ColumnName="password" />
@@ -90,19 +92,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="bill_confirm_slip">
-      <EntityTypeMapping TypeName="accountModel.bill_confirm_slip">
-        <MappingFragment StoreEntitySet="bill_confirm_slip">
-          <ScalarProperty Name="amount" ColumnName="amount" />
-          <ScalarProperty Name="create_date" ColumnName="create_date" />
-          <ScalarProperty Name="create_at" ColumnName="create_at" />
-          <ScalarProperty Name="comfirm_by" ColumnName="comfirm_by" />
-          <ScalarProperty Name="slip" ColumnName="slip" />
-          <ScalarProperty Name="transaction_id" ColumnName="transaction_id" />
-          <ScalarProperty Name="id" ColumnName="id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="companies">
       <EntityTypeMapping TypeName="accountModel.company">
         <MappingFragment StoreEntitySet="company">
@@ -147,6 +136,40 @@
           <ScalarProperty Name="firstname" ColumnName="firstname" />
           <ScalarProperty Name="role" ColumnName="role" />
           <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="log_pay_member">
+      <EntityTypeMapping TypeName="accountModel.log_pay_member">
+        <MappingFragment StoreEntitySet="log_pay_member">
+          <ScalarProperty Name="account_type" ColumnName="account_type" />
+          <ScalarProperty Name="overpay" ColumnName="overpay" />
+          <ScalarProperty Name="complete_amount" ColumnName="complete_amount" />
+          <ScalarProperty Name="balance_amount" ColumnName="balance_amount" />
+          <ScalarProperty Name="file_code" ColumnName="file_code" />
+          <ScalarProperty Name="create_by" ColumnName="create_by" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="amount_thai" ColumnName="amount_thai" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="rate" ColumnName="rate" />
+          <ScalarProperty Name="currency_id" ColumnName="currency_id" />
+          <ScalarProperty Name="bill_transaction_id" ColumnName="bill_transaction_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="system_currency">
+      <EntityTypeMapping TypeName="accountModel.system_currency">
+        <MappingFragment StoreEntitySet="system_currency">
+          <ScalarProperty Name="update_by" ColumnName="update_by" />
+          <ScalarProperty Name="update_date" ColumnName="update_date" />
+          <ScalarProperty Name="create_by" ColumnName="create_by" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="fullname" ColumnName="fullname" />
+          <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>

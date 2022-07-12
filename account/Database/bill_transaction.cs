@@ -23,7 +23,7 @@ namespace account.Database
         public Nullable<int> company_type_sub_id { get; set; }
         public Nullable<int> company_prefix_id { get; set; }
         public Nullable<int> bill_type { get; set; }
-        public System.DateTime start_date { get; set; }
+        public Nullable<System.DateTime> start_date { get; set; }
         public Nullable<System.DateTime> end_date { get; set; }
         public string file_name { get; set; }
         public string system_bank_id { get; set; }

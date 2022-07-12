@@ -1,0 +1,60 @@
+﻿@*@model IEnumerable<account.Database.bill_transaction>*@
+@using PagedList.Mvc;
+@model PagedList.IPagedList<account.Database.bill_transaction>
+
+
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("HistoryList",
+       new { page,sortOrder = ViewBag.CurrentSort,currentFilter = ViewBag.CurrentFilter}))
+        <table class="table table-border">
+            <thead>
+                <tr>
+                    <th set-lan="text:Quotation No"></th>
+                    <th set-lan="text:Period"></th>
+                    <th set-lan="text:Grand Total"></th>
+                    <th set-lan="text:Complete Date"></th>
+                    <th set-lan="text:View History"></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model.Count() != 0)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.no)
+                            </td>
+                            <td>
+                                <label set-lan="text:Start date" class="fontbold"></label>@item.start_date.ToString("dd/MM/yyyy")
+                                <br />
+                                <label set-lan="text:End date" class="fontbold"></label>@item.end_date.ToString("dd/MM/yyyy")
+                            </td>
+                            <td style="text-align:center">
+                                @Html.DisplayFor(modelItem => item.grand_total)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.confirm_date)
+                            </td>
+                            <td style="text-align:center">
+                                @Html.ActionLink(" ", "History", "Quotation", new { id = item.id }, new { @class = "btn btn-green fa fa-clock-o" })
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="8" style="text-align:center"> No data.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+<style>
+    .fontbold {
+        font-weight: bold;
+    }
+</style>
