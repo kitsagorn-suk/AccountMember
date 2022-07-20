@@ -21,7 +21,7 @@ namespace account.Database
         public Nullable<decimal> amount { get; set; }
         public Nullable<decimal> amount_thai { get; set; }
         public Nullable<int> status { get; set; }
-        public Nullable<System.DateTime> create_date { get; set; }
+        public System.DateTime create_date { get; set; }
         public Nullable<int> create_by { get; set; }
         public string file_code { get; set; }
         public Nullable<decimal> balance_amount { get; set; }

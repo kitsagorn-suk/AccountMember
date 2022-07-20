@@ -1,6 +1,6 @@
 ﻿@*@model IEnumerable<account.Database.bill_transaction_detail>*@
 @using PagedList.Mvc;
-@model PagedList.IPagedList<account.Database.bill_confirm_slip>
+@model PagedList.IPagedList<account.Models.PayHistory>
 
 
 @Html.Hidden("ShowImg", @Url.Action("ShowImg", "Quotation"))
@@ -14,6 +14,7 @@
             <thead>
                 <tr>
                     <th set-lan="text:ID"></th>
+                    <th set-lan="text:Quotation No"></th>
                     <th set-lan="text:Upload Date"></th>
                     <th set-lan="text:Amount"></th>
                     <th set-lan="text:SF"></th>
@@ -23,49 +24,41 @@
                 @{var count = 1; }
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>@count</td>
-                        <td>@item.create_date.ToString("dd/MM/yyyy")</td>
-                        <td style="text-align:center">@item.amount.ToString("0,000.00")</td>
-                        @*<td style="text-align:center"><a href="~/SlipImg/@item.slip" target="_blank" class="btn btn-green fa fa-file-image-o"></a></td>*@
-                        <td style="text-align:center"><a class="btn btn-green fa fa-file-image-o" id="viewbtn" value="@item.id" data-toggle="modal" data-target="#showmodal" ></a></td>
-                    </tr>
+                <tr>
+                    <td>@count</td>
+                    <td>@item.bill_trans</td>
+                    <td>@item.create_date</td>
+                    <td style="text-align:center">@item.amount_thai</td>
+                    @*<td style="text-align:center"><a href="~/SlipImg/@item.slip" target="_blank" class="btn btn-green fa fa-file-image-o"></a></td>*@
+                    <td style="text-align:center"><a class="btn btn-green fa fa-file-image-o" id="viewbtn" data-toggle="modal" data-target="#fujian" @*data-image="@item.url"*@  data-image="http://localhost:51428/SlipImg/8e595afb-8572-41b2-aea5-a8c1f7cb0de7.jpeg"></a></td>
+                </tr>
                     count++;
                 }
 
         </table>
       
-        <div id="showmodal" class="modal fade" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-
+        <div id="fujian" class="modal fade">
+            <div class="modal-dialog modal-lg">
+                @*//Missing this Div*@
+                <div class="modal-content">
+                    @*//Missing this Div*@
+                    <div class="modal-body" style="text-align:center">
+                        <img class="showimage" src="" style="width:400px;height:500px;"/> 
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
             </div>
         </div>
 
 <script>
-    $("#ShowHistory").on("click", "#viewbtn", function () {
-        var id = $('#viewbtn').val();
-        var urlAction = $('#ShowImg').val();
-        console.log(urlAction);
-        $.ajax({
-            type: "GET",
-            url: urlAction,
-            data: {
-                id: id,
-            },
-            contentType: "application/json; charset=utf-8",
-            datatype: "json",  
-            success: function (data) {
-                $("#showmodal .modal-dialog").html(data);
-                $("#showmodal").modal("show");
-            },
-            error: function () {
-                alert("Dynamic content load failed.");
-            }  
-        });
-
-        $("#closbtn").click(function () {
-            $('#myModal').modal('hide');
+    $(document).ready(function () { //Dom Ready
+        $('#fujian').on('show.bs.modal', function (e) { //Event listener
+            var image = $(e.relatedTarget).data('image'); //Fetch image url from modal trigger <a> link
+            $(".showimage").attr("src", image); //load image in modal
         });
     });
+
 </script>
 

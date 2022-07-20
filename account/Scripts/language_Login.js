@@ -593,6 +593,11 @@
     "AddSlip": " Add New Payment",
     "DelSlip": " Delete Payment",
     "selectAll": " Select All",
+    "Pay history": "Pay History",
+    "Currency": "Currency",
+    "Currency_": "Currency :",
+    "Rate_": "Rate :",
+    "AmtThai_": "Amount(Thai) :",
 
 };
 
@@ -1189,6 +1194,11 @@ var Thai = {
     "AddSlip": " เพิ่มรายการจ่าย",
     "DelSlip": " ลบรายการจ่าย",
     "selectAll": " เลือกทั้งหมด",
+    "Pay history": "ประวัติการจ่าย",
+    "Currency": "สกุลเงิน",
+    "Currency_": "สกุลเงิน :",
+    "Rate_": "ค่าเงิน :",
+    "AmtThai_": "ค่าเงิน(ไทย) :",
     
 };
 

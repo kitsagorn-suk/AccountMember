@@ -91,22 +91,83 @@ namespace account.Controllers
 
         public ActionResult HistoryList(int id, int? page)
         {
-            accountEntities db = new accountEntities();
-            var data = db.bill_transaction.Where(x => x.id == id /*&& x.is_complete == 3*/).ToList();
+            //accountEntities db = new accountEntities();
+            //var _comp = db.user_member_login.Where(x => x.id == id /*&& x.is_complete == 3*/).FirstOrDefault();
+            //var data = db.log_pay_member.Where(y => y.create_by == id).ToList();
+
+            List<PayHistory> payHistoryList = new List<PayHistory>();
+            string CS = ConfigurationManager.ConnectionStrings["DEV"].ConnectionString;
+            string query = "SELECT lm.bill_transaction_id, sc.name, lm.rate, lm.amount, lm.amount_thai, CONVERT(VARCHAR, lm.create_date, 103) AS create_date, lm.file_code";
+            query += " FROM log_pay_member AS lm";
+            query += " LEFT JOIN system_currency AS sc ON lm.currency_id = sc.id";
+            query += " WHERE lm.status = 1 and lm.create_by = " + id;
+           // query += " GROUP BY lm.file_code, lm.bill_transaction_id, CONVERT(VARCHAR, lm.create_date, 103), lm.create_by";
+
+
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.CommandType = CommandType.Text;
+                con.Open();
+
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    var payHis = new PayHistory();
+
+                    payHis.bill_trans = rdr["bill_transaction_id"].ToString();
+                    payHis.file_code = rdr["file_code"].ToString();
+                    payHis.currency_name = rdr["name"].ToString();
+                    payHis.rate = Convert.ToDecimal(rdr["rate"]);
+                    payHis.amount = Convert.ToDecimal(rdr["amount"]);
+                    payHis.amount_thai = Convert.ToDecimal(rdr["amount_thai"]);
+                    payHis.create_date = rdr["create_date"].ToString();
+
+                    payHistoryList.Add(payHis);
+                }
+            }
 
             int pageSize = 20;
             int pageNumber = (page ?? 1);
-            return View(data.ToPagedList(pageNumber, pageSize));
+            return View(payHistoryList.ToPagedList(pageNumber, pageSize));
         }
 
-        //public ActionResult History(int id, int? page)
+        //public ActionResult History(string id, int? page)
         //{
-        //    accountEntities db = new accountEntities();
-        //    var data = db.bill_confirm_slip.Where(x => x.transaction_id == id).ToList();
+        //    List<PayHistory> payHistoryList = new List<PayHistory>();
+        //    string CS = ConfigurationManager.ConnectionStrings["DEV"].ConnectionString;
+        //    string query = "SELECT lm.bill_transaction_id, lm.currency_id, lm.rate, lm.amount, lm.amount_thai, lm.file_code, CONVERT(VARCHAR, lm.create_date, 103) AS create_date";
+        //    query += " FROM log_pay_member AS lm";
+        //    query += " LEFT JOIN file_detail AS fd ON lm.file_code = fd.file_code";
+        //    query += " WHERE lm.status = 1 and lm.file_code = '" + id +"'";
+        //    query += " GROUP BY lm.bill_transaction_id, lm.currency_id, lm.rate, lm.amount, lm.amount_thai, lm.file_code, CONVERT(VARCHAR, lm.create_date, 103) ";
 
+
+        //    using (SqlConnection con = new SqlConnection(CS))
+        //    {
+        //        SqlCommand cmd = new SqlCommand(query, con);
+        //        cmd.CommandType = CommandType.Text;
+        //        con.Open();
+
+        //        SqlDataReader rdr = cmd.ExecuteReader();
+        //        while (rdr.Read())
+        //        {
+        //            var payHis = new PayHistory();
+
+        //            payHis.bill_trans = rdr["bill_transaction_id"].ToString();
+        //            payHis.currency_id = Convert.ToInt32(rdr["currency_id"]);
+        //            payHis.rate = Convert.ToDecimal(rdr["rate"]);
+        //            payHis.amount = Convert.ToDecimal(rdr["amount"]);
+        //            payHis.amount_thai = Convert.ToDecimal(rdr["amount_thai"]);
+        //            payHis.file_code = rdr["file_code"].ToString();
+        //            payHis.create_date = rdr["create_date"].ToString();
+
+        //            payHistoryList.Add(payHis);
+        //        }
+        //    }
         //    int pageSize = 20;
         //    int pageNumber = (page ?? 1);
-        //    return View(data.ToPagedList(pageNumber, pageSize));
+        //    return View(payHistoryList.ToPagedList(pageNumber, pageSize));
         //}
 
         public RedirectResult Quotations(int Id)
@@ -136,7 +197,7 @@ namespace account.Controllers
             iYear = DateTime.Now.Year;
             //list from create because comnyid in system_user = 1 all
             var db = new accountEntities();
-            var _comp = db.user_login.Where(x => x.id == id).FirstOrDefault();
+            var _comp = db.user_member_login.Where(x => x.id == id).FirstOrDefault();
 
             List<QuotationAll> quotationList = new List<QuotationAll>();
             string CS = ConfigurationManager.ConnectionStrings["DEV"].ConnectionString;
@@ -244,7 +305,7 @@ namespace account.Controllers
         public JsonResult getNameCompany(int id)
         {
             var db = new accountEntities();
-            var _user = db.user_login.Where(x => x.id == id).FirstOrDefault();
+            var _user = db.user_member_login.Where(x => x.id == id).FirstOrDefault();
             var comp = db.companies.Where(y => y.id == _user.company_id).FirstOrDefault();
             var compID = comp.name;
             
@@ -293,6 +354,43 @@ namespace account.Controllers
             return Json(new { result = bankList }, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult getSilp(string fileCode)
+        {
+
+            List<PayHistory> PayList = new List<PayHistory>();
+            string CS = ConfigurationManager.ConnectionStrings["DEV"].ConnectionString;
+            string query = "SELECT url";
+            query += " FROM file_detail";
+            query += " where file_code = '"+fileCode+"'";
+           
+
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.CommandType = CommandType.Text;
+                con.Open();
+
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    var pay = new PayHistory();
+
+                    //quotation.id = Convert.ToInt32(rdr["id"]);
+                    //quotation.no = rdr["no"].ToString();
+                    pay.url = rdr["url"].ToString();
+
+                    PayList.Add(pay);
+                }
+            }
+            //var db = new accountEntities();
+            //var _user = db.user_login.Where(x => x.id == id).FirstOrDefault();
+            //var comp = db.companies.Where(y => y.id == _user.company_id).FirstOrDefault();
+            //var compID = comp.name;
+
+            //ViewBag.company = compID;
+            return Json(new { result = PayList }, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult SearchQuotationNo(string quo, string date, int id)
         {
             var year = date.Substring(0, 4);
@@ -303,7 +401,7 @@ namespace account.Controllers
             var Data = db.bill_transaction.ToList();
             try
             {
-                var comp = db.user_login.Where(y => y.id == id).FirstOrDefault();
+                var comp = db.user_member_login.Where(y => y.id == id).FirstOrDefault();
                // Data = db.bill_transaction.Where(x => x.month == month && x.year == year && x.company_id == comp.company_id).ToList();
 
                 List<QuotationAll> quotationList = new List<QuotationAll>();
@@ -362,7 +460,7 @@ namespace account.Controllers
             var Data = db.bill_transaction.ToList();
             try
             {
-                var comp = db.user_login.Where(y => y.id == id).FirstOrDefault();
+                var comp = db.user_member_login.Where(y => y.id == id).FirstOrDefault();
                 Data = db.bill_transaction.Where(x => x.month == month && x.year == year && x.company_id == comp.company_id).ToList();
 
                 List<QuotationAll> quotationList = new List<QuotationAll>();
@@ -477,20 +575,43 @@ namespace account.Controllers
             return View();
         }
 
-        [HttpPost]
-        public static Image LoadBase64(string base64image)
-        {
+        //[HttpPost]
+        //public static Image LoadBase64(string base64image)
+        //{
            
-            var t = base64image.Substring(23);  // remove data:image/png;base64,
+        //    var t = base64image.Substring(23);  // remove data:image/png;base64,
 
-            byte[] bytes = Convert.FromBase64String(t);
+        //    byte[] bytes = Convert.FromBase64String(t);
 
-            Image image;
-            using (MemoryStream ms = new MemoryStream(bytes))
-            {
-                image = Image.FromStream(ms);
-            }
-            return image;
+        //    Image image;
+        //    using (MemoryStream ms = new MemoryStream(bytes))
+        //    {
+        //        image = Image.FromStream(ms);
+        //    }
+        //    return image;
+        //}
+
+        public static Bitmap LoadBase64(string base64String)
+        {
+            Bitmap bmpReturn = null;
+
+            var t = base64String.Substring(23);
+            byte[] byteBuffer = Convert.FromBase64String(t);
+            MemoryStream memoryStream = new MemoryStream(byteBuffer);
+
+
+            memoryStream.Position = 0;
+
+
+            bmpReturn = (Bitmap)Bitmap.FromStream(memoryStream);
+
+
+            memoryStream.Close();
+            memoryStream = null;
+            byteBuffer = null;
+
+
+            return bmpReturn;
         }
 
 
@@ -498,19 +619,53 @@ namespace account.Controllers
         public JsonResult insSlip(log_pay infos)//ฟังก์ชั่น insert data to sql
         {
             string msg = "";
-
-            System.Drawing.Image files = LoadBase64(infos.SlipImg.ToString());
-            string filename = Guid.NewGuid().ToString()+"."+infos.fileExtension;
-
-            UploadFile(files, filename);
+            HttpFileCollectionBase _files = Request.Files;
+            //Bitmap files = LoadBase64(infos.SlipImg.ToString());
+           
+            //UploadFile(files, filename);
             //var Model = Request.Form.AllKeys.Length;
             //accountEntities dbcontext = new accountEntities();
             //log_pay_member insSlip = new log_pay_member();
             try
             {
-                //Guid guid = Guid.NewGuid();
-                
-                var newpath = string.Format(WebConfigurationManager.AppSettings["file_pay_url_dev"] + "/SlipImg/"+ filename);
+                string fileCode = Guid.NewGuid().ToString();
+                if(_files != null)
+                {
+                    var num = _files.Count;
+                    
+                    for (int i = 0; i < num; i++)
+                    {
+                        HttpPostedFileBase _File = _files[i];
+                        string g = Guid.NewGuid().ToString();
+                        string _type = _files[i].ContentType.ToString();
+                        string fname = g + "." + _type.Substring(6);
+                        UploadFile1(_File, fname);
+
+                        var newpath = string.Format(WebConfigurationManager.AppSettings["file_pay_url_dev"] + "/SlipImg/" + fname);
+                        if (infos != null)
+                        {
+                            string conn = ConfigurationManager.ConnectionStrings["DEV"].ConnectionString;
+                            SqlConnection cnn = new SqlConnection(conn);
+                            SqlCommand cmd = new SqlCommand();
+                            cmd.Connection = cnn;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.CommandText = "insert_file_detail";
+                            //parameter
+                            cmd.Parameters.AddWithValue("@pActionID", infos.actionID);
+                            cmd.Parameters.AddWithValue("@pActionName", infos.actionName);
+                            cmd.Parameters.AddWithValue("@pFileExtension", _type.Substring(6));
+                            cmd.Parameters.AddWithValue("@pFileCode", fileCode);
+                            cmd.Parameters.AddWithValue("@pName", fname);
+                            cmd.Parameters.AddWithValue("@pUrl", newpath);
+                            cmd.Parameters.AddWithValue("@pCreateBy", infos.createBy);
+                            cnn.Open();
+                            object o = cmd.ExecuteScalar();
+                            cnn.Close();
+                        }
+                    }
+                }
+               
+
                 if (infos != null)
                 {
                     string conn = ConfigurationManager.ConnectionStrings["DEV"].ConnectionString;
@@ -518,14 +673,14 @@ namespace account.Controllers
                     SqlCommand cmd = new SqlCommand();
                     cmd.Connection = cnn;
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.CommandText = "insert_file_detail";
+                    cmd.CommandText = "insert_log_pay_member";
                     //parameter
-                    cmd.Parameters.AddWithValue("@pActionID", infos.actionID);
-                    cmd.Parameters.AddWithValue("@pActionName", infos.actionName);
-                    cmd.Parameters.AddWithValue("@pFileExtension", infos.fileExtension);
-                    cmd.Parameters.AddWithValue("@pFileCode", infos.fileCode);
-                    cmd.Parameters.AddWithValue("@pName", filename);
-                    cmd.Parameters.AddWithValue("@pUrl", newpath);
+                    cmd.Parameters.AddWithValue("@pBilltran", infos.billtrans);
+                    cmd.Parameters.AddWithValue("@pCurrencyId", infos.currencyId);
+                    cmd.Parameters.AddWithValue("@pRate", infos.rate);
+                    cmd.Parameters.AddWithValue ("@pAmount", infos.amount);
+                    cmd.Parameters.AddWithValue("@pFileCode", fileCode);
+                    cmd.Parameters.AddWithValue("@pAccountType", infos.accountType);
                     cmd.Parameters.AddWithValue("@pCreateBy", infos.createBy);
                     cnn.Open();
                     object o = cmd.ExecuteScalar();
@@ -533,33 +688,7 @@ namespace account.Controllers
                 }
 
                 msg = "Upload slip complete!";
-
-
-
-
-                //if (infos != null)
-                //{
-                //    //insSlip.transaction_id = Convert.ToInt32(Request.Form["transaction_id"].ToString().Trim());
-                //    //insSlip.create_date = DateTime.Now;
-                //    //insSlip.amount = Convert.ToInt32(Request.Form["amount"].ToString().Trim());
-
-
-                //    if (files.Count > 0)
-                //    {
-                //        //HttpPostedFileBase _File = files[0];
-                //        //insSlip.slip = _File.FileName;
-                //        //UploadFile(_File);
-                //    }
-                //    else
-                //    {
-                //        //insSlip.slip = "";
-                //    }
-
-                //    dbcontext.log_pay_member.Add(insSlip);
-                //    var i = dbcontext.SaveChanges();
-                //}
-                //msg = "Upload slip complete!";
-
+                
             }
             catch (DbEntityValidationException e)
             {
@@ -579,16 +708,18 @@ namespace account.Controllers
         }
 
         [HttpPost]
-        public ActionResult UploadFile(System.Drawing.Image file,string filename)
+        public ActionResult UploadFile1(HttpPostedFileBase file,string fname)
         {
-            if (file != null /*&& file.ContentLength > 0*/)
+            if (file != null && file.ContentLength > 0)
                 try
                 {  //Server.MapPath takes the absolte path of folder 'Uploads'
-                    string path = Path.Combine(Server.MapPath("~/SlipImg"), filename
-                                               /*Path.GetFileName(file.FileName)*/);
+                    //string guid = Guid.NewGuid().ToString();
+                    //string _type = file.ContentType.ToString();
+                    //string fname = guid + "."+ _type.Substring(6);
+                    string path = Path.Combine(Server.MapPath("~/SlipImg"),
+                                               Path.GetFileName(fname));
                     //Save file using Path+fileName take from above string
-                    file.Save(path);
-                    file.Dispose();
+                    file.SaveAs(path);
                     ViewBag.Message = "File uploaded successfully";
                 }
                 catch (Exception ex)
@@ -601,6 +732,48 @@ namespace account.Controllers
             }
             return View();
         }
+
+        //[HttpPost]
+        //public ActionResult UploadFile(Bitmap bmp,string filename)
+        //{
+        //    string path = Path.Combine(Server.MapPath("~/SlipImg"), filename);
+        //    Bitmap bitmap = new Bitmap(bmp.Width, bmp.Height, bmp.PixelFormat);
+        //    Graphics g = Graphics.FromImage(bitmap);
+        //    g.DrawImage(bmp, new Point(0, 0));
+        //    g.Dispose();
+        //    bmp.Dispose();
+        //    bitmap.Save(path);
+        //    bmp = bitmap;
+        //    //string path = Path.Combine(Server.MapPath("~/SlipImg"), filename);
+        //    //string outputFileName = filename;
+        //    //using (MemoryStream memory = new MemoryStream())
+        //    //{
+        //    //    using (FileStream fs = new FileStream(path, FileMode.Create, FileAccess.ReadWrite))
+        //    //    {
+        //    //        file.Save(memory, System.Drawing.Imaging.ImageFormat.Jpeg);
+        //    //        byte[] bytes = memory.ToArray();
+        //    //        fs.Write(bytes, 0, bytes.Length);
+        //    //    }
+        //    //}
+        //    //if (file != null /*&& file.ContentLength > 0*/)
+        //    //    try
+        //    //    {  //Server.MapPath takes the absolte path of folder 'Uploads'
+        //    //        string path = Path.Combine(Server.MapPath("~/SlipImg"), filename);
+        //    //        //Save file using Path+fileName take from above string
+        //    //        file.Save(path, System.Drawing.Imaging.ImageFormat.Jpeg);
+        //    //        file.Dispose();
+        //    //        ViewBag.Message = "File uploaded successfully";
+        //    //    }
+        //    //    catch (Exception ex)
+        //    //    {
+        //    //        ViewBag.Message = "ERROR:" + ex.Message.ToString();
+        //    //    }
+        //    //else
+        //    //{
+        //    //    ViewBag.Message = "You have not specified a file.";
+        //    //}
+        //    return View();
+        //}
 
         [HttpGet]
         public ActionResult ShowImg(int id)

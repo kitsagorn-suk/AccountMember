@@ -1,7 +1,8 @@
 ﻿@*@model IEnumerable<account.Database.bill_transaction>*@
 @using PagedList.Mvc;
-@model PagedList.IPagedList<account.Database.bill_transaction>
+@model PagedList.IPagedList<account.Models.PayHistory>
 
+@Html.Hidden("getSilp", @Url.Action("getSilp", "Quotation"))
 
         Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
@@ -11,9 +12,9 @@
             <thead>
                 <tr>
                     <th set-lan="text:Quotation No"></th>
-                    <th set-lan="text:Period"></th>
-                    <th set-lan="text:Grand Total"></th>
-                    <th set-lan="text:Complete Date"></th>
+                    <th set-lan="text:Currency"></th>
+                    <th set-lan="text:Amount"></th>
+                    <th set-lan="text:Create date"></th>
                     <th set-lan="text:View History"></th>
                 </tr>
             </thead>
@@ -25,21 +26,27 @@
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.no)
+                                @Html.DisplayFor(modelItem => item.bill_trans)
                             </td>
                             <td>
-                                <label set-lan="text:Start date" class="fontbold"></label>@item.start_date.ToString("dd/MM/yyyy")
+                                <label set-lan="text:Currency-" class="fontbold"></label>
+                                <span style="float:right">@item.currency_name</span><br />
+                                <label set-lan="text:Rate_" class="fontbold"></label>
+                                <span style="float:right">@item.rate</span><br />
+                            </td>
+                            <td>
+                                <label set-lan="text:Amount-" class="fontbold"></label>
+                                <span style="float:right">@item.amount.ToString("0,000.00")</span><br />
+                                <label set-lan="text:AmtThai_" class="fontbold"></label>
+                                <span style="float:right">@item.amount_thai.ToString("0,000.00")</span><br />
+                            </td>
+                            <td style="text-align:center">
+                                @item.create_date
                                 <br />
-                                <label set-lan="text:End date" class="fontbold"></label>@item.end_date.ToString("dd/MM/yyyy")
                             </td>
+
                             <td style="text-align:center">
-                                @Html.DisplayFor(modelItem => item.grand_total)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.confirm_date)
-                            </td>
-                            <td style="text-align:center">
-                                @Html.ActionLink(" ", "History", "Quotation", new { id = item.id }, new { @class = "btn btn-green fa fa-clock-o" })
+                                <button class="btn btn-green fa fa-picture-o" type="button" id="viewbtn" name="viewbtn" onclick="openModal('@item.file_code')" style="border:hidden"></button>
                             </td>
                         </tr>
                     }
@@ -47,14 +54,73 @@
                 else
                 {
                     <tr>
-                        <td colspan="8" style="text-align:center"> No data.</td>
+                        <td colspan="5" style="text-align:center"> No data.</td>
                     </tr>
                 }
             </tbody>
         </table>
 
-<style>
-    .fontbold {
-        font-weight: bold;
-    }
-</style>
+        @* Modal start*@
+        <div class="modal fade" id="ModalPopUp" role="dialog">
+            <div class="modal-dialog modal-lg" style="">
+                <div class="modal-content">
+                    <div class="modal-body" style="text-align:center;">
+                       <div id="gall"></div>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button id="btnclose" type="button" class="btn btn-yellow font-weight-bold waves-effect waves-light" data-dismiss="modal" aria-label="Close" set-lan="text:Close"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @* Modal end*@
+
+        <script>
+            function openModal(filecode) {
+                console.log(filecode);
+                $('#ModalPopUp').modal('show');
+                
+                var urlAction = $('#getSilp').val();
+                console.log(urlAction);
+
+                $.ajax({
+                    url: urlAction,
+                    type: "POST",
+                    dataType: "JSON",
+                    data: {
+                        fileCode: filecode,
+                    },
+                    success: function (obj) {
+                        console.log(obj);
+                        console.log(obj.result.length);
+
+                        for (var i = 0; i < obj.result.length; i++) {
+                            const item = obj.result[i].url;
+                            console.log("item", item);
+                            const para = document.createElement("img");
+                            para.src = item;
+                            para.setAttribute("id", "ShwImg");
+                            para.style.cssText = 'width:400px;height:550px;margin-top:5px';
+                            document.getElementById("gall").appendChild(para);
+
+                        }
+                    }
+                });
+            }
+            $('#btnclose').click(function () {
+                var count = $("#gall > img").length;
+                console.log(count);
+                for (var i = 0; i < count; i++) {
+                    const img = document.getElementById('ShwImg');
+                    img.parentNode.removeChild(img);
+                }
+                $('#ModalPopUp').modal('hide');
+            });
+          
+        </script>
+
+        <style>
+            .fontbold {
+                font-weight: bold;
+            }
+        </style>

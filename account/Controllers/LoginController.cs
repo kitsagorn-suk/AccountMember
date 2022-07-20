@@ -30,7 +30,7 @@ namespace account.Controllers
             {
                 accountEntities db = new accountEntities();
                 var _pass = Base64Encode(login.Password);
-                var user = (from userlist in db.user_login
+                var user = (from userlist in db.user_member_login
                             where userlist.username == login.UserName && userlist.password == _pass
                             select new
                             {
@@ -44,7 +44,7 @@ namespace account.Controllers
 
                     var _id = user.FirstOrDefault().id;
 
-                    var _login = db.user_login.Where(x => x.id == _id).FirstOrDefault();
+                    var _login = db.user_member_login.Where(x => x.id == _id).FirstOrDefault();
                     if(_login != null)
                     {
                         _login.login_date = DateTime.Now;

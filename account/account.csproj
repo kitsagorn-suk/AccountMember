@@ -219,7 +219,7 @@
     <Compile Include="Database\system_user.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\user_login.cs">
+    <Compile Include="Database\user_member_login.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
@@ -230,6 +230,7 @@
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\log_pay.cs" />
     <Compile Include="Models\Pagination.cs" />
+    <Compile Include="Models\PayHistory.cs" />
     <Compile Include="Models\QuotationAll.cs" />
     <Compile Include="Models\Treatments.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

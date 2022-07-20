@@ -81,6 +81,9 @@
     <Property Name="update_date" Type="datetime" />
     <Property Name="update_by" Type="int" />
     <Property Name="in_house" Type="int" />
+    <Property Name="action_expire_date" Type="date" />
+    <Property Name="action_date" Type="datetime" />
+    <Property Name="action_by" Type="int" />
   </EntityType>
   <EntityType Name="log_pay_member">
     <Key>
@@ -144,7 +147,7 @@
     <Property Name="token_id" Type="varchar(max)" />
     <Property Name="token_expire_date" Type="datetime" />
   </EntityType>
-  <EntityType Name="user_login">
+  <EntityType Name="user_member_login">
     <Key>
       <PropertyRef Name="id" />
     </Key>
@@ -165,6 +168,9 @@
     <Property Name="company_id" Type="int" />
     <Property Name="company_type" Type="int" />
     <Property Name="login_date" Type="datetime" />
+    <Property Name="action_expire_date" Type="date" />
+    <Property Name="action_date" Type="datetime" />
+    <Property Name="action_by" Type="int" />
   </EntityType>
   <EntityContainer Name="accountModelStoreContainer">
     <EntitySet Name="bill_transaction" EntityType="Self.bill_transaction" Schema="dbo" store:Type="Tables" />
@@ -173,6 +179,6 @@
     <EntitySet Name="log_pay_member" EntityType="Self.log_pay_member" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="system_currency" EntityType="Self.system_currency" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="system_user" EntityType="Self.system_user" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="user_login" EntityType="Self.user_login" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_member_login" EntityType="Self.user_member_login" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

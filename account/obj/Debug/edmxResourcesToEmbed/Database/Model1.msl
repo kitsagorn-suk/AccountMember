@@ -1,29 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="accountModelStoreContainer" CdmEntityContainer="accountEntities">
-    <EntitySetMapping Name="user_login">
-      <EntityTypeMapping TypeName="accountModel.user_login">
-        <MappingFragment StoreEntitySet="user_login">
-          <ScalarProperty Name="login_date" ColumnName="login_date" />
-          <ScalarProperty Name="company_type" ColumnName="company_type" />
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="username" ColumnName="username" />
-          <ScalarProperty Name="password" ColumnName="password" />
-          <ScalarProperty Name="password_expire_date" ColumnName="password_expire_date" />
-          <ScalarProperty Name="token_id" ColumnName="token_id" />
-          <ScalarProperty Name="device_type" ColumnName="device_type" />
-          <ScalarProperty Name="device_id" ColumnName="device_id" />
-          <ScalarProperty Name="device_token" ColumnName="device_token" />
-          <ScalarProperty Name="is_online" ColumnName="is_online" />
-          <ScalarProperty Name="status" ColumnName="status" />
-          <ScalarProperty Name="create_date" ColumnName="create_date" />
-          <ScalarProperty Name="create_by" ColumnName="create_by" />
-          <ScalarProperty Name="update_date" ColumnName="update_date" />
-          <ScalarProperty Name="update_by" ColumnName="update_by" />
-          <ScalarProperty Name="company_id" ColumnName="company_id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="bill_transaction">
       <EntityTypeMapping TypeName="accountModel.bill_transaction">
         <MappingFragment StoreEntitySet="bill_transaction">
@@ -95,6 +72,9 @@
     <EntitySetMapping Name="companies">
       <EntityTypeMapping TypeName="accountModel.company">
         <MappingFragment StoreEntitySet="company">
+          <ScalarProperty Name="action_by" ColumnName="action_by" />
+          <ScalarProperty Name="action_date" ColumnName="action_date" />
+          <ScalarProperty Name="action_expire_date" ColumnName="action_expire_date" />
           <ScalarProperty Name="in_house" ColumnName="in_house" />
           <ScalarProperty Name="update_by" ColumnName="update_by" />
           <ScalarProperty Name="update_date" ColumnName="update_date" />
@@ -170,6 +150,32 @@
           <ScalarProperty Name="status" ColumnName="status" />
           <ScalarProperty Name="fullname" ColumnName="fullname" />
           <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_member_login">
+      <EntityTypeMapping TypeName="accountModel.user_member_login">
+        <MappingFragment StoreEntitySet="user_member_login">
+          <ScalarProperty Name="action_by" ColumnName="action_by" />
+          <ScalarProperty Name="action_date" ColumnName="action_date" />
+          <ScalarProperty Name="action_expire_date" ColumnName="action_expire_date" />
+          <ScalarProperty Name="login_date" ColumnName="login_date" />
+          <ScalarProperty Name="company_type" ColumnName="company_type" />
+          <ScalarProperty Name="company_id" ColumnName="company_id" />
+          <ScalarProperty Name="update_by" ColumnName="update_by" />
+          <ScalarProperty Name="update_date" ColumnName="update_date" />
+          <ScalarProperty Name="create_by" ColumnName="create_by" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="is_online" ColumnName="is_online" />
+          <ScalarProperty Name="device_token" ColumnName="device_token" />
+          <ScalarProperty Name="device_id" ColumnName="device_id" />
+          <ScalarProperty Name="device_type" ColumnName="device_type" />
+          <ScalarProperty Name="token_id" ColumnName="token_id" />
+          <ScalarProperty Name="password_expire_date" ColumnName="password_expire_date" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="username" ColumnName="username" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>

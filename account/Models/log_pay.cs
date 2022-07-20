@@ -16,5 +16,11 @@ namespace account.Models
         public string createBy { get; set; } = "";
         public string fileCode { get; set; } = "";
         public string SlipImg { get; set; } = "";
+
+        public string billtrans { get; set; } = "";
+        public int currencyId { get; set; } = 0;
+        public float rate { get; set; } = 0;
+        public decimal amount { get; set; } = 0;
+        public int accountType { get; set; } = 0;
     }
 }

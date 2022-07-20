@@ -1,35 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="accountModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="user_login">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="password" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-    <Property Name="password_expire_date" Type="DateTime" Precision="3" />
-    <Property Name="token_id" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="device_type" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="device_id" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-    <Property Name="device_token" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-    <Property Name="is_online" Type="Boolean" />
-    <Property Name="status" Type="Boolean" />
-    <Property Name="create_date" Type="DateTime" Precision="3" />
-    <Property Name="create_by" Type="Int32" />
-    <Property Name="update_date" Type="DateTime" Precision="3" />
-    <Property Name="update_by" Type="Int32" />
-    <Property Name="company_id" Type="Int32" />
-    <Property Name="company_type" Type="Int32" />
-    <Property Name="login_date" Type="DateTime" Precision="3" />
-  </EntityType>
   <EntityContainer Name="accountEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="user_login" EntityType="Self.user_login" />
     <EntitySet Name="bill_transaction" EntityType="accountModel.bill_transaction" />
     <EntitySet Name="bill_transaction_detail" EntityType="accountModel.bill_transaction_detail" />
     <EntitySet Name="companies" EntityType="accountModel.company" />
     <EntitySet Name="system_user" EntityType="accountModel.system_user" />
     <EntitySet Name="log_pay_member" EntityType="accountModel.log_pay_member" />
     <EntitySet Name="system_currency" EntityType="accountModel.system_currency" />
+    <EntitySet Name="user_member_login" EntityType="accountModel.user_member_login" />
   </EntityContainer>
   <EntityType Name="bill_transaction">
     <Key>
@@ -112,6 +90,9 @@
     <Property Name="update_date" Type="DateTime" Precision="3" />
     <Property Name="update_by" Type="Int32" />
     <Property Name="in_house" Type="Int32" />
+    <Property Name="action_expire_date" Type="DateTime" Precision="0" />
+    <Property Name="action_date" Type="DateTime" Precision="3" />
+    <Property Name="action_by" Type="Int32" />
   </EntityType>
   <EntityType Name="system_user">
     <Key>
@@ -174,5 +155,30 @@
     <Property Name="create_by" Type="Int32" />
     <Property Name="update_date" Type="DateTime" Precision="3" />
     <Property Name="update_by" Type="Int32" />
+  </EntityType>
+  <EntityType Name="user_member_login">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="password_expire_date" Type="DateTime" Precision="3" />
+    <Property Name="token_id" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="device_type" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="device_id" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="device_token" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="is_online" Type="Boolean" />
+    <Property Name="status" Type="Boolean" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="create_by" Type="Int32" />
+    <Property Name="update_date" Type="DateTime" Precision="3" />
+    <Property Name="update_by" Type="Int32" />
+    <Property Name="company_id" Type="Int32" />
+    <Property Name="company_type" Type="Int32" />
+    <Property Name="login_date" Type="DateTime" Precision="3" />
+    <Property Name="action_expire_date" Type="DateTime" Precision="0" />
+    <Property Name="action_date" Type="DateTime" Precision="3" />
+    <Property Name="action_by" Type="Int32" />
   </EntityType>
 </Schema>

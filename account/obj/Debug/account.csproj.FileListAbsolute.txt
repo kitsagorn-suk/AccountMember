@@ -170,8 +170,8 @@ C:\Users\pleng\Desktop\AccountMember\account\bin\System.Web.WebPages.Deployment.
 C:\Users\pleng\Desktop\AccountMember\account\bin\System.Web.WebPages.Razor.xml
 C:\Users\pleng\Desktop\AccountMember\account\bin\System.Web.Optimization.xml
 C:\Users\pleng\Desktop\AccountMember\account\bin\Antlr3.Runtime.pdb
-C:\Users\pleng\Desktop\AccountMember\account\obj\Debug\account.csprojAssemblyReference.cache
 C:\Users\pleng\Desktop\AccountMember\account\obj\Debug\account.csproj.CoreCompileInputs.cache
 C:\Users\pleng\Desktop\AccountMember\account\obj\Debug\account.csproj.CopyComplete
 C:\Users\pleng\Desktop\AccountMember\account\obj\Debug\account.dll
 C:\Users\pleng\Desktop\AccountMember\account\obj\Debug\account.pdb
+C:\Users\pleng\Desktop\AccountMember\account\obj\Debug\account.csprojAssemblyReference.cache
