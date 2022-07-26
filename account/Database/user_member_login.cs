@@ -34,5 +34,7 @@ namespace account.Database
         public Nullable<System.DateTime> action_expire_date { get; set; }
         public Nullable<System.DateTime> action_date { get; set; }
         public Nullable<int> action_by { get; set; }
+        public Nullable<System.DateTime> active_date { get; set; }
+        public Nullable<int> active_by { get; set; }
     }
 }

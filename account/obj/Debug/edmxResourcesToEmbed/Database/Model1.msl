@@ -120,26 +120,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="log_pay_member">
-      <EntityTypeMapping TypeName="accountModel.log_pay_member">
-        <MappingFragment StoreEntitySet="log_pay_member">
-          <ScalarProperty Name="account_type" ColumnName="account_type" />
-          <ScalarProperty Name="overpay" ColumnName="overpay" />
-          <ScalarProperty Name="complete_amount" ColumnName="complete_amount" />
-          <ScalarProperty Name="balance_amount" ColumnName="balance_amount" />
-          <ScalarProperty Name="file_code" ColumnName="file_code" />
-          <ScalarProperty Name="create_by" ColumnName="create_by" />
-          <ScalarProperty Name="create_date" ColumnName="create_date" />
-          <ScalarProperty Name="status" ColumnName="status" />
-          <ScalarProperty Name="amount_thai" ColumnName="amount_thai" />
-          <ScalarProperty Name="amount" ColumnName="amount" />
-          <ScalarProperty Name="rate" ColumnName="rate" />
-          <ScalarProperty Name="currency_id" ColumnName="currency_id" />
-          <ScalarProperty Name="bill_transaction_id" ColumnName="bill_transaction_id" />
-          <ScalarProperty Name="id" ColumnName="id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="system_currency">
       <EntityTypeMapping TypeName="accountModel.system_currency">
         <MappingFragment StoreEntitySet="system_currency">
@@ -157,6 +137,8 @@
     <EntitySetMapping Name="user_member_login">
       <EntityTypeMapping TypeName="accountModel.user_member_login">
         <MappingFragment StoreEntitySet="user_member_login">
+          <ScalarProperty Name="active_by" ColumnName="active_by" />
+          <ScalarProperty Name="active_date" ColumnName="active_date" />
           <ScalarProperty Name="action_by" ColumnName="action_by" />
           <ScalarProperty Name="action_date" ColumnName="action_date" />
           <ScalarProperty Name="action_expire_date" ColumnName="action_expire_date" />
@@ -176,6 +158,45 @@
           <ScalarProperty Name="password_expire_date" ColumnName="password_expire_date" />
           <ScalarProperty Name="password" ColumnName="password" />
           <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="log_pay_member">
+      <EntityTypeMapping TypeName="accountModel.log_pay_member">
+        <MappingFragment StoreEntitySet="log_pay_member">
+          <ScalarProperty Name="company_id" ColumnName="company_id" />
+          <ScalarProperty Name="account_type" ColumnName="account_type" />
+          <ScalarProperty Name="overpay" ColumnName="overpay" />
+          <ScalarProperty Name="complete_amount" ColumnName="complete_amount" />
+          <ScalarProperty Name="balance_amount" ColumnName="balance_amount" />
+          <ScalarProperty Name="file_code" ColumnName="file_code" />
+          <ScalarProperty Name="create_by" ColumnName="create_by" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="amount_thai" ColumnName="amount_thai" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="rate" ColumnName="rate" />
+          <ScalarProperty Name="currency_id" ColumnName="currency_id" />
+          <ScalarProperty Name="bill_transaction_id" ColumnName="bill_transaction_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="file_detail">
+      <EntityTypeMapping TypeName="accountModel.file_detail">
+        <MappingFragment StoreEntitySet="file_detail">
+          <ScalarProperty Name="action_id" ColumnName="action_id" />
+          <ScalarProperty Name="update_by" ColumnName="update_by" />
+          <ScalarProperty Name="update_date" ColumnName="update_date" />
+          <ScalarProperty Name="create_by" ColumnName="create_by" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="url" ColumnName="url" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="file_extension" ColumnName="file_extension" />
+          <ScalarProperty Name="file_code" ColumnName="file_code" />
+          <ScalarProperty Name="action_name" ColumnName="action_name" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>

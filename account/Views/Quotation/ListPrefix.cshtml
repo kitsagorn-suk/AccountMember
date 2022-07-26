@@ -63,7 +63,7 @@
 
                         htmlDetail += "<tr>";
                         htmlDetail += "<td><label set-lan='text:Start date' class='fontbold'></label>" + obj.result[i].start + "<br/><label set-lan='text:End date' class='fontbold'></label>" + obj.result[i].end + "</td>";
-                        htmlDetail += "<td><label set-lan='text:Company Name-' class='fontbold'></label>" + obj.result[i].name + "<br/><label set-lan='text:Company Prefix-' class='fontbold'></label>" + obj.result[i].name_prefix + "<br/><label set-lan='text:Bank--' class='fontbold'></label><button class='btn-green fa fa-question-circle' type='button' id='banklist' name='banklist' value='" + obj.result[i].bank + "' style='border:hidden'></button></td>";
+                        htmlDetail += "<td><label set-lan='text:Company Name-' class='fontbold'></label>" + obj.result[i].name + "<br/><label set-lan='text:Company Prefix-' class='fontbold'></label>" + obj.result[i].name_prefix + "<br/><label set-lan='text:Bank--' class='fontbold'></label><button class='btn-green fa fa-question-circle' type='button' onclick='openModal(`" + obj.result[i].bank +"`)' id='banklist' name='banklist' value='" + obj.result[i].bank + "' style='border:hidden'></button></td>";
                         htmlDetail += "<td><label set-lan='text:Quotation No_' class='fontbold'></label>" + obj.result[i].no + "</td>";
                         htmlDetail += "<td><label set-lan='text:Grand Total_' class='fontbold'></label>" + obj.result[i].grand_total.toLocaleString('en', options) + "<br /><label set-lan='text:Balance Paid_' class='fontbold'></label>" + obj.result[i].complete_amount.toLocaleString('en', options) + "<br /><label set-lan='text:Balance Amount' class='fontbold'></label>" + obj.result[i].balance_amount.toLocaleString('en', options) + "<br /><label set-lan='text:Overpayment-' class='fontbold'></label>" + obj.result[i].overpay.toLocaleString('en', options) + "</td>";
                         //htmlDetail += "<td><label set-lan='text:Status' class='fontbold'></label>" + obj.result[i].no + "</td>";
@@ -143,6 +143,7 @@
         </div>
     </div>
     @* Modal end*@
+
     <div class="card col-md-12">
         <div class="card-body">
             <div class="row">
@@ -206,7 +207,7 @@
                             <label set-lan="text:Company Name-" class="fontbold"></label>@item.name <br />
                             <label set-lan="text:Company Prefix-" class="fontbold">@item.name_prefix</label><br />
                             <label set-lan="text:Bank--" class="fontbold"></label>
-                            <button class="btn-green fa fa-question-circle" type="button" id="banklist" name="banklist" value="@item.bank" style="border:hidden"></button>
+                            <button class="btn-green fa fa-question-circle" type="button" onclick="openModal('@item.bank')" id="banklist" name="banklist" value="@item.bank" style="border:hidden"></button>
                             @*<a id="banklist" class="btn-green fa fa-question-circle" type="button" value="@item.bank" style="border:hidden" @*data-toggle="modal" data-target="#ModalPopUp"></a>*@
                         </td>
                         <td>
@@ -265,11 +266,11 @@
         integrity="sha256-2+LznWeWgL7AJ1ciaIG5rFP7GKemzzl+K75tRyTByOE="
         crossorigin="anonymous"></script>
 <script>
-    $("#banklist").click(function () {
+    function openModal(BankL) {
         $('#ModalPopUp').modal('show');
 
-        var BankL = $('#banklist').val();
-        console.log(BankL);
+        //var BankL = $('#banklist').val();
+        //console.log(BankL);
         var urlAction = $('#getBank').val();
         console.log(urlAction);
 
@@ -286,7 +287,7 @@
                 $("#bankListModal > tbody").html("");
                 var htmlDetail = "";
                 //var obj = JSON.parse(obj.result);
-                
+
                 if (obj.result.length == 0) {
                     htmlDetail += "<tr><td colspan='5' style='text-align: center;'>No data.</td></tr>";
                 }
@@ -294,7 +295,7 @@
 
                     var no = 1;
                     for (var i = 0; i < obj.result.length; i++) {
-                       
+
 
                         htmlDetail += "<tr>";
                         htmlDetail += "<td>" + no + "</td>";
@@ -310,7 +311,7 @@
                         }
                         htmlDetail += "<td>" + obj.result[i].account + "</td>";
                         htmlDetail += "<td>" + obj.result[i].accountName + "</td>";
-                        
+
 
 
                         htmlDetail += "</tr>";
@@ -322,8 +323,8 @@
                 SetLan($('#txtLan').val());
             }
         });
-    })
-
+    }
+  
     $('#btnclose').click(function () {
         $('#ModalPopUp').modal('hide');
     });

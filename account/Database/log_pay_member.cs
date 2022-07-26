@@ -15,18 +15,19 @@ namespace account.Database
     public partial class log_pay_member
     {
         public int id { get; set; }
-        public Nullable<int> bill_transaction_id { get; set; }
+        public string bill_transaction_id { get; set; }
         public Nullable<int> currency_id { get; set; }
         public Nullable<decimal> rate { get; set; }
         public Nullable<decimal> amount { get; set; }
         public Nullable<decimal> amount_thai { get; set; }
         public Nullable<int> status { get; set; }
-        public System.DateTime create_date { get; set; }
+        public Nullable<System.DateTime> create_date { get; set; }
         public Nullable<int> create_by { get; set; }
         public string file_code { get; set; }
         public Nullable<decimal> balance_amount { get; set; }
         public Nullable<decimal> complete_amount { get; set; }
         public Nullable<decimal> overpay { get; set; }
         public Nullable<int> account_type { get; set; }
+        public Nullable<int> company_id { get; set; }
     }
 }

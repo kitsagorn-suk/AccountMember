@@ -27,8 +27,6 @@
 
     function SearchQuotationNo() {
        
-
-
         console.log("aaaaaaaaaaaaaa");
     }
 
@@ -98,8 +96,8 @@
                         htmlDetail += "<tr>";
                         htmlDetail += "<td><label set-lan='text:Start date' class='fontbold'></label>" + monthN + " " + obj.result[i].year + "</td>";
                         htmlDetail += "<td><label set-lan='text:Company Name-' class='fontbold'></label>" + obj.result[i].name + "</td>";
-                        htmlDetail += "<td><label set-lan='text:Grand Total_' class='fontbold'></label><span style='float: right'>" + obj.result[i].grand_total.toLocaleString('en', options) + "</span><br /><label set-lan='text:Balance Paid_' class='fontbold'></label><span style='float: right'>" + obj.result[i].complete_amount.toLocaleString('en', options) + "</span><br /><label set-lan='text:Balance Amount' class='fontbold'></label><span style='float: right'>" + obj.result[i].balance_amount.toLocaleString('en', options) + "</span><br /><label set-lan='text:Overpayment-' class='fontbold'></label><span style='float: right'>" + obj.result[i].overpay.toLocaleString('en', options) +"</span></td>";                      
-                        htmlDetail += "<td style='text-align:center'><a class='btn-sm btn-green fa fa-search' href='/Quotation/ListPrefix?id=" + obj.result[i].year+obj.result[i].month + "'></a></td>";
+                        htmlDetail += "<td><label set-lan='text:Grand Total_' class='fontbold'></label><span style='float: right'>" + obj.result[i].grand_total.toLocaleString('en', options) + "</span><br /><label set-lan='text:Balance Paid_' class='fontbold'></label><span style='float: right'>" + obj.result[i].complete_amount.toLocaleString('en', options) + "</span><br /><label set-lan='text:Balance Amount' class='fontbold'></label><span style='float: right'>" + obj.result[i].balance_amount.toLocaleString('en', options) + "</span><br /><label set-lan='text:Overpayment-' class='fontbold'></label><span style='float: right'>" + obj.result[i].overpay.toLocaleString('en', options) + "</span></td>";
+                        htmlDetail += "<td style='text-align:center'><a class='btn-sm btn-green fa fa-search' href='/Quotation/ListPrefix?id=" + obj.result[i].company_id+ "&date=" + obj.result[i].year + obj.result[i].month + "'></a></td>";
 
 
                         

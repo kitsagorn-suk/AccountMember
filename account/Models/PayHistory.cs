@@ -7,6 +7,7 @@ namespace account.Models
 {
     public class PayHistory
     {
+        public int Id { get; set; } = 0;
         public string bill_trans { get; set; } = "";
         public string currency_name { get; set; } = "";
         public decimal rate { get; set; } = 0;
@@ -16,5 +17,6 @@ namespace account.Models
         public string file_code { get; set; } = "";
         public string url { get; set; } = "";
         public int account_type { get; set; } = 0;
+        public string my { get; set; } = "";
     }
 }

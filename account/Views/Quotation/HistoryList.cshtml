@@ -3,12 +3,57 @@
 @model PagedList.IPagedList<account.Models.PayHistory>
 
 @Html.Hidden("getSilp", @Url.Action("getSilp", "Quotation"))
+@Html.Hidden("SearchQuotationNo", @Url.Action("SearchQuotationNoHistory", "Quotation"))
+
+<div class="card col-md-12">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4 textcen">
+                <label set-lan="text:Quotation No"></label>
+                <span>
+                    <input id="txtQuo" class="form-control" />
+                </span>
+            </div>
+            <div class="col-md-4 textcen">
+                <label set-lan="text:Month-"></label>
+                <span>
+                    @Html.DropDownList("linktoMonthId", null, null, new
+               {
+                   @id = "ddlMonths",
+                   @class = "form-control",
+                   @style = "width:200px ; display:block !important"
+               })
+                </span>
+            </div>
+            <div class="col-md-4 textcen">
+                <label set-lan="text:Year-"></label>
+                <span>
+                    @Html.DropDownList("linktoYearId", null,null, new
+               {
+                   @id = "ddlYears",
+                   @class = "form-control",
+                   @style = "width:200px ; display:block !important"
+               })
+                </span>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="col-md-10"></div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-yellow" onclick="SearchQuotation();" set-lan="text:Search" style="top:10px"></button>
+            </div>
+        </div>
+       
+    </div>
+</div>
+
 
         Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
         @Html.PagedListPager(Model, page => Url.Action("HistoryList",
        new { page,sortOrder = ViewBag.CurrentSort,currentFilter = ViewBag.CurrentFilter}))
-        <table class="table table-border">
+        <table class="table table-border" id="HistoryList">
             <thead>
                 <tr>
                     <th set-lan="text:Quotation No"></th>
@@ -16,6 +61,7 @@
                     <th set-lan="text:Amount"></th>
                     <th set-lan="text:Create date"></th>
                     <th set-lan="text:View History"></th>
+                    <th set-lan="text:Edit"></th>
                 </tr>
             </thead>
 
@@ -26,7 +72,7 @@
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.bill_trans)
+                                @item.bill_trans
                             </td>
                             <td>
                                 <label set-lan="text:Currency-" class="fontbold"></label>
@@ -48,6 +94,9 @@
                             <td style="text-align:center">
                                 <button class="btn btn-green fa fa-picture-o" type="button" id="viewbtn" name="viewbtn" onclick="openModal('@item.file_code')" style="border:hidden"></button>
                             </td>
+                            <td style="text-align:center">
+                                @Html.ActionLink(" ", "EditSlip", "Quotation", new { id = @item.Id, date = @item.my, u = @Session["UserID"].ToString() }, new { @class = "btn btn-yellow fa fa-edit" })
+                            </td>
                         </tr>
                     }
                 }
@@ -65,7 +114,7 @@
             <div class="modal-dialog modal-lg" style="">
                 <div class="modal-content">
                     <div class="modal-body" style="text-align:center;">
-                       <div id="gall"></div>
+                        <div id="gall"></div>
                     </div>
                     <div class="modal-footer d-flex justify-content-center">
                         <button id="btnclose" type="button" class="btn btn-yellow font-weight-bold waves-effect waves-light" data-dismiss="modal" aria-label="Close" set-lan="text:Close"></button>
@@ -79,7 +128,7 @@
             function openModal(filecode) {
                 console.log(filecode);
                 $('#ModalPopUp').modal('show');
-                
+
                 var urlAction = $('#getSilp').val();
                 console.log(urlAction);
 
@@ -116,11 +165,89 @@
                 }
                 $('#ModalPopUp').modal('hide');
             });
-          
+
+            function SearchQuotation() {
+                var urlAction = $('#SearchQuotationNo').val();
+                var _id = @Session["UserID"].ToString();
+                const options = {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                };
+                //console.log(_date);
+                $.ajax({
+                    url: urlAction,
+                    type: "POST",
+                    dataType: "JSON",
+                    data: {
+                        quo: $("#txtQuo").val(),
+                        month: $("#ddlMonths").val(),
+                        year: $("#ddlYears").val(),
+                        id: _id,
+                    },
+                    success: function (obj) {
+                        console.log(obj);
+                        //console.log(obj);
+                        console.log(obj.result.length);
+
+                        $("#HistoryList > tbody").html("");
+                        var htmlDetail = "";
+
+
+                        if (obj.result.length == 0) {
+                            htmlDetail += "<tr><td colspan='6' style='text-align: center;'>No data.</td></tr>";
+                        }
+                        else {
+
+                            var no = 1;
+                            for (var i = 0; i < obj.result.length; i++) {
+                                var _rate = parseFloat(obj.result[i].rate).toFixed(2);
+                                htmlDetail += "<tr>";
+                                htmlDetail += "<td>" + obj.result[i].bill_trans + "</td>";
+                                htmlDetail += "<td><label set-lan='text:Currency-' class='fontbold'></label><span style='float: right'>" + obj.result[i].currency_name + "</span><br/><label set-lan='text:Rate_' class='fontbold'></label><span style='float: right'>" + _rate + "</span></td>";
+                                htmlDetail += "<td><label set-lan='text:Amount-' class='fontbold'></label><span style='float: right'>" + obj.result[i].amount.toLocaleString('en', options) + "</span><br/><label set-lan='text:AmtThai_' class='fontbold'></label><span style='float: right'>" + obj.result[i].amount_thai.toLocaleString('en', options)  + "</span></td>";
+                                htmlDetail += "<td>" + obj.result[i].create_date + "</td>";
+                               
+                                htmlDetail += "<td><button class='btn btn-green fa fa-picture-o waves-effect waves-light' type='button' id='viewbtn' name='viewbtn' onclick='openModal(`" + obj.result[i].file_code + "`)' style='border: hidden'></button></td>";
+                                htmlDetail += "<td><a class='btn btn-yellow fa fa-edit waves-effect waves-light' href='/Quotation/EditSlip?id=" + obj.result[i].Id + "&date=" + obj.result[i].my + "&u=" +@Session["UserID"].ToString()+"'></a></td>";
+                                htmlDetail += "</tr>";
+                                no++;
+                            }
+                        }
+                        $("#HistoryList > tbody").append(htmlDetail);
+
+                        SetLan($('#txtLan').val());
+                    }
+                });
+            }
+
         </script>
 
         <style>
             .fontbold {
                 font-weight: bold;
+            }
+
+            .textcen {
+                padding-top: 10px;
+            }
+
+            /*table.table .link, table.table thead .sorting:not(.no-sort), table.table thead .sorting_asc:not(.no-sort), table.table thead .sorting_desc:not(.no-sort) {
+                color: white !important;
+                font-weight: bold !important;
+            }*/
+
+            label {
+                float: left;
+            }
+
+            span {
+                display: block;
+                overflow: hidden;
+                padding: 0 4px 0 6px;
+            }
+
+            input {
+                width: 100%;
+                float: right;
             }
         </style>

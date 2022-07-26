@@ -90,14 +90,32 @@
           <Property Name="action_date" Type="datetime" />
           <Property Name="action_by" Type="int" />
         </EntityType>
+        <EntityType Name="file_detail">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="file_code" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="action_name" Type="varchar" MaxLength="20" />
+          <Property Name="file_code" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="file_extension" Type="varchar" MaxLength="20" />
+          <Property Name="name" Type="varchar" MaxLength="200" />
+          <Property Name="url" Type="varchar" MaxLength="250" />
+          <Property Name="status" Type="bit" />
+          <Property Name="create_date" Type="datetime" />
+          <Property Name="create_by" Type="int" />
+          <Property Name="update_date" Type="datetime" />
+          <Property Name="update_by" Type="int" />
+          <Property Name="action_id" Type="int" />
+        </EntityType>
         <EntityType Name="log_pay_member">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="bill_transaction_id" Type="int" />
+          <Property Name="bill_transaction_id" Type="varchar" MaxLength="250" />
           <Property Name="currency_id" Type="int" />
-          <Property Name="rate" Type="decimal" Precision="18" Scale="8" />
+          <Property Name="rate" Type="decimal" Precision="18" Scale="2" />
           <Property Name="amount" Type="decimal" Precision="18" Scale="2" />
           <Property Name="amount_thai" Type="decimal" Precision="18" Scale="2" />
           <Property Name="status" Type="int" />
@@ -108,6 +126,7 @@
           <Property Name="complete_amount" Type="decimal" Precision="18" Scale="2" />
           <Property Name="overpay" Type="decimal" Precision="18" Scale="2" />
           <Property Name="account_type" Type="int" />
+          <Property Name="company_id" Type="int" />
         </EntityType>
         <EntityType Name="system_currency">
           <Key>
@@ -176,11 +195,14 @@
           <Property Name="action_expire_date" Type="date" />
           <Property Name="action_date" Type="datetime" />
           <Property Name="action_by" Type="int" />
+          <Property Name="active_date" Type="datetime" />
+          <Property Name="active_by" Type="int" />
         </EntityType>
         <EntityContainer Name="accountModelStoreContainer">
           <EntitySet Name="bill_transaction" EntityType="Self.bill_transaction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="bill_transaction_detail" EntityType="Self.bill_transaction_detail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="company" EntityType="Self.company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="file_detail" EntityType="Self.file_detail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="log_pay_member" EntityType="Self.log_pay_member" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="system_currency" EntityType="Self.system_currency" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="system_user" EntityType="Self.system_user" Schema="dbo" store:Type="Tables" />
@@ -195,9 +217,10 @@
           <EntitySet Name="bill_transaction_detail" EntityType="accountModel.bill_transaction_detail" />
           <EntitySet Name="companies" EntityType="accountModel.company" />
           <EntitySet Name="system_user" EntityType="accountModel.system_user" />
-          <EntitySet Name="log_pay_member" EntityType="accountModel.log_pay_member" />
           <EntitySet Name="system_currency" EntityType="accountModel.system_currency" />
           <EntitySet Name="user_member_login" EntityType="accountModel.user_member_login" />
+          <EntitySet Name="log_pay_member" EntityType="accountModel.log_pay_member" />
+          <EntitySet Name="file_detail" EntityType="accountModel.file_detail" />
         </EntityContainer>
         <EntityType Name="bill_transaction">
           <Key>
@@ -314,25 +337,6 @@
           <Property Name="token_id" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="token_expire_date" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="log_pay_member">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="bill_transaction_id" Type="Int32" />
-          <Property Name="currency_id" Type="Int32" />
-          <Property Name="rate" Type="Decimal" Precision="18" Scale="8" />
-          <Property Name="amount" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="amount_thai" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="status" Type="Int32" />
-          <Property Name="create_date" Type="DateTime" Precision="3" />
-          <Property Name="create_by" Type="Int32" />
-          <Property Name="file_code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="balance_amount" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="complete_amount" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="overpay" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="account_type" Type="Int32" />
-        </EntityType>
         <EntityType Name="system_currency">
           <Key>
             <PropertyRef Name="id" />
@@ -370,6 +374,46 @@
           <Property Name="action_expire_date" Type="DateTime" Precision="0" />
           <Property Name="action_date" Type="DateTime" Precision="3" />
           <Property Name="action_by" Type="Int32" />
+          <Property Name="active_date" Type="DateTime" Precision="3" />
+          <Property Name="active_by" Type="Int32" />
+        </EntityType>
+        <EntityType Name="log_pay_member">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bill_transaction_id" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="currency_id" Type="Int32" />
+          <Property Name="rate" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="amount_thai" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="status" Type="Int32" />
+          <Property Name="create_date" Type="DateTime" Precision="3" />
+          <Property Name="create_by" Type="Int32" />
+          <Property Name="file_code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="balance_amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="complete_amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="overpay" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="account_type" Type="Int32" />
+          <Property Name="company_id" Type="Int32" />
+        </EntityType>
+        <EntityType Name="file_detail">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="file_code" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="action_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="file_code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="file_extension" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="url" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="create_date" Type="DateTime" Precision="3" />
+          <Property Name="create_by" Type="Int32" />
+          <Property Name="update_date" Type="DateTime" Precision="3" />
+          <Property Name="update_by" Type="Int32" />
+          <Property Name="action_id" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -496,26 +540,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="log_pay_member">
-            <EntityTypeMapping TypeName="accountModel.log_pay_member">
-              <MappingFragment StoreEntitySet="log_pay_member">
-                <ScalarProperty Name="account_type" ColumnName="account_type" />
-                <ScalarProperty Name="overpay" ColumnName="overpay" />
-                <ScalarProperty Name="complete_amount" ColumnName="complete_amount" />
-                <ScalarProperty Name="balance_amount" ColumnName="balance_amount" />
-                <ScalarProperty Name="file_code" ColumnName="file_code" />
-                <ScalarProperty Name="create_by" ColumnName="create_by" />
-                <ScalarProperty Name="create_date" ColumnName="create_date" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="amount_thai" ColumnName="amount_thai" />
-                <ScalarProperty Name="amount" ColumnName="amount" />
-                <ScalarProperty Name="rate" ColumnName="rate" />
-                <ScalarProperty Name="currency_id" ColumnName="currency_id" />
-                <ScalarProperty Name="bill_transaction_id" ColumnName="bill_transaction_id" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="system_currency">
             <EntityTypeMapping TypeName="accountModel.system_currency">
               <MappingFragment StoreEntitySet="system_currency">
@@ -533,6 +557,8 @@
           <EntitySetMapping Name="user_member_login">
             <EntityTypeMapping TypeName="accountModel.user_member_login">
               <MappingFragment StoreEntitySet="user_member_login">
+                <ScalarProperty Name="active_by" ColumnName="active_by" />
+                <ScalarProperty Name="active_date" ColumnName="active_date" />
                 <ScalarProperty Name="action_by" ColumnName="action_by" />
                 <ScalarProperty Name="action_date" ColumnName="action_date" />
                 <ScalarProperty Name="action_expire_date" ColumnName="action_expire_date" />
@@ -552,6 +578,45 @@
                 <ScalarProperty Name="password_expire_date" ColumnName="password_expire_date" />
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="log_pay_member">
+            <EntityTypeMapping TypeName="accountModel.log_pay_member">
+              <MappingFragment StoreEntitySet="log_pay_member">
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="account_type" ColumnName="account_type" />
+                <ScalarProperty Name="overpay" ColumnName="overpay" />
+                <ScalarProperty Name="complete_amount" ColumnName="complete_amount" />
+                <ScalarProperty Name="balance_amount" ColumnName="balance_amount" />
+                <ScalarProperty Name="file_code" ColumnName="file_code" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="amount_thai" ColumnName="amount_thai" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="rate" ColumnName="rate" />
+                <ScalarProperty Name="currency_id" ColumnName="currency_id" />
+                <ScalarProperty Name="bill_transaction_id" ColumnName="bill_transaction_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="file_detail">
+            <EntityTypeMapping TypeName="accountModel.file_detail">
+              <MappingFragment StoreEntitySet="file_detail">
+                <ScalarProperty Name="action_id" ColumnName="action_id" />
+                <ScalarProperty Name="update_by" ColumnName="update_by" />
+                <ScalarProperty Name="update_date" ColumnName="update_date" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="file_extension" ColumnName="file_extension" />
+                <ScalarProperty Name="file_code" ColumnName="file_code" />
+                <ScalarProperty Name="action_name" ColumnName="action_name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

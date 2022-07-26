@@ -5,9 +5,10 @@
     <EntitySet Name="bill_transaction_detail" EntityType="accountModel.bill_transaction_detail" />
     <EntitySet Name="companies" EntityType="accountModel.company" />
     <EntitySet Name="system_user" EntityType="accountModel.system_user" />
-    <EntitySet Name="log_pay_member" EntityType="accountModel.log_pay_member" />
     <EntitySet Name="system_currency" EntityType="accountModel.system_currency" />
     <EntitySet Name="user_member_login" EntityType="accountModel.user_member_login" />
+    <EntitySet Name="log_pay_member" EntityType="accountModel.log_pay_member" />
+    <EntitySet Name="file_detail" EntityType="accountModel.file_detail" />
   </EntityContainer>
   <EntityType Name="bill_transaction">
     <Key>
@@ -124,25 +125,6 @@
     <Property Name="token_id" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="token_expire_date" Type="DateTime" Precision="3" />
   </EntityType>
-  <EntityType Name="log_pay_member">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="bill_transaction_id" Type="Int32" />
-    <Property Name="currency_id" Type="Int32" />
-    <Property Name="rate" Type="Decimal" Precision="18" Scale="8" />
-    <Property Name="amount" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="amount_thai" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="status" Type="Int32" />
-    <Property Name="create_date" Type="DateTime" Precision="3" />
-    <Property Name="create_by" Type="Int32" />
-    <Property Name="file_code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="balance_amount" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="complete_amount" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="overpay" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="account_type" Type="Int32" />
-  </EntityType>
   <EntityType Name="system_currency">
     <Key>
       <PropertyRef Name="id" />
@@ -180,5 +162,45 @@
     <Property Name="action_expire_date" Type="DateTime" Precision="0" />
     <Property Name="action_date" Type="DateTime" Precision="3" />
     <Property Name="action_by" Type="Int32" />
+    <Property Name="active_date" Type="DateTime" Precision="3" />
+    <Property Name="active_by" Type="Int32" />
+  </EntityType>
+  <EntityType Name="log_pay_member">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="bill_transaction_id" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="currency_id" Type="Int32" />
+    <Property Name="rate" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="amount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="amount_thai" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="status" Type="Int32" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="create_by" Type="Int32" />
+    <Property Name="file_code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="balance_amount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="complete_amount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="overpay" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="account_type" Type="Int32" />
+    <Property Name="company_id" Type="Int32" />
+  </EntityType>
+  <EntityType Name="file_detail">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="file_code" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="action_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="file_code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="file_extension" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="url" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="Boolean" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="create_by" Type="Int32" />
+    <Property Name="update_date" Type="DateTime" Precision="3" />
+    <Property Name="update_by" Type="Int32" />
+    <Property Name="action_id" Type="Int32" />
   </EntityType>
 </Schema>

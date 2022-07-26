@@ -85,14 +85,32 @@
     <Property Name="action_date" Type="datetime" />
     <Property Name="action_by" Type="int" />
   </EntityType>
+  <EntityType Name="file_detail">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="file_code" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="action_name" Type="varchar" MaxLength="20" />
+    <Property Name="file_code" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="file_extension" Type="varchar" MaxLength="20" />
+    <Property Name="name" Type="varchar" MaxLength="200" />
+    <Property Name="url" Type="varchar" MaxLength="250" />
+    <Property Name="status" Type="bit" />
+    <Property Name="create_date" Type="datetime" />
+    <Property Name="create_by" Type="int" />
+    <Property Name="update_date" Type="datetime" />
+    <Property Name="update_by" Type="int" />
+    <Property Name="action_id" Type="int" />
+  </EntityType>
   <EntityType Name="log_pay_member">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="bill_transaction_id" Type="int" />
+    <Property Name="bill_transaction_id" Type="varchar" MaxLength="250" />
     <Property Name="currency_id" Type="int" />
-    <Property Name="rate" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="rate" Type="decimal" Precision="18" Scale="2" />
     <Property Name="amount" Type="decimal" Precision="18" Scale="2" />
     <Property Name="amount_thai" Type="decimal" Precision="18" Scale="2" />
     <Property Name="status" Type="int" />
@@ -103,6 +121,7 @@
     <Property Name="complete_amount" Type="decimal" Precision="18" Scale="2" />
     <Property Name="overpay" Type="decimal" Precision="18" Scale="2" />
     <Property Name="account_type" Type="int" />
+    <Property Name="company_id" Type="int" />
   </EntityType>
   <EntityType Name="system_currency">
     <Key>
@@ -171,11 +190,14 @@
     <Property Name="action_expire_date" Type="date" />
     <Property Name="action_date" Type="datetime" />
     <Property Name="action_by" Type="int" />
+    <Property Name="active_date" Type="datetime" />
+    <Property Name="active_by" Type="int" />
   </EntityType>
   <EntityContainer Name="accountModelStoreContainer">
     <EntitySet Name="bill_transaction" EntityType="Self.bill_transaction" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="bill_transaction_detail" EntityType="Self.bill_transaction_detail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="company" EntityType="Self.company" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="file_detail" EntityType="Self.file_detail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="log_pay_member" EntityType="Self.log_pay_member" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="system_currency" EntityType="Self.system_currency" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="system_user" EntityType="Self.system_user" Schema="dbo" store:Type="Tables" />

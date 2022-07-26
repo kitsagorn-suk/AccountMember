@@ -1,0 +1,430 @@
+﻿@model account.Database.log_pay_member
+@{
+
+    List<SelectListItem> TypeEn = new List<SelectListItem>();
+    TypeEn.Add(new SelectListItem
+    {
+        Text = "Saving Account",
+        Value = "1"
+    });
+    TypeEn.Add(new SelectListItem
+    {
+        Text = "Fixed Deposit Account",
+        Value = "2"
+    });
+    TypeEn.Add(new SelectListItem
+    {
+        Text = "Current Account",
+        Value = "3"
+    });
+    TypeEn.Add(new SelectListItem
+    {
+        Text = "Crypto Currency",
+        Value = "4"
+    });
+
+    List<SelectListItem> TypeTh = new List<SelectListItem>();
+    TypeTh.Add(new SelectListItem
+    {
+        Text = "บัญชีเงินฝากออมทรัพย์",
+        Value = "1"
+    });
+    TypeTh.Add(new SelectListItem
+    {
+        Text = "บัญชีเงินฝากประจำ",
+        Value = "2"
+    });
+    TypeTh.Add(new SelectListItem
+    {
+        Text = "บัญชีเงินฝากกระแสรายวัน หรือบัญชีเงินฝากเดินสะพัด",
+        Value = "3"
+    });
+    TypeTh.Add(new SelectListItem
+    {
+        Text = "คริปโทเคอร์เรนซี",
+        Value = "4"
+    });
+
+}
+
+@Html.Hidden("DelImg", @Url.Action("DelImg", "Quotation"))
+@Html.Hidden("UpdateSlip", @Url.Action("UpdateSlip", "Quotation"))
+@Html.HiddenFor(m => m.bill_transaction_id)
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card bg-light text-dark">
+            <div class="card-body" style="background :#fff">
+
+                <h1 set-lan="text:Upload Silp"></h1>
+                <br />
+                <div id="ListPayment1">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <br />
+                            <label set-lan="text:Type"> :</label>
+                            <span>
+                                @Html.DropDownList("type1",
+                                                          new SelectList(TypeEn, "Value", "Text",Model.account_type), "choose type",
+                                                                 new { @class = "form-control", @style = "float:right;display: block !important"})
+                            </span>
+                        </div>
+
+                        <div class="col-md-4">
+                            <br />
+                            <label set-lan="text:Amount"> :</label>
+                            <span>
+                                @Html.EditorFor(model => model.amount, new { htmlAttributes = new { @class = "form-control", @required = true } })
+                            </span>
+                        </div>
+
+                        <div class="col-md-4">
+                            <br />
+                            <label set-lan="text:Currency"> :</label>
+                            <span>
+                                @Html.DropDownList("currency_id1",
+                              new SelectList(ViewBag.CurList, "iValue", "iKey",Model.currency_id), "choose currency",
+                                     new { @class = "form-control", @style = "float:right;display: block !important", @onchange = "disRate(rate)" })
+                            </span>
+                        </div>
+                        <br />
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <br />
+                            <label set-lan="text:Rate"></label>
+                            <span>
+                                @if (Model.currency_id == 8)
+                                {
+                                    @Html.EditorFor(model => model.rate, new { htmlAttributes = new { @class = "form-control", @required = true, disabled = "disabled" } })
+                                }
+                                else
+                                {
+                                    @Html.EditorFor(model => model.rate, new { htmlAttributes = new { @class = "form-control", @required = true } })
+                                }
+                            </span>
+                        </div>
+                        <div class="col-md-4">
+                            <br />
+                            <label set-lan="text:Slip"> :</label>
+                            <span>
+                                <input type="file" class="form-control" id="Slip_1" name="image" @*onchange="CheckExt(this)"*@ multiple />
+                            </span>
+                        </div>
+                        <div class="gallery" id="gal_1"></div>
+                    </div>
+                    <br />
+                </div>
+
+                @*<div class="row">
+                        <div class="col-md-3" style="text-align-last:right">
+                            <span class="btn btn-green fa fa-plus" set-lan="text:AddSlip" id="cloneDiv" onclick="cloneDivTier()"></span>
+                        </div>
+                        <div class="col-md-3">
+                            <span class="btn btn-yellow fa fa-minus" set-lan="text:DelSlip" id="removeDiv" onclick="removeDivTier()" style="display:none"></span>
+                        </div>
+                    </div>*@
+                <br />
+
+                <table id="QuoList" class="table table-border">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input checkheader" name="select_all" value="1" id="select_all">
+                                    <label class="form-check-label" for="select_all" set-lan="text:selectAll"></label>
+                                </div>
+                            </th>
+                            <th><label set-lan="text:Quotation No"></label></th>
+                            <th><label set-lan="text:Amount"></label></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{int no = 1;}
+                        @foreach (var item in ViewBag.Quotation)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" name="_chkbok" value="@item.id" id="chk_@no">
+                                        <label class="form-check-label" for="chk_@no"></label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <label set-lan="text:Quotation No_"></label>@item.no
+                                </td>
+                                <td>
+                                    @*amount*@
+                                    <label set-lan="text:Grand Total_" class="fontbold"></label><span style="float:right">@item.grand_total.ToString("0,000.00")</span><br />
+                                    <label set-lan="text:Balance Paid_" class="fontbold"></label><span style="float:right">@item.complete_amount.ToString("0,000.00")</span><br />
+                                    <label set-lan="text:Balance Amount" class="fontbold"></label><span style="float:right">@item.balance_amount.ToString("0,000.00")</span><br />
+                                    <label set-lan="text:Overpayment-" class="fontbold"></label><span style="float:right">@item.overpay.ToString("0,000.00")</span>
+                                </td>
+                            </tr>
+                            no++;
+                        }
+
+                    </tbody>
+                </table>
+                <br />
+                <div class="row">
+                    <div id="ShowImg">
+                        @{var count = 1;}
+                        @foreach (var item in ViewBag.ImgList)
+                        {
+                            <div style="margin-left:5px">
+                                <input type="checkbox" id="img_@count" class="form-check-input" name="imgchk" value="@item.id" />
+                                <label for="img_@count" class="form-check-label" style="height:230px;margin-left:10px"><img src="@item.url" style="width:200px;height:225px;" /></label>
+                            </div>
+                            count++;
+                        }
+                    </div>
+                </div>
+
+                <br />
+                <div class="row">
+                    <div class="col-md-10"></div>
+                    <div class="col-md-2">
+                        <a class="btn btn-lg btn-danger fa fa-trash-o" onclick="DelImg()"></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-5"></div>
+                            <div class="col-md-2">
+                                <span class="btn btn-lg btn-green" type="button" set-lan="text:Upload" id="btnUpload" onclick="UpdateSlip()"></span>
+                                @*<button class="btn btn-lg btn-green" type="button" set-lan="text:Upload" id="btnUpload" onclick="editdata()"></button>*@
+                            </div>
+                            <div class="col-md-5"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <br />
+    </div>
+
+</div>
+
+<script>
+    const queryString = window.location.search;
+    console.log(queryString);
+    const urlParams = new URLSearchParams(queryString);
+    console.log(urlParams);
+    const logId = urlParams.get('id')
+    console.log(logId);
+
+    chkbox()
+    function chkbox() {
+        var bill = $('#bill_transaction_id').val();
+        console.log("bill", bill);
+        var array = JSON.parse("[" + bill + "]");
+        console.log(array);
+        for (var i = 0; i < array.length; i++) {
+            console.log("array", array[i]);
+            $('input[type=checkbox][value=' + array[i] + ']').prop('checked', true);
+        }
+    }
+
+    var validFiles = ["bmp", "gif", "png", "jpg", "jpeg", "pic", "psd", "tif", "eps"];
+    function CheckExt(obj) {
+        var _id = obj.id.substring(obj.id.indexOf('_') + 1);
+        console.log(_id);
+        console.log('wwwwww', obj);
+        console.log('get eele', obj.files)
+
+        var count = $("#gal_" + _id + " > img").length;
+        console.log(count);
+
+        if (count > 0) {
+            for (var i = 0; i < count; i++) {
+                const img = document.getElementById('ShwImg');
+                img.parentNode.removeChild(img);
+            }
+        }
+
+        const file = obj.files
+
+        for (var i = 0; i < file.length; i++) {
+            const item = file[i]
+            const filePreview = URL.createObjectURL(item);
+            const para = document.createElement("img");
+            para.src = filePreview;
+            para.setAttribute("id", "ShwImg");
+            para.style.cssText = 'width:200px;height:250px;margin-left:5px';
+            document.getElementById("gal_" + _id).appendChild(para);
+
+        }
+
+        console.log(obj.id);
+
+        var IDimg = obj.id.split('_')[1];
+        var input = obj;
+        var url = obj.value;
+        var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+        console.log(IDimg);
+        if (input.files && input.files[0] && (ext == "bmp" || ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg" || ext == "mp4" || ext == "mov" || ext == "wmv" || ext == "avi")) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#img_' + IDimg).attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+        else {
+
+
+            $('#img_' + IDimg).attr('src', '/SlipImg/noImage.png');
+            $("#" + obj.id + "").val("");
+
+
+            document.getElementById("lbAlert").setAttribute("set-lan", "html:missing 'image file' field");
+            SetLan(localStorage.getItem("Language"));
+            $('#modalAlert').modal('show');
+            $("#myModalLoad").modal('hide');
+        }
+    }
+
+    function disRate(id) {
+        var show = $('#currency_id1').val();
+        if (show == 8) {
+            document.getElementById(id.id).disabled = true;
+            document.getElementById('rate').value = "1";
+        } else {
+            document.getElementById(id.id).disabled = false;
+        }
+    }
+
+    function DelImg() {
+        var urlAction = $('#DelImg').val();
+        var arrData = [];
+        $('input[name="imgchk"]:checked').each(function () {
+            arrData.push(this.value);
+        });
+        console.log(arrData);
+        for (var i = 0; i < arrData.length; i++) {
+        $.ajax({
+                    url: urlAction,
+                    type: "POST",
+                    dataType: "JSON",
+                    data: {
+                        id: @Session["UserID"].ToString(),
+                        img: arrData[i],
+                    },
+                    success: function (obj) {
+
+                    }
+                });
+        }
+        location.reload();
+    }
+
+    function UpdateSlip() {
+        var urlAction = $('#UpdateSlip').val();
+        console.log(urlAction);
+
+        let ele = document.getElementById("Slip_1");
+        var _chk = ele.files.length;
+        console.log(_chk);
+        var arrData = [];
+        
+            console.log("okay");
+
+
+            $('input[name="_chkbok"]:checked').each(function () {
+                arrData.push(this.value);
+            });
+            console.log(arrData);
+
+            var _text = arrData.toString();
+                var fileUpload = $("#Slip_1").get(0);
+                console.log("1111",fileUpload);
+                var files = fileUpload.files;
+                console.log("file : " + files);
+
+                var fileData = new FormData();
+                for (var j = 0; j < files.length; j++) {
+                    fileData.append(files[j].name, files[j]);
+            }
+                fileData.append('Id', logId);
+                fileData.append('actionID', 0);
+                fileData.append('actionName', "log_pay_member");
+                fileData.append('fileExtension', "");
+                fileData.append('name', "");
+                fileData.append('url', "");
+                fileData.append('createBy', @Session["UserID"].ToString());
+                fileData.append('FileCode', "");
+                fileData.append('billtrans', _text);
+                fileData.append('currencyId', $('#currency_id1').val());
+                fileData.append('rate', $('#rate').val());
+                fileData.append('amount', $('#amount').val());
+                fileData.append('accountType', $('#type1').val());
+            console.log("111111111111", fileData);
+
+            $.ajax({
+                url: urlAction,
+                type: "POST",
+                contentType: false, // Not to set any content header
+                processData: false, // Not to process data
+                data:fileData,
+                    success: function (obj) {
+                        console.log(obj);
+                    }
+                });
+
+            location.reload();
+    }
+
+</script>
+
+
+<style>
+    h1 {
+        text-align: center;
+    }
+
+    label {
+        float: left;
+    }
+
+    span {
+        display: block;
+        overflow: hidden;
+        padding: 0 4px 0 6px;
+    }
+
+    input {
+        width: 100%;
+        float: right;
+    }
+
+    .head {
+        text-align: center;
+    }
+
+    .checkheader {
+        /*top: -4px;
+        left: -5px;
+        width: 12px;
+        height: 1.375rem;
+        border-top: 2px solid transparent;
+        border-left: 2px solid transparent;*/
+        border-right: 3px solid #f9ee72 !important;
+        border-bottom: 3px solid #f9ee72 !important;
+        /*transform: rotate(40deg);
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        transform-origin: 100% 100%;*/
+    }
+
+    .gallery {
+        margin-top: 10px;
+        text-align: center;
+    }
+</style>

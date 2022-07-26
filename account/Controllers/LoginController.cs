@@ -41,6 +41,7 @@ namespace account.Controllers
                 {
                     Session["UserName"] = user.FirstOrDefault().username;
                     Session["UserID"] = user.FirstOrDefault().id;
+                    Session.Timeout = 120;
 
                     var _id = user.FirstOrDefault().id;
 

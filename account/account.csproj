@@ -195,6 +195,9 @@
     <Compile Include="Database\company.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\file_detail.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\log_pay_member.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -1622,7 +1625,9 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
@@ -1635,9 +1640,9 @@
     <Content Include="Views\Quotation\UploadSlip.cshtml" />
     <Content Include="Views\Quotation\SiteMaster.cshtml" />
     <Content Include="Views\Shared\SiteMaster1.cshtml" />
-    <Content Include="Views\Quotation\History.cshtml" />
     <Content Include="Views\Quotation\HistoryList.cshtml" />
     <Content Include="Views\Quotation\ListPrefix.cshtml" />
+    <Content Include="Views\Quotation\EditSlip.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

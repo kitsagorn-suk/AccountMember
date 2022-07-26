@@ -185,7 +185,8 @@
 </div>
 
 <script>
-    
+   
+
     $('#select_all').click(function (e) {
         var chkArray = [];
         var table = $(e.target).closest('table');
@@ -359,6 +360,7 @@
         var show = $('#currency_id2').val();
         if (show == 8) {
             document.getElementById(id.id).disabled = true;
+            document.getElementById('rate').value = "1";
         } else {
             document.getElementById(id.id).disabled = false;
         }
@@ -428,6 +430,7 @@
                     data: fileData,
                     success: function (obj) {
                         console.log(obj);
+                        UpdateBillTrans();
                     }
                 });
             }
